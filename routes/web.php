@@ -17,5 +17,9 @@ Route::group([
     'namespace'=>'\App\Http\Controllers\Admin',
     'as'=>'admin.'
 ], function(){
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('usuarios', 'UserController');
+    Route::resource('gerencias', 'ManagementController');
+    Route::resource('roles', 'UserController');
+
 });
