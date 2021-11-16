@@ -30,7 +30,7 @@ trait Request
     public function loadView(string $view, array $params = []): Response
     {
         $string = self::standar($view);
-        $view = str_replace('.', '/', $string);
+        $view = str_replace('.', '/', $view);
         return Inertia::render($view,$params);
     }
 

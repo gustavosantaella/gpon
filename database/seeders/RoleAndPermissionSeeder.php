@@ -89,10 +89,18 @@ endforeach;
 
 // roles
 $role1 = Role::create([
-    'name'=>'super-admin',
+    'name'=>'super usuario',
     'guard_name'=>'web',
 ]);
 
 $role1->syncPermissions($permissionId);
+
+$role2 = Role::create([
+    'name'=>'consultor',
+    'guard_name'=>'web',
+]);
+
+
 }
+
 }

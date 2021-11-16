@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,6 +179,8 @@ return [
 
         //laravel permission for systems roles and permissions
         Spatie\Permission\PermissionServiceProvider::class,
+        // laravel spanish
+        Laraveles\Spanish\SpanishServiceProvider::class,
 
     ],
 
