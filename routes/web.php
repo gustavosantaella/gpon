@@ -20,6 +20,6 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('usuarios', 'UserController');
     Route::resource('gerencias', 'ManagementController');
-    Route::resource('roles', 'UserController');
+    Route::resource('roles', 'RoleController');
 
 });

@@ -28,7 +28,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gerencias
                         </nav-link>
-                          <nav-link :navlink="false" :href='route("admin.roles.index")'>
+                          <nav-link   :navlink="false" :href='route("admin.roles.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Roles
                         </nav-link>

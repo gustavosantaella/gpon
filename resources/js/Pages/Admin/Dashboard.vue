@@ -31,7 +31,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-5 py-3">
-                    <slot name="main-content"></slot>
+                    <slot ></slot>
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
