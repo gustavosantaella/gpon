@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Management;
 class ManagementSeeder extends Seeder
 {
     /**
@@ -13,6 +13,6 @@ class ManagementSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Management::factory(7)->create();
     }
 }

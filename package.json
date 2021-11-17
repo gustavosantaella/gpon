@@ -33,6 +33,7 @@
         "@popperjs/core": "^2.10.2",
         "bootstrap": "^5.1",
         "laravel-permission-to-vuejs": "^3.0.0",
+        "vue-select": "^3.16.0",
         "vue-template-compiler": "^2.6.14"
     }
 }

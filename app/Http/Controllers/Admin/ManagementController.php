@@ -9,6 +9,8 @@ class ManagementController extends BaseController
 {
     public function index()
     {
-        return $this->loadView('Admin.Management.index');
+        $managements = $this->model('management')->paginate(5);
+
+        return $this->loadView('Admin.Managements.index', compact('managements'));
     }
 }

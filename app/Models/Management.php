@@ -8,4 +8,6 @@ use Spatie\Permission\Traits\HasRoles;
 class Management extends Model
 {
     use HasFactory, HasRoles;
+
+public $table = 'managements';
 }
