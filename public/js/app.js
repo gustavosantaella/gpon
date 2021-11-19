@@ -24368,22 +24368,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Datatable',
-  props: ['th', 'options', 'items'],
-  mounted: function mounted() {
-    this.table();
-  },
-  data: function data() {
-    return {};
-  },
-  methods: {
-    table: function table() {
-      var _this = this;
-
-      this.$nextTick(function () {
-        console.log(_this.$refs['tableref']);
-      });
-    }
-  }
+  props: ['th', 'options', 'items']
 });
 
 /***/ }),
@@ -29087,7 +29072,17 @@ var _hoisted_3 = {
   "class": "nav"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"sb-sidenav-menu-heading\">Core</div><a class=\"nav-link\" href=\"index.html\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div> Dashboard </a><div class=\"sb-sidenav-menu-heading\">Interface</div><a class=\"nav-link collapsed\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseLayouts\" aria-expanded=\"false\" aria-controls=\"collapseLayouts\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div> Layouts <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div></a><div class=\"collapse\" id=\"collapseLayouts\" aria-labelledby=\"headingOne\" data-bs-parent=\"#sidenavAccordion\"><nav class=\"sb-sidenav-menu-nested nav\"><a class=\"nav-link\" href=\"layout-static.html\">Static Navigation</a><a class=\"nav-link\" href=\"layout-sidenav-light.html\">Light Sidenav</a></nav></div>", 5);
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"sb-sidenav-menu-heading\">Core</div><a class=\"nav-link\" href=\"index.html\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-tachometer-alt\"></i></div> Dashboard </a><div class=\"sb-sidenav-menu-heading\">Modulos</div>", 3);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "sb-nav-link-icon"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-chart-area"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Usuarios ");
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "sb-nav-link-icon"
@@ -29097,7 +29092,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Usuarios ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Gerencias ");
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "sb-nav-link-icon"
@@ -29107,21 +29102,11 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Gerencias ");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Roles ");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "sb-nav-link-icon"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-chart-area"
-})], -1
-/* HOISTED */
-);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"sb-sidenav-menu-heading\">Ubicacion</div><a class=\"nav-link collapsed\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\"#territorio\" aria-expanded=\"false\" aria-controls=\"territorio\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-columns\"></i></div> Territorios <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div></a><div class=\"collapse\" id=\"territorio\" aria-labelledby=\"headingOne\" data-bs-parent=\"#sidenavAccordion\"><nav class=\"sb-sidenav-menu-nested nav\"><a class=\"nav-link\" href=\"layout-static.html\">REGIONES</a><a class=\"nav-link\" href=\"layout-sidenav-light.html\">ESTADOS</a><a class=\"nav-link\" href=\"layout-sidenav-light.html\">MUNICIPIO</a><a class=\"nav-link\" href=\"layout-sidenav-light.html\">PARROQUIAS</a></nav></div>", 3);
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Roles ");
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<a class=\"nav-link collapsed\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapsePages\" aria-expanded=\"false\" aria-controls=\"collapsePages\"><div class=\"sb-nav-link-icon\"><i class=\"fas fa-book-open\"></i></div> Pages <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div></a><div class=\"collapse\" id=\"collapsePages\" aria-labelledby=\"headingTwo\" data-bs-parent=\"#sidenavAccordion\"><nav class=\"sb-sidenav-menu-nested nav accordion\" id=\"sidenavAccordionPages\"><a class=\"nav-link collapsed\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\"#pagesCollapseAuth\" aria-expanded=\"false\" aria-controls=\"pagesCollapseAuth\"> Authentication <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div></a><div class=\"collapse\" id=\"pagesCollapseAuth\" aria-labelledby=\"headingOne\" data-bs-parent=\"#sidenavAccordionPages\"><nav class=\"sb-sidenav-menu-nested nav\"><a class=\"nav-link\" href=\"login.html\">Login</a><a class=\"nav-link\" href=\"register.html\">Register</a><a class=\"nav-link\" href=\"password.html\">Forgot Password</a></nav></div><a class=\"nav-link collapsed\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\"#pagesCollapseError\" aria-expanded=\"false\" aria-controls=\"pagesCollapseError\"> Error <div class=\"sb-sidenav-collapse-arrow\"><i class=\"fas fa-angle-down\"></i></div></a><div class=\"collapse\" id=\"pagesCollapseError\" aria-labelledby=\"headingOne\" data-bs-parent=\"#sidenavAccordionPages\"><nav class=\"sb-sidenav-menu-nested nav\"><a class=\"nav-link\" href=\"401.html\">401 Page</a><a class=\"nav-link\" href=\"404.html\">404 Page</a><a class=\"nav-link\" href=\"500.html\">500 Page</a></nav></div></nav></div>", 2);
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "sb-sidenav-footer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "small"
@@ -29137,7 +29122,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.route("admin.usuarios.index")
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9, _hoisted_10];
+      return [_hoisted_7, _hoisted_8];
     }),
     _: 1
     /* STABLE */
@@ -29149,7 +29134,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.route("admin.gerencias.index")
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_11, _hoisted_12];
+      return [_hoisted_9, _hoisted_10];
     }),
     _: 1
     /* STABLE */
@@ -29161,14 +29146,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.route("admin.roles.index")
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_13, _hoisted_14];
+      return [_hoisted_11, _hoisted_12];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["href"]), _hoisted_15])]), _hoisted_17]);
+  , ["href"]), _hoisted_13])]), _hoisted_16]);
 }
 
 /***/ }),
@@ -29210,6 +29195,26 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["colspan"];
 var _hoisted_6 = ["onClick"];
+var _hoisted_7 = {
+  "class": "d-flex justify-content-end"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-arrow-left"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = ["onClick"];
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-arrow-right"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_12 = [_hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -29250,7 +29255,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* UNKEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  )]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "#",
+    "class": "ml-2",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return _this.$inertia.get(_this.items.prev_page_url);
+    })
+  }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Math.ceil(this.items.total / this.items.per_page), function (i) {
+    var _ref;
+
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-sm", {
+        ' btn-danger ': (_ref = i === _this.items.current_page) !== null && _ref !== void 0 ? _ref : 'btn-secondary'
+      }]),
+      onClick: function onClick($event) {
+        return _this.$inertia.get(_ctx.route('admin.gerencias.index', {
+          page: i
+        }));
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(i), 11
+    /* TEXT, CLASS, PROPS */
+    , _hoisted_10);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "#",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _this.$inertia.get(_this.items.next_page_url);
+    })
+  }, _hoisted_12)])]);
 }
 
 /***/ }),
