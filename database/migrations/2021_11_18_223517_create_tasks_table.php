@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagementTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('managements', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->boolean('active')->default(false)->nullable();
-            $table->timestamps();
+            $table->foreignId('management_id')->references('id')->on('managements')->onDelete('cascade');
+            $table->string('title');
+            $table->longText('description');
+            $table->bigInteger('end_days');
             $table->softDeletes();
-
-            $table->index('name');
-            $table->index('active');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +31,6 @@ class CreateManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('managements');
+        Schema::dropIfExists('tasks');
     }
 }

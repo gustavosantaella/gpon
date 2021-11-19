@@ -16,9 +16,9 @@
     components: {
       Link,
     },
-    
+
     props: ['href', 'active', 'navlink'],
-    
+
 
     computed: {
       classes() {
