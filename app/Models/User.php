@@ -63,6 +63,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    // Relations
+    public function management()
+    {
+        return $this->belongsToMany(Management::class, 'user_has_managements', 'user_id', 'management_id', 'id', 'id',
+            'users');
+    }
+
         // Mutators
     public function setNameAttribute($value)
     {

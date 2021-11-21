@@ -13,6 +13,7 @@ class TerritorioSeeder extends Seeder
      */
     public function run()
     {
+
         $path = database_path('sql/territorio.sql');
         $sql = file_get_contents($path);
         DB::unprepared($sql);

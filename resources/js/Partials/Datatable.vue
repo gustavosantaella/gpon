@@ -1,43 +1,73 @@
 <template>
+    <dialog-modal v-if="this.modal" :id='this.modal.id'>
+        <template v-slot:title>{{this.modal.title}}</template>
+        <template v-slot:content>
+            <slot :name="this.modal.id"></slot>
+        </template>
+    </dialog-modal>
     <div class="table-responsive">
-        <div class="container row">
-            <input type="text" placeholder="Buscar..." name="search" id="" class="form-control">
-            <pre>
-		{{ this.items }}
-	</pre>
+
+        <div class='row' v-if="this.filters || this.modal">
+            <div  v-if="this.filters" class="form-responsive col-md-10">
+
+                <div class="form-group">
+                    <input @keyup='this.search()' v-model='this.filter.search' type="text" class="form-control"
+                           name="search"
+                           placeholder="Busca algo...">
+                </div>
+
+            </div>
+            <dialog-modal v-if="this.modal" :id='this.modal.id'>
+                <template v-slot:title>{{ this.modal.title }}</template>
+                <template v-slot:content>
+                    <slot :name="this.modal.id"></slot>
+                </template>
+            </dialog-modal>
+            <button v-if="this.modal" type='button' data-bs-toggle="modal"
+                    class='btn btn-sm btn-secondary fw-bold'
+                    :class="{'col-md-1':this.modal.class}"
+                    :data-bs-target="'#'+this.modal.id"><i v-if='this.modal.IconFilter' class="fas fa-filter"></i>{{
+                    this.modal.text }}
+            </button>
         </div>
         <table class="table table-hover table-striped" ref="tableref" id="datatablesSimple">
             <thead>
             <tr>
-                <th v-for='th in this.th'>{{ th.text.toUpperCase() }}</th>
-                <th :colspan="this.options.length" align="center">OPCIONES</th>
+                <th class='text-center fw-bold' :colspan="this.captionColspan()">{{this.caption}}</th>
+            </tr>
+            <tr>
+                <th v-if='this.th' v-for='th in this.th'>{{ th.text.toUpperCase() }}</th>
+                <th v-if="this.options" :colspan="this.options.length" align="center">OPCIONES</th>
+                <slot name="th"></slot>
             </tr>
             </thead>
 
             <tbody>
-            <tr v-for='item in this.items.data'>
-                <td v-for='th in this.th'>{{ item[th.original] }}</td>
-                <td>
+            <tr v-if="this.items" v-for='item in this.items.data'>
+                <td v-if='this.th' v-for='th in this.th'>{{ item[th.original] }}</td>
+                <td v-if="this.options">
                     <button v-for="(option, key) in this.options" :key="key" :class="[option.class]"
                             @click.prevent="this.$emit(option.method,item)">{{ option.text }}
                     </button>
                 </td>
             </tr>
+            <slot name="items"></slot>
             </tbody>
         </table>
-        <div class="d-flex justify-content-end">
+        <div v-if="this.items" class="d-flex justify-content-end">
             <a href="#" class='ml-2'
                @click="this.$inertia.get(this.items.prev_page_url)"><i class="fas fa-arrow-left"></i></a>
             <div>
                 <button class="btn btn-sm" v-for="i of (Math.ceil(this.items.total /
-        this.items.per_page))"
+                            this.items.per_page))"
 
                         @click="this.$inertia.get(route('admin.gerencias.index',{
-                                                    page:i
+                                                    page:i,
+
                                                 }))"
                         :class="{
                                 ' btn-danger ': i === this.items.current_page ?? 'btn-secondary'
-                            }">{{ i  }}
+                            }">{{ i }}
                 </button>
 
 
@@ -48,11 +78,37 @@
 </template>
 
 <script>
+import DialogModal from '@/Jetstream/DialogModal'
 
 export default {
-
+    components: {
+        DialogModal
+    },
     name: 'Datatable',
-    props: ['th', 'options', 'items'],
+    props: ['th', 'options', 'items', 'filters', 'url', 'caption', 'modal'],
+    data() {
+        return {
+            filter: {
+                search: null
+            }
+        }
+    },
+    methods: {
+        search() {
+            try {
+                this.$inertia.get(this.url, {
+                    text: this.filter.search
+                })
+            } catch (e) {
+                this.$toast.error(`Sucedio un error, pongase en contacto con el administrador \n message:`, {
+                    position: 'top-right'
+                });
+            }
+        },
+        captionColspan() {
+            return this.options ? this.th.length + 1 : this.th.length;
+        }
+    }
 
 }
 </script>
