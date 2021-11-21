@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
 
 class User extends Authenticatable
 {
@@ -17,6 +19,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
+    use LaravelPermissionToVueJS;
 
     /**
      * The attributes that are mass assignable.
@@ -58,4 +62,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // Relations
+    public function management()
+    {
+        return $this->belongsToMany(Management::class, 'user_has_managements', 'user_id', 'management_id', 'id', 'id',
+            'users');
+    }
+
+        // Mutators
+    public function setNameAttribute($value)
+    {
+    $this->attributes['name'] = strtoupper($value);
+    }
 }

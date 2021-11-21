@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 
-class HomeController extends BaseController
+class UserController extends BaseController
 {
     public function index()
     {
-        return $this->loadView('Admin.Dashboard');
+        $this->loadView('Admin.users.index');
     }
 }
