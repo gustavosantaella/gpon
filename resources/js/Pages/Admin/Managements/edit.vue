@@ -1,6 +1,6 @@
 <template>
     <Dashboard>
-        sdfsdf
+
         <pre>
             {{this.$page}}
         </pre>
@@ -49,7 +49,37 @@
                                     text:'Dias de culminacion',
                                 }]"
                             >
-                                <template v-slot:modalid>hola</template>
+                                <template v-slot:modalid>
+                                    <div class="form-responsive">
+                                        <form @submit.prevent="this.sendActivity()">
+                                            <div class="mb-3">
+                                                <label for="title">Titulo de la actividiad:</label>
+                                                <input required type="text" name="title" v-model="this.task.title"
+                                                       id="title"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="descriptionofactivity" >Descripcion de la
+                                                    actividiad:</label>
+                                                <textarea required v-model="this.task.description"
+                                                          id="descriptionofactivity" cols="30"
+                                                          rows="10"
+                                                          class="form-control">{{this.task.description}}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="end_days">Numero de dias que demora la actividad</label>
+                                                <input required  v-model='this.task.end_days' type="number"
+                                                       name="end_days"
+                                                        id="end_days"
+                                                        class="form-control">
+                                            </div>
+                                            <div>
+                                                <input :disabled="this.button" type="submit" value="Enviar"
+                                                       class="btn btn-primary">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </template>
                             </datatable>
 
 
@@ -91,6 +121,22 @@ export default {
         Datatable,
 
     },
-    props: ['gerencia', 'tasks', 'users']
+
+    data(){
+        return{
+            task:{
+                title:null,
+                description:null,
+                end_days:null,
+            }
+        }
+    },
+    props: ['gerencia', 'tasks', 'users'],
+
+    methods:{
+        sendActivity(){
+            
+        }
+    }
 }
 </script>
