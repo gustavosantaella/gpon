@@ -1,7 +1,7 @@
 <template>
     <Dashboard>
 
-        <pre>
+        <pre >
             {{this.$page}}
         </pre>
         <div class="form-responsive">
@@ -11,11 +11,13 @@
                         <label for="name">Nombre:</label>
                         <input type="text" required name="name" id="name" class="form-control"
                                v-model="this.gerencia.name">
+                               <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
                     </div>
                     <div class=" col-md-6">
                         <label for="acronimo">Nombre(Acronimo):</label>
                         <input type="text" required name="acronimo" id="acronimo" class="form-control"
                                v-model="this.gerencia.name">
+                               <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
                     </div>
 
                 </div>
@@ -32,6 +34,12 @@
                        </div>
                         <div>
                             <datatable
+                                :options="[{
+                                 text:'editar',
+                                 method:'edit',
+                                 class:'btn-primary',
+                                 permission:(is('CONSULTOR'))
+                               },]"
                                 :modal="{
                                 id:'modalid',
                                 title:'titulo del modal',
@@ -57,6 +65,7 @@
                                                 <input required type="text" name="title" v-model="this.task.title"
                                                        id="title"
                                                        class="form-control">
+                                                    
                                             </div>
                                             <div class="mb-3">
                                                 <label for="descriptionofactivity" >Descripcion de la
@@ -114,16 +123,22 @@
 <script>
 import Dashboard from '@/Pages/Admin/Dashboard';
 import Datatable from '@/Partials/Datatable';
+import Form from '@/Partials/Form';
 
 export default {
     components: {
         Dashboard,
         Datatable,
+        Form: 'app-form',
 
     },
 
+    mounted(){
+        alert(123)
+    },
     data(){
         return{
+            button:false,
             task:{
                 title:null,
                 description:null,
@@ -135,6 +150,16 @@ export default {
 
     methods:{
         sendActivity(){
+                this.button = true;
+                const _this = this;
+                let method = 'post';
+                this.$inertia[method](route('admin.gerencias.storeTask', {
+                gerencia:this.gerencia
+            }),this.task, {
+                    onSuccess(){
+                  _this.button = false;
+                    },
+                });
             
         }
     }

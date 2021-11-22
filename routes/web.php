@@ -15,11 +15,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'namespace'=>'\App\Http\Controllers\Admin',
-    'as'=>'admin.'
+    'as'=>'admin.',
+    'prefix'=>'admin'
 ], function(){
     Route::get('/', 'HomeController@index')->name('home');
+    // users
     Route::resource('usuarios', 'UserController');
+    // gerencias
     Route::resource('gerencias', 'ManagementController');
+    Route::group(['prefix' => 'gerencias', 'as'=>'gerencias.'], function() {
+        Route::post('{gerencia:id}/task/store', 'ManagementController@storeTask')->name('storeTask');
+    });
+
+    // roles
     Route::resource('roles', 'RoleController');
 
 });

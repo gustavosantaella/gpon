@@ -22,4 +22,19 @@ class ManagementController extends BaseController
 
         return $this->loadView('Admin.Managements.edit', compact('gerencia','tasks', 'users'));
     }
+
+    public function storeTask(Management $gerencia)
+    {
+        $this->request()->validate([
+            'title'=>['required' ,'unique:tasks'],
+            'description'=>['required'],
+            'end_days'=>'required'
+        ]);
+
+        $data = $this->request()->only(['title', 'description', 'end_days']);
+        if($gerencia)
+            $gerencia->tasks()->create($data);
+
+        return back();
+    }
 }
