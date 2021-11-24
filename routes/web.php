@@ -25,6 +25,7 @@ Route::group([
     Route::resource('gerencias', 'ManagementController');
     Route::group(['prefix' => 'gerencias', 'as'=>'gerencias.'], function() {
         Route::post('{gerencia:id}/task/store', 'ManagementController@storeTask')->name('storeTask');
+        Route::put('{gerencia:id}/{task}/update', 'ManagementController@updateTask')->name('updateTask');
     });
 
     // roles

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
-use App\Models\Management;
+use App\Models\{
+    Management,
+    Task
+};
 
 
 class ManagementController extends BaseController
@@ -27,7 +30,7 @@ class ManagementController extends BaseController
     {
         $this->request()->validate([
             'title'=>['required' ,'unique:tasks'],
-            'description'=>['required'],
+            'description'=>['required','Min:5'],
             'end_days'=>'required'
         ]);
 
@@ -36,5 +39,25 @@ class ManagementController extends BaseController
             $gerencia->tasks()->create($data);
 
         return back();
+    }
+
+    public function updateTask(Management $gerencia, Task $task)
+    {
+        $this->request()->validate([
+            'title'=>['required' ,"unique:tasks,title,{$this->request()->id}"],
+            'description'=>['required','Min:5'],
+            'end_days'=>'required'
+        ]);
+
+        $data = $this->request()->only(['title', 'description', 'end_days']);
+        if($gerencia)
+            $gerencia->tasks()->find($task->id)->update($data);
+
+        return back();
+    }
+
+    public function deleteTask(Management $gerencia, Task $task)
+    {
+
     }
 }

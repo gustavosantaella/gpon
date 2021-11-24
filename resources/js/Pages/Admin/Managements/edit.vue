@@ -10,14 +10,14 @@
                     <div class=" col-md-6">
                         <label for="name">Nombre:</label>
                         <input type="text" required name="name" id="name" class="form-control"
-                               v-model="this.gerencia.name">
-                               <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
+                        v-model="this.gerencia.name">
+                        <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
                     </div>
                     <div class=" col-md-6">
                         <label for="acronimo">Nombre(Acronimo):</label>
                         <input type="text" required name="acronimo" id="acronimo" class="form-control"
-                               v-model="this.gerencia.name">
-                               <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
+                        v-model="this.gerencia.name">
+                        <small v-if='this.$page.errors'>{{this.$page.errors.name}}</small>
                     </div>
 
                 </div>
@@ -27,141 +27,163 @@
                     <label class="form-check-label mx-1" for="code">Activo</label>
                 </div>
             </form>
-                <div class="row">
-                    <div class="col-md-6">
-                       <div class="row">
-                           <h2 class="col-md-6">Actividades</h2>
-                       </div>
-                        <div>
-                            <datatable
-                                :options="[{
-                                 text:'editar',
-                                 method:'edit',
-                                 class:'btn-primary',
-                                 permission:(is('CONSULTOR'))
-                               },]"
-                                :modal="{
-                                id:'modalid',
-                                title:'titulo del modal',
-                                text:'Nueva actividad'
-                                }"
-                                :items="this.tasks"
-                                :th="[{
-                                    original:'title',
-                                    text:'titulo',
-                                },{
-                                    original:'description',
-                                    text:'descripcion',
-                                },{
-                                    original:'end_days',
-                                    text:'Dias de culminacion',
-                                }]"
-                            >
-                                <template v-slot:modalid>
-                                    <div class="form-responsive">
-                                        <form @submit.prevent="this.sendActivity()">
-                                            <div class="mb-3">
-                                                <label for="title">Titulo de la actividiad:</label>
-                                                <input required type="text" name="title" v-model="this.task.title"
-                                                       id="title"
-                                                       class="form-control">
-                                                    
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="descriptionofactivity" >Descripcion de la
-                                                    actividiad:</label>
-                                                <textarea required v-model="this.task.description"
-                                                          id="descriptionofactivity" cols="30"
-                                                          rows="10"
-                                                          class="form-control">{{this.task.description}}</textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="end_days">Numero de dias que demora la actividad</label>
-                                                <input required  v-model='this.task.end_days' type="number"
-                                                       name="end_days"
-                                                        id="end_days"
-                                                        class="form-control">
-                                            </div>
-                                            <div>
-                                                <input :disabled="this.button" type="submit" value="Enviar"
-                                                       class="btn btn-primary">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </template>
-                            </datatable>
+            <div class="row">
+                <div class="col-md-6">
+                 <div class="row">
+                     <h2 class="col-md-6">Actividades</h2>
+                 </div>
+                 <div>
+                    <datatable
+                    v-on:editTask="this.editTask"
+                    v-on:openingModal='this.openModal'
+                    :options="[{
+                       text:'editar',
+                       method:'editTask',
+                       class:'btn-primary',
+                       permission:(is('CONSULTOR'))
+                   },]"
+                   :modal="{
+                    id:'modalActivy',
+                    title:'Crear/Editar actividad',
+                    text:'Nueva actividad'
+                }"
+                :items="this.tasks"
+                :th="[{
+                    original:'title',
+                    text:'titulo',
+                },{
+                    original:'end_days',
+                    text:'Dias de culminacion',
+                }]"
+                >
+                <template v-slot:modalActivy>
+                    <div class="form-responsive">
+                        <app-form 
+                        :method='this.form.method'
+                        :url='this.form.url'
+                        :data='this.task'
+                        v-on:submitSuccess='this.success'
+                        >
+                        <template v-slot:content>
+                            <div class="mb-3">
+                                <label for="title">Titulo de la actividiad:</label>
+                                <input required type="text" name="title" v-model="this.task.title"
+                                id="title"
+                                class="form-control">
 
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h2>Empleados</h2>
-                        <div>
-                            <datatable
-                                :items="this.users"
-                                :th="[{
-                                    original:'name',
-                                    text:'Nombre',
-                                },{
-                                    original:'email',
-                                    text:'Correo',
-                                }]"
-                            />
-
-
-                        </div>
-                    </div>
-
+                            </div>
+                            <div class="mb-3">
+                                <label for="descriptionofactivity" >Descripcion de la
+                                actividiad:</label>
+                                <textarea required v-model="this.task.description"
+                                id="descriptionofactivity" cols="30"
+                                rows="10"
+                                class="form-control">{{this.task.description}}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_days">Numero de dias que demora la actividad</label>
+                                <input required  v-model='this.task.end_days' type="number"
+                                name="end_days"
+                                id="end_days"
+                                class="form-control">
+                            </div>
+                        </template>
+                    </app-form>
                 </div>
+            </template>
+        </datatable>
 
 
-        </div>
-    </Dashboard>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <h2>Empleados</h2>
+    <div>
+        <datatable
+        :items="this.users"
+        :modal="{
+                    id:'modalUser',
+                    title:'Asignar/Remover usuario',
+                    text:'Nuevo usuario'
+                }"
+        :th="[{
+            original:'name',
+            text:'Nombre',
+        },{
+            original:'email',
+            text:'Correo',
+        }]"
+        />
+
+
+    </div>
+</div>
+
+</div>
+
+
+</div>
+</Dashboard>
 </template>
 
 <script>
-import Dashboard from '@/Pages/Admin/Dashboard';
-import Datatable from '@/Partials/Datatable';
-import Form from '@/Partials/Form';
+    import Dashboard from '@/Pages/Admin/Dashboard';
+    import Datatable from '@/Partials/Datatable';
+    import AppForm from '@/Partials/AppForm';
 
-export default {
-    components: {
-        Dashboard,
-        Datatable,
-        Form: 'app-form',
+    export default {
+        components: {
+            Dashboard,
+            Datatable,
+            AppForm,
 
-    },
+        },
 
-    mounted(){
-        alert(123)
-    },
-    data(){
-        return{
-            button:false,
-            task:{
-                title:null,
-                description:null,
-                end_days:null,
+
+        data(){
+            return{
+                button:false,
+                task:{
+                    title:null,
+                    description:null,
+                    end_days:null,
+                },
+                form:{
+                    method:null,
+                    url:null,
+                    data:null
+                },
+                modal:null
             }
-        }
-    },
-    props: ['gerencia', 'tasks', 'users'],
+        },
+        props: ['gerencia', 'tasks', 'users'],
 
-    methods:{
-        sendActivity(){
-                this.button = true;
-                const _this = this;
-                let method = 'post';
-                this.$inertia[method](route('admin.gerencias.storeTask', {
-                gerencia:this.gerencia
-            }),this.task, {
-                    onSuccess(){
-                  _this.button = false;
-                    },
+        methods:{
+            openModal(modal){
+                this.modal = modal;
+                this.form.url = route('admin.gerencias.storeTask',{
+                    gerencia:this.gerencia.id
                 });
-            
-        }
-    }
-}
+                this.form.method = 'post';
+                modal.show()
+
+            },
+
+            success(){
+    
+             this.modal.hide()
+         },
+         editTask(task){
+            this.task =  task
+            this.form.url = route('admin.gerencias.updateTask',{
+                    gerencia:this.gerencia.id,
+                    task:task.id
+                });
+                this.form.method = 'put';
+            let modal = new bootstrap.Modal(document.getElementById('modalActivy'))
+            modal.show()
+         }
+     }
+ }
 </script>
