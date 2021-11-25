@@ -26732,7 +26732,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_11 = {
-  "class": "row"
+  "class": "row mb-3"
 };
 var _hoisted_12 = {
   "class": "col-md-6"
@@ -26794,6 +26794,11 @@ var _hoisted_24 = {
   "for": "users"
 };
 var _hoisted_25 = ["value"];
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Roles")], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -26975,7 +26980,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["items", "onOpeningModal", "onRemoveUser", "options"])])])])])];
+      , ["items", "onOpeningModal", "onRemoveUser", "options"])])])]), _hoisted_26])];
     }),
     _: 1
     /* STABLE */

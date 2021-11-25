@@ -23,7 +23,7 @@
                     <label class="form-check-label mx-1" for="code">Activo</label>
                 </div>
             </form>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-6">
                    <div class="row">
                        <h2 class="col-md-6">Actividades</h2>
@@ -144,7 +144,10 @@
 </div>
 
 </div>
+    <div>
+        <h2>Roles</h2>
 
+    </div>
 
 </div>
 </Dashboard>

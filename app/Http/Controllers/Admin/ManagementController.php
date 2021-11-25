@@ -24,7 +24,26 @@ class ManagementController extends BaseController
         $tasks = $gerencia->tasks()->orderBy('id','DESC')->paginate(5, ['*'], 'tasks_page');
         $users = $gerencia->users()->orderBy('id','DESC')->paginate(5, ['*'], 'users_page');
 
+        dd($this->hasRoles($gerencia));
         return $this->loadView('Admin.Managements.edit', compact('gerencia','tasks', 'users'));
+    }
+
+    public function hasRoles($gerencia)
+    {
+        $roles = $this->model('role')->all();
+        $haverRole =  $gerencia->roles()->get();
+        $array_roles = array();
+        foreach ($roles as $role) {
+            if ($haverRole->contains($role)) {
+                $array_roles[$role->name]['check']= true ;
+            }else{
+                $array_roles[$role->name]['check']= false ;
+            }
+            $array_roles[$role->name]['id']= $role->id ;
+        }
+
+        return $array_roles;
+
     }
 
     public function storeTask(Management $gerencia)
