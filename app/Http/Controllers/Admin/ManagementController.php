@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use App\Models\{
     Management,
-    Task
+    Task,
+    User
 };
 
 
@@ -59,5 +60,29 @@ class ManagementController extends BaseController
     public function deleteTask(Management $gerencia, Task $task)
     {
 
+    }
+
+    public function getUsers()
+    {
+        $users = $this->model('user')->all();
+        return response()->json($users);
+    }
+
+    public function addUserToManagement(Management $gerencia)
+    {
+
+        $this->request()->validate([
+            'user_id'=>['required' ,"unique:user_has_managements"],
+        ]);
+        
+        $user_id = $this->request()->user_id;
+        $gerencia->users()->attach($user_id);
+        return back();
+    }
+
+    public function removeUser(Management $gerencia, User $user)
+    {
+        $gerencia->users()->detach($user);
+        return back();
     }
 }

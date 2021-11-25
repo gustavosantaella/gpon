@@ -19,7 +19,7 @@
             </div>
             <dialog-modal v-if="this.modal" :id='this.modal.id'>
                 <template v-slot:title>{{ this.modal.title }}</template>
-                <template v-slot:content>
+                <template v-slot:content >
 
                     <slot :name="this.modal.id"></slot>
                 </template>
@@ -96,7 +96,7 @@
             }
         },
         mounted(){
-          
+
         },
         methods: {
             search() {
@@ -113,13 +113,14 @@
             captionColspan() {
                 return this.options ? this.th.length + 1 : this.th.length;
             },
-            openModal(){
-                let modal = new bootstrap.Modal(document.getElementById(this.modal.id))
-                this.$emit('openingModal', modal)
-            }
-        }
+             openModal(){
 
+            let modal = new bootstrap.Modal(document.getElementById(this.modal.id))
+            this.$emit('openingModal', modal)
+        }
     }
+
+}
 </script>
 
 <style lang="css" scoped>
