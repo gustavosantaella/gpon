@@ -11,7 +11,8 @@
             <div  v-if="this.filters" class="form-responsive col-md-10">
 
                 <div class="form-group">
-                    <input @keyup='this.search()' v-model='this.filter.search' type="text" class="form-control"
+                    <input @keyup='this.search()' v-model='this.filter.search'  type="text"
+                           class="form-control"
                     name="search"
                     placeholder="Busca algo...">
                 </div>
@@ -24,7 +25,7 @@
                     <slot :name="this.modal.id"></slot>
                 </template>
             </dialog-modal>
-            <button v-if="this.modal" type='button' 
+            <button v-if="this.modal" type='button'
             class='btn btn-sm btn-secondary fw-bold'
             :class="{'col-md-1':this.modal.class}"
             @click='this.openModal()'><i v-if='this.modal.IconFilter' class="fas fa-filter"></i>{{
@@ -73,7 +74,7 @@
 
 
     </div>
-    <a href="#" @click="this.$inertia.get(this.items.next_page_url)"><i class="fas fa-arrow-right "></i></a>
+    <a href="#" @click="this.nextPage()"><i class="fas fa-arrow-right "></i></a>
 </div>
 </div>
 </template>
@@ -97,16 +98,29 @@
         },
         mounted(){
 
+            this.filter.search = this.queryParams().text
+
         },
         methods: {
+
+            queryParams(){
+                const params = new URLSearchParams(window.location.search);
+                return  Array.from(params.keys()).reduce(
+                    (acc, val) => ({ ...acc, [val]: params.get(val) }),
+                    {}
+                );
+            },
+
             search() {
                 try {
+
                     this.$inertia.get(this.url, {
                         text: this.filter.search
                     })
                 } catch (e) {
-                    this.$toast.error(`Sucedio un error, pongase en contacto con el administrador \n message:`, {
-                        position: 'top-right'
+                    this.$toast.error(`Sucedio un error, pongase en contacto con el administrador \n message: ${e.message}`, {
+                        position: 'top-right',
+                        duration:5000,
                     });
                 }
             },
@@ -117,7 +131,12 @@
 
             let modal = new bootstrap.Modal(document.getElementById(this.modal.id))
             this.$emit('openingModal', modal)
-        }
+        },
+
+            nextPage(){
+
+                return this.$inertia.get(this.items.next_page_url, this.queryParams())
+            }
     }
 
 }

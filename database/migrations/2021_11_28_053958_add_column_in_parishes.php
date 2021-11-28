@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagementTable extends Migration
+class AddColumnInParishes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,8 @@ class CreateManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('managements', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('acronym');
-            $table->timestamps();
+        Schema::table('parishes', function (Blueprint $table) {
             $table->softDeletes();
-
-            $table->index('name');
-            $table->index('active');
         });
     }
 
@@ -32,6 +25,8 @@ class CreateManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('managements');
+        Schema::table('parishes', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }

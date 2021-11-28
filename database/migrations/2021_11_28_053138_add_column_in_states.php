@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagementTable extends Migration
+class AddColumnInStates extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('managements', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('acronym');
-            $table->timestamps();
+        Schema::table('states', function (Blueprint $table) {
             $table->softDeletes();
-
-            $table->index('name');
-            $table->index('active');
+            $table->foreignId('region_id')->nullable()->references('id')->on('regions')->onDelete('cascade');
         });
     }
 
@@ -32,6 +26,9 @@ class CreateManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('managements');
+        Schema::table('states', function (Blueprint $table) {
+            $table->dropColumn('region_id');
+            $table->dropColumn('deleted_at');
+        });
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagementTable extends Migration
+class CreateProvidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('managements', function (Blueprint $table) {
+        Schema::create('providers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('acronym');
-            $table->timestamps();
+            $table->string('name')->unique();
             $table->softDeletes();
 
             $table->index('name');
-            $table->index('active');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +30,6 @@ class CreateManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('managements');
+        Schema::dropIfExists('providers');
     }
 }

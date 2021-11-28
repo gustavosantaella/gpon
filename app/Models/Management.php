@@ -10,6 +10,8 @@ class Management extends Model
 {
     use HasFactory, HasRoles;
 
+    protected $guarded = [];
+
     public $table = 'managements';
 
     // Relations

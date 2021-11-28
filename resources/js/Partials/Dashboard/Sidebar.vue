@@ -3,21 +3,42 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
+                        <nav-link :navlink="false" :href='route("admin.home")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
-                        </a>
+                        </nav-link>
                         <div class="sb-sidenav-menu-heading">Modulos</div>
 
                          <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Usuarios
                         </nav-link>
-                         <nav-link :navlink="false" :href='route("admin.gerencias.index")'>
+
+
+
+
+                        <div class="sb-sidenav-menu-heading">Equipos</div>
+
+                        <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Proveedores
+                        </nav-link>
+                        <nav-link :navlink="false" :href='route("admin.gerencias.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Modelos
+                        </nav-link>
+
+                        <div class="sb-sidenav-menu-heading">Cantv</div>
+
+                        <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Centrales
+                        </nav-link>
+                        <nav-link :navlink="false" :href='route("admin.gerencias.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gerencias
                         </nav-link>
-                          <nav-link   :navlink="false" :href='route("admin.roles.index")'>
+                        <nav-link   :navlink="false" :href='route("admin.roles.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Roles
                         </nav-link>

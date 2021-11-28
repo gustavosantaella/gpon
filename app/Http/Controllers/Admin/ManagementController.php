@@ -3,77 +3,79 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\Traits\RolesAndPermissions;
 use App\Models\{
     Management,
     Task,
     User
 };
+use Throwable;
 
 
 class ManagementController extends BaseController
 {
+    use RolesAndPermissions;
+
     public function index(): \Inertia\Response
     {
+        $prevOrNextPageName = 'page';
         $managements = $this->model('management')->where('name', 'like', "%{$this->request()->text}%")->paginate(3);
 
-        return $this->loadView('Admin.Managements.index', compact('managements'));
+        return $this->loadView('Admin.Managements.index', compact('managements', 'prevOrNextPageName'));
     }
 
     public function edit(Management $gerencia): \Inertia\Response
     {
-        $tasks = $gerencia->tasks()->orderBy('id','DESC')->paginate(5, ['*'], 'tasks_page');
-        $users = $gerencia->users()->orderBy('id','DESC')->paginate(5, ['*'], 'users_page');
-
-        dd($this->hasRoles($gerencia));
-        return $this->loadView('Admin.Managements.edit', compact('gerencia','tasks', 'users'));
+        $tasks = $gerencia->tasks()->orderBy('id', 'DESC')->paginate(5, ['*'], 'tasks_page');
+        $users = $gerencia->users()->orderBy('id', 'DESC')->paginate(5, ['*'], 'users_page');
+        $roles = $this->hasRoles($gerencia);
+        return $this->loadView('Admin.Managements.edit', compact('gerencia', 'tasks', 'users', 'roles'));
     }
 
-    public function hasRoles($gerencia)
+    public function update(Management $gerencia)
     {
-        $roles = $this->model('role')->all();
-        $haverRole =  $gerencia->roles()->get();
-        $array_roles = array();
-        foreach ($roles as $role) {
-            if ($haverRole->contains($role)) {
-                $array_roles[$role->name]['check']= true ;
-            }else{
-                $array_roles[$role->name]['check']= false ;
-            }
-            $array_roles[$role->name]['id']= $role->id ;
+        $data = $this->request()->validate([
+            'name' => ['required', "unique:managements,name,{$this->request()->id}"],
+            'position' => ['required', "unique:managements,position,{$this->request()->id}"],
+
+        ]);
+        try {
+            $gerencia->update($data);
+            return back()->with('status', 200);
+        } catch (Throwable  $e) {
+            return $e->getMessage();
         }
-
-        return $array_roles;
-
     }
 
     public function storeTask(Management $gerencia)
     {
         $this->request()->validate([
-            'title'=>['required' ,'unique:tasks'],
-            'description'=>['required','Min:5'],
-            'end_days'=>'required'
+            'title' => ['required', 'unique:tasks'],
+            'description' => ['required', 'Min:5'],
+            'end_days' => 'required'
         ]);
 
+
         $data = $this->request()->only(['title', 'description', 'end_days']);
-        if($gerencia)
+        if ($gerencia)
             $gerencia->tasks()->create($data);
 
-        return back();
+        return back()->with('status', 200);
     }
 
     public function updateTask(Management $gerencia, Task $task)
     {
         $this->request()->validate([
-            'title'=>['required' ,"unique:tasks,title,{$this->request()->id}"],
-            'description'=>['required','Min:5'],
-            'end_days'=>'required'
+            'title' => ['required', "unique:tasks,title,{$this->request()->id}"],
+            'description' => ['required', 'Min:5'],
+            'end_days' => 'required'
         ]);
 
         $data = $this->request()->only(['title', 'description', 'end_days']);
-        if($gerencia)
+        if ($gerencia)
             $gerencia->tasks()->find($task->id)->update($data);
 
-        return back();
+        return back()->with('status', 200);
     }
 
     public function deleteTask(Management $gerencia, Task $task)
@@ -91,17 +93,25 @@ class ManagementController extends BaseController
     {
 
         $this->request()->validate([
-            'user_id'=>['required' ,"unique:user_has_managements"],
+            'user_id' => ['required', "unique:user_has_managements"],
         ]);
-        
+
         $user_id = $this->request()->user_id;
         $gerencia->users()->attach($user_id);
-        return back();
+        return back()->with('status', 200);
     }
 
     public function removeUser(Management $gerencia, User $user)
     {
         $gerencia->users()->detach($user);
-        return back();
+        return back()->with('status', 200);
+    }
+
+    public function addOrRemoveRole(Management $gerencia)
+    {
+        $roles = $this->request()->selected;
+
+        if ($roles) $gerencia->roles()->sync($roles);
+        return response()->json($gerencia->roles);
     }
 }

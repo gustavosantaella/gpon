@@ -22,7 +22,7 @@ Route::group([
     // users
     Route::resource('usuarios', 'UserController');
     Route::group(['prefix' => 'usuarios', 'as'=>'usuarios.'], function() {
-        
+
     });
     // gerencias
     Route::resource('gerencias', 'ManagementController');
@@ -32,6 +32,7 @@ Route::group([
         Route::get('usuarios/all/management', 'ManagementController@getUsers')->name('getUsers');
         Route::post('{gerencia:id}/add-user', 'ManagementController@addUserToManagement')->name('addUserToManagement');
         Route::delete('{gerencia:id}/{user:id}/remove-user', 'ManagementController@removeUser')->name('removeUser');
+        Route::post('{gerencia:id}/addOrRemoveRole', 'ManagementController@addOrRemoveRole')->name('addOrRemoveRole');
     });
 
     // roles

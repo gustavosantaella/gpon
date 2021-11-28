@@ -1,6 +1,8 @@
 <template>
     <Dashboard>
+
         <Datatable
+            :prevOrNextPageName="this.prevOrNextPageName"
             :url="route('admin.gerencias.index')"
             :filters="true"
             v-on:edit="this.edit"
@@ -40,7 +42,7 @@ export default {
 
     },
     name: 'index',
-    props: ['managements'],
+    props: ['managements', 'prevOrNextPageName'],
 
     methods: {
         edit(item) {
