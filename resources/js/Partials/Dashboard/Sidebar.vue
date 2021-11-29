@@ -19,7 +19,7 @@
 
                         <div class="sb-sidenav-menu-heading">Equipos</div>
 
-                        <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
+                        <nav-link :navlink="false" :href='route("admin.proveedores.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Proveedores
                         </nav-link>

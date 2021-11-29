@@ -38,6 +38,10 @@ Route::group([
         Route::delete('{gerencia:id}/{user:id}/remove-user', 'ManagementController@removeUser')->name('removeUser');
         Route::post('{gerencia:id}/addOrRemoveRole', 'ManagementController@addOrRemoveRole')->name('addOrRemoveRole');
     });
+
+    //--------------------------------------------------------------------------------------
+    // proveedores
+    Route::resource('proveedores', 'ProviderController');
 //--------------------------------------------------------------------------------------
     // roles
     Route::resource('roles', 'RoleController');

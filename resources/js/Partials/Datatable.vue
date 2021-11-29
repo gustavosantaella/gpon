@@ -38,18 +38,18 @@
                     <th class='text-center fw-bold' :colspan="this.captionColspan()">{{this.caption}}</th>
                 </tr>
                 <tr>
-                    <th v-if='this.th' v-for='th in this.th'>{{ th.text.toUpperCase() }}</th>
+                    <th v-show='this.th' v-for='(th, key) in this.th' :key='key'>{{ th.text.toUpperCase() }}</th>
                     <th v-if="this.options" :colspan="this.options.length" align="center">OPCIONES</th>
                     <slot name="th"></slot>
                 </tr>
             </thead>
 
             <tbody>
-                <tr v-if="this.items" v-for='item in this.items.data'>
-                    <td v-if='this.th' v-for='th in this.th'>{{ item[th.original] }}</td>
-                    <td v-if="this.options">
-                        <button v-for="(option, key) in this.options" :key="key" :class="[option.class]"
-                        @click.prevent="this.$emit(option.method,item)">{{ option.text }}
+                <tr v-show="this.items" v-for='(item, key) in this.items.data' :key='key'>
+                    <td v-show='this.th' v-for='(th, key) in this.th' :key='key'>{{ item[th.original] }}</td>
+                    <td v-show="this.options">
+                        <button class='btn fw-bold btn-sm' v-for="(option, key) in this.options" :key="key" :class="[option.class]"
+                        @click.prevent="this.$emit(option.method,item)">{{ option.text.toUpperCase() }}
                     </button>
                 </td>
             </tr>
@@ -60,7 +60,7 @@
         <a href="#" class='ml-2'
         @click="this.prevPage()"><i class="fas fa-arrow-left"></i></a>
         <div>
-            <button class="btn btn-sm btn-secondary mx-1 fw-bold" v-for="i of 5"
+            <button class="btn btn-sm btn-secondary mx-1 fw-bold" v-for="i of 5" :key='i'
             @click="this.$inertia.get(route('admin.gerencias.index',{
                 page:i,}))"
             :class="{' btn-danger ': i === this.items.current_page ?? 'btn-secondary'}">{{ i }}
