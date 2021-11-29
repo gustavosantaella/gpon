@@ -78,9 +78,18 @@ class ManagementController extends BaseController
         return back()->with('status', 200);
     }
 
+    /**
+     * Comment s
+     *
+     * @param  Management $gerencia
+     * @param Task $task
+     * @return void
+     */
     public function deleteTask(Management $gerencia, Task $task)
     {
 
+            $gerencia->tasks()->find($task->id)->delete();
+            return back();
     }
 
     public function getUsers()

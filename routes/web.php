@@ -30,6 +30,7 @@ Route::group([
         Route::post('{gerencia:id}/task/store', 'ManagementController@storeTask')->name('storeTask');
         Route::put('{gerencia:id}/{task}/update', 'ManagementController@updateTask')->name('updateTask');
         Route::get('usuarios/all/management', 'ManagementController@getUsers')->name('getUsers');
+        Route::delete('{gerencia:id}/{task}/delete', 'ManagementController@deleteTask')->name('deleteTask');
         Route::post('{gerencia:id}/add-user', 'ManagementController@addUserToManagement')->name('addUserToManagement');
         Route::delete('{gerencia:id}/{user:id}/remove-user', 'ManagementController@removeUser')->name('removeUser');
         Route::post('{gerencia:id}/addOrRemoveRole', 'ManagementController@addOrRemoveRole')->name('addOrRemoveRole');

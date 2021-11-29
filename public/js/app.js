@@ -23337,6 +23337,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this.$toast.success('Usuario removido');
         }
       });
+    },
+    deleteTask: function deleteTask(task) {
+      this.$inertia["delete"](route('admin.gerencias.deleteTask', {
+        gerencia: this.gerencia,
+        task: task
+      }));
     }
   }
 });
@@ -26961,11 +26967,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["data", "url"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
         onEditTask: _this.editTask,
+        onDeleteTask: _this.deleteTask,
         onOpeningModal: _this.openModal,
         options: [{
           text: 'editar',
           method: 'editTask',
-          "class": 'btn-primary',
+          "class": 'btn btn-sm fw-bold btn-primary',
+          permission: _ctx.is('CONSULTOR')
+        }, {
+          text: 'eliminar',
+          method: 'deleteTask',
+          "class": 'btn btn-sm fw-bold btn-danger',
           permission: _ctx.is('CONSULTOR')
         }],
         modal: {
@@ -27037,7 +27049,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["onEditTask", "onOpeningModal", "options", "items"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+      , ["onEditTask", "onDeleteTask", "onOpeningModal", "options", "items"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
         items: _this.users,
         onOpeningModal: _this.openModalUser,
         onRemoveUser: _this.removeUser,

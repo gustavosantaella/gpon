@@ -38,27 +38,35 @@
                     <div>
                         <datatable
                             v-on:editTask="this.editTask"
+                            v-on:deleteTask="this.deleteTask"
                             v-on:openingModal='this.openModal'
                             :options="[{
-                     text:'editar',
-                     method:'editTask',
-                     class:'btn-primary',
-                     permission:(is('CONSULTOR'))
-                 },]"
-                            :modal="{
-                    id:'modalActivy',
-                    title:'Crear/Editar actividad',
-                    text:'Nueva actividad'
-                }"
-                            :items="this.tasks"
-                            :th="[{
-                    original:'title',
-                    text:'titulo',
-                },{
-                    original:'end_days',
-                    text:'Dias de culminacion',
-                }]"
-                        >
+                                    text:'editar',
+                                    method:'editTask',
+                                    class:'btn btn-sm fw-bold btn-primary',
+                                    permission:(is('CONSULTOR'))
+                                },
+                                {
+                                    text:'eliminar',
+                                    method:'deleteTask',
+                                    class:'btn btn-sm fw-bold btn-danger',
+                                    permission:(is('CONSULTOR'))
+                                },
+                                ]"
+                                            :modal="{
+                                    id:'modalActivy',
+                                    title:'Crear/Editar actividad',
+                                    text:'Nueva actividad'
+                                }"
+                                            :items="this.tasks"
+                                            :th="[{
+                                    original:'title',
+                                    text:'titulo',
+                                },{
+                                    original:'end_days',
+                                    text:'Dias de culminacion',
+                                }]"
+                                    >
                             <template v-slot:modalActivy>
                                 <div class="form-responsive">
                                     <app-form
@@ -253,6 +261,12 @@ export default {
                     _this.$toast.success('Usuario removido')
                 }
             });
+        },
+        deleteTask(task){
+                this.$inertia.delete(route('admin.gerencias.deleteTask', {
+                    gerencia:this.gerencia,
+                    task
+                }));
         }
     }
 }
