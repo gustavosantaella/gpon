@@ -13,6 +13,6 @@ class ManagementSeeder extends Seeder
      */
     public function run()
     {
-        Management::factory(7)->create();
+        Management::factory(400)->create();
     }
 }

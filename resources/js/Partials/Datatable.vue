@@ -58,18 +58,12 @@
     </table>
     <div v-if="this.items" class="d-flex justify-content-end">
         <a href="#" class='ml-2'
-        @click="this.$inertia.get(this.items.prev_page_url)"><i class="fas fa-arrow-left"></i></a>
+        @click="this.prevPage()"><i class="fas fa-arrow-left"></i></a>
         <div>
-            <button class="btn btn-sm" v-for="i of (Math.ceil(this.items.total /
-            this.items.per_page))"
-
+            <button class="btn btn-sm" v-for="i of (Math.ceil(this.items.total /this.items.per_page))"
             @click="this.$inertia.get(route('admin.gerencias.index',{
-                page:i,
-
-            }))"
-            :class="{
-                ' btn-danger ': i === this.items.current_page ?? 'btn-secondary'
-            }">{{ i }}
+                page:i,}))"
+            :class="{' btn-danger ': i === this.items.current_page ?? 'btn-secondary'}">{{ i }}
         </button>
 
 
@@ -87,7 +81,7 @@
             DialogModal
         },
         name: 'Datatable',
-        props: ['th', 'options', 'items', 'filters', 'url', 'caption', 'modal'],
+        props: ['th', 'options', 'items', 'filters', 'url', 'caption', 'modal','formDataFilters'],
 
         data() {
             return {
@@ -135,7 +129,21 @@
 
             nextPage(){
 
-                return this.$inertia.get(this.items.next_page_url, this.queryParams())
+                let data = this.json();
+                return this.$inertia.get(this.items.next_page_url,data);
+            },
+
+            prevPage(){
+                 let data = this.json();
+                return this.$inertia.get(this.items.prev_page_url,data);
+            },
+
+            json(){
+                    let jsonSearch = {
+                     text: this.filter.search
+                }
+                let jsonFilters = this.formDataFilters;
+                return {...jsonSearch, ...jsonFilters};
             }
     }
 

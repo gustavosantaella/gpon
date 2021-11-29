@@ -24525,17 +24525,26 @@ __webpack_require__.r(__webpack_exports__);
       this.$inertia[this.method](this.url, this.data, {
         onSuccess: function onSuccess() {
           if (_this.$page.props.flash.error) {
-            return _this.$toast.error(this.$page.props.flash.error);
+            return _this.$toast.error(this.$page.props.flash.error, {
+              position: 'top-right',
+              duration: 5000
+            });
           }
 
           if (_this.$page.props.flash.warning) {
-            return _this.$toast.warning(this.$page.props.flash.warning);
+            return _this.$toast.warning(this.$page.props.flash.warning, {
+              position: 'top-right',
+              duration: 5000
+            });
           }
 
           if (_this.$page.props.flash.status === 200) {
             _this.disabled = false;
 
-            _this.$toast.success('La peticion se ha realizado con exito.');
+            _this.$toast.success('La peticion se ha realizado con exito.', {
+              position: 'top-right',
+              duration: 5000
+            });
 
             _this.$emit('submitSuccess');
           }
@@ -24555,7 +24564,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.$swal('Ups!, ha sucedido un error', errors(e), 'error');
         },
         onFinish: function onFinish() {
-          _this.$toast.success('La peticion se ha ejecutado con exito.');
+          _this.$toast.success('La peticion se ha ejecutado con exito.', {
+            position: 'top-right',
+            duration: 5000
+          });
         },
         onwaiting: function onwaiting() {
           alert('esperando');
@@ -24682,7 +24694,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     DialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   name: 'Datatable',
-  props: ['th', 'options', 'items', 'filters', 'url', 'caption', 'modal'],
+  props: ['th', 'options', 'items', 'filters', 'url', 'caption', 'modal', 'formDataFilters'],
   data: function data() {
     return {
       filter: {
@@ -24720,7 +24732,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$emit('openingModal', modal);
     },
     nextPage: function nextPage() {
-      return this.$inertia.get(this.items.next_page_url, this.queryParams());
+      var data = this.json();
+      return this.$inertia.get(this.items.next_page_url, data);
+    },
+    prevPage: function prevPage() {
+      var data = this.json();
+      return this.$inertia.get(this.items.prev_page_url, data);
+    },
+    json: function json() {
+      var jsonSearch = {
+        text: this.filter.search
+      };
+      var jsonFilters = this.formDataFilters;
+      return _objectSpread(_objectSpread({}, jsonSearch), jsonFilters);
     }
   }
 });
@@ -30237,7 +30261,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: "#",
     "class": "ml-2",
     onClick: _cache[3] || (_cache[3] = function ($event) {
-      return _this.$inertia.get(_this.items.prev_page_url);
+      return _this.prevPage();
     })
   }, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Math.ceil(this.items.total / this.items.per_page), function (i) {
     var _ref;

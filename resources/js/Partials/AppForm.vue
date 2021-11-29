@@ -40,15 +40,24 @@ export default {
                 onSuccess() {
 
                     if (_this.$page.props.flash.error) {
-                        return _this.$toast.error(this.$page.props.flash.error)
+                        return _this.$toast.error(this.$page.props.flash.error,{
+                            position: 'top-right',
+                            duration:5000,
+                        })
                     }
                     if (_this.$page.props.flash.warning) {
-                        return _this.$toast.warning(this.$page.props.flash.warning)
+                        return _this.$toast.warning(this.$page.props.flash.warning,{
+                            position: 'top-right',
+                            duration:5000,
+                        })
                     }
 
                     if (_this.$page.props.flash.status === 200) {
                         _this.disabled = false
-                        _this.$toast.success('La peticion se ha realizado con exito.')
+                        _this.$toast.success('La peticion se ha realizado con exito.',{
+                            position: 'top-right',
+                            duration:5000,
+                        })
                         _this.$emit('submitSuccess');
                     }
 
@@ -67,7 +76,10 @@ export default {
                     _this.$swal('Ups!, ha sucedido un error', errors(e), 'error')
                 },
                 onFinish() {
-                    _this.$toast.success('La peticion se ha ejecutado con exito.')
+                    _this.$toast.success('La peticion se ha ejecutado con exito.',{
+                            position: 'top-right',
+                            duration:5000,
+                        })
                 },
                 onwaiting() {
                     alert('esperando')
