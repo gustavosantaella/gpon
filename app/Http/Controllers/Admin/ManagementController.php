@@ -20,8 +20,20 @@ class ManagementController extends BaseController
     {
         $prevOrNextPageName = 'page';
         $managements = $this->model('management')->where('name', 'like', "%{$this->request()->text}%")->paginate(3);
+        return $this->loadView('Admin.Managements.index', compact('managements'));
+    }
 
-        return $this->loadView('Admin.Managements.index', compact('managements', 'prevOrNextPageName'));
+    public function store()
+    {
+        $data = $this->request()->validate([
+            'name' => ['required', "unique:managements"],
+            'position' => ['required', "unique:managements"],
+            'acronym' => ['required', "unique:managements"],
+
+        ]);
+
+        $management = $this->model('management')->create($data);
+        return redirect()->route('admin.gerencias.edit', $management)->with('status',200);
     }
 
     public function edit(Management $gerencia): \Inertia\Response

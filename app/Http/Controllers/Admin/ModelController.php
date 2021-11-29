@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class ModelController extends BaseController
 {
-    //
+    public function index()
+    {
+        return 1;
+    }
 }

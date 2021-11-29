@@ -15,6 +15,26 @@ class ProviderController extends BaseController
         return $this->loadView('Admin.Providers.index', compact('providers'));
     }
 
+    public function store()
+    {
+        $data = $this->request()->validate([
+            'name'=>['required', 'unique:providers']
+        ]);
+
+        $this->model('provider')->create($data);
+        return back()->with('status', 200);
+    }
+
+    public function update(Provider $proveedore)
+    {
+         $data = $this->request()->validate([
+            'name'=>['required', "unique:providers,name,{$proveedore->id}"]
+        ]);
+
+       $proveedore->update($data);
+        return back()->with('status', 200);
+    }
+
     public function destroy(Provider $proveedore)
     {
         $proveedore->delete();

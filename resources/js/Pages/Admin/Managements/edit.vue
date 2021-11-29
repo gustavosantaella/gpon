@@ -111,6 +111,7 @@
                 <div class="col-md-6">
                     <h2>Empleados</h2>
                     <div>
+                      
                         <datatable
                             :items="this.users"
                             v-on:openingModal='this.openModalUser'

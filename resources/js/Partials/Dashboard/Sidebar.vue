@@ -23,7 +23,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Proveedores
                         </nav-link>
-                        <nav-link :navlink="false" :href='route("admin.gerencias.index")'>
+                        <nav-link :navlink="false" :href='route("admin.modelos.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Modelos
                         </nav-link>

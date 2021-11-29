@@ -16,8 +16,8 @@ class ManagementFactory extends Factory
     {
         return [
             'name'=>$this->faker->name(),
-            'active'=> $this->faker->boolean(),
             'position'=>0,
+            'acronym'=>'ACRO'
         ];
     }
 }

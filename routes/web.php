@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([
-    'namespace'=>'\App\Http\Controllers\Admin',
-    'as'=>'admin.',
-    'prefix'=>'admin'
-], function(){
+Route::prefix('dashboard')->namespace('\App\Http\Controllers\Admin')->as('admin.')->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 //--------------------------------------------------------------------------------------
     // users
@@ -39,10 +35,17 @@ Route::group([
         Route::post('{gerencia:id}/addOrRemoveRole', 'ManagementController@addOrRemoveRole')->name('addOrRemoveRole');
     });
 
-    //--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
     // proveedores
     Route::resource('proveedores', 'ProviderController');
 //--------------------------------------------------------------------------------------
+    // modelos
+    Route::prefix('equipos')->group(function(){
+
+    Route::resource('modelos', 'ProviderController');
+});
+//--------------------------------------------------------------------------------------
+
     // roles
     Route::resource('roles', 'RoleController');
 

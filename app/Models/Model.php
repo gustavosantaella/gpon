@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as LaravelModel;
 
-class Model extends Model
+class Model extends LaravelModel
 {
     use HasFactory;
+
+    protected $guarded = [];
 }
