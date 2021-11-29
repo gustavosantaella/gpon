@@ -23378,13 +23378,20 @@ __webpack_require__.r(__webpack_exports__);
       }));
     },
     "delete": function _delete(item) {
+      var _this = this;
+
       this.$swal({
         title: 'Estas seguro?',
         text: 'Si eliminas este registro, se eliminara permanentemente del sistema.',
         icon: 'warning',
-        dangerMode: true
+        dangerMode: true,
+        showCancelButton: true
       }).then(function (e) {
-        alert(1);
+        if (e.isConfirmed) {
+          _this.$inertia["delete"](route('admin.gerencias.destroy', {
+            gerencia: item
+          }));
+        }
       });
     }
   }
@@ -27179,7 +27186,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Dashboard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Datatable, {
-        prevOrNextPageName: _this.prevOrNextPageName,
         url: _ctx.route('admin.gerencias.index'),
         filters: true,
         onEdit: _this.edit,
@@ -27205,7 +27211,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }]
       }, null, 8
       /* PROPS */
-      , ["prevOrNextPageName", "url", "onEdit", "onDelete", "items", "options"])];
+      , ["url", "onEdit", "onDelete", "items", "options"])];
     }),
     _: 1
     /* STABLE */
@@ -30263,10 +30269,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return _this.prevPage();
     })
-  }, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Math.ceil(this.items.total / this.items.per_page), function (i) {
+  }, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(5, function (i) {
     var _ref;
 
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-sm", {
         ' btn-danger ': (_ref = i === _this.items.current_page) !== null && _ref !== void 0 ? _ref : 'btn-secondary'
       }]),
@@ -30278,8 +30284,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(i), 11
     /* TEXT, CLASS, PROPS */
     , _hoisted_14);
-  }), 256
-  /* UNKEYED_FRAGMENT */
+  }), 64
+  /* STABLE_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#",
     onClick: _cache[4] || (_cache[4] = function ($event) {

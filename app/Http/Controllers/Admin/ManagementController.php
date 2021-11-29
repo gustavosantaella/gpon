@@ -123,4 +123,10 @@ class ManagementController extends BaseController
         if ($roles) $gerencia->roles()->sync($roles);
         return response()->json($gerencia->roles);
     }
+
+    public function destroy(Management $gerencia)
+    {
+        $gerencia->delete();
+        return back();
+    }
 }

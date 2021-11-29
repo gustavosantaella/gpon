@@ -19,11 +19,14 @@ Route::group([
     'prefix'=>'admin'
 ], function(){
     Route::get('/', 'HomeController@index')->name('home');
+//--------------------------------------------------------------------------------------
     // users
     Route::resource('usuarios', 'UserController');
     Route::group(['prefix' => 'usuarios', 'as'=>'usuarios.'], function() {
 
     });
+
+//--------------------------------------------------------------------------------------
     // gerencias
     Route::resource('gerencias', 'ManagementController');
     Route::group(['prefix' => 'gerencias', 'as'=>'gerencias.'], function() {
@@ -35,7 +38,7 @@ Route::group([
         Route::delete('{gerencia:id}/{user:id}/remove-user', 'ManagementController@removeUser')->name('removeUser');
         Route::post('{gerencia:id}/addOrRemoveRole', 'ManagementController@addOrRemoveRole')->name('addOrRemoveRole');
     });
-
+//--------------------------------------------------------------------------------------
     // roles
     Route::resource('roles', 'RoleController');
 

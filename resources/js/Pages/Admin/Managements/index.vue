@@ -1,8 +1,6 @@
 <template>
     <Dashboard>
-
         <Datatable
-            :prevOrNextPageName="this.prevOrNextPageName"
             :url="route('admin.gerencias.index')"
             :filters="true"
             v-on:edit="this.edit"
@@ -51,13 +49,20 @@ export default {
             }));
         },
         delete(item) {
+            const  _this = this;
             this.$swal({
                 title: 'Estas seguro?',
                 text: 'Si eliminas este registro, se eliminara permanentemente del sistema.',
                 icon: 'warning',
                 dangerMode: true,
+                  showCancelButton: true,
             }).then(e => {
-                alert(1)
+                if(e.isConfirmed)
+                {
+                    _this.$inertia.delete(route('admin.gerencias.destroy',{
+                        gerencia:item
+                    }));
+                }
             });
         }
     }

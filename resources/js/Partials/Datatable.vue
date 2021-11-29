@@ -60,7 +60,7 @@
         <a href="#" class='ml-2'
         @click="this.prevPage()"><i class="fas fa-arrow-left"></i></a>
         <div>
-            <button class="btn btn-sm" v-for="i of (Math.ceil(this.items.total /this.items.per_page))"
+            <button class="btn btn-sm" v-for="i of 5"
             @click="this.$inertia.get(route('admin.gerencias.index',{
                 page:i,}))"
             :class="{' btn-danger ': i === this.items.current_page ?? 'btn-secondary'}">{{ i }}
