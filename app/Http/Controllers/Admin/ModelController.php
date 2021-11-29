@@ -9,6 +9,17 @@ class ModelController extends BaseController
 {
     public function index()
     {
-        return 1;
+ 
+        $models = $this->model('model')
+        ->select([
+            'providers.name as provName',
+            'models.*',
+        ])
+        ->join('providers', 'models.provider_id', '=', 'providers.id')->paginate(5);
+        dd($models);
+
+        return $this->loadView('Admin.Models.index', compact(
+            'models'
+        ));
     }
 }

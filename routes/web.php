@@ -2,18 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::prefix('dashboard')->namespace('\App\Http\Controllers\Admin')->as('admin.')->group(function(){
+Route::prefix('dashboard')
+->namespace('\App\Http\Controllers\Admin')
+->as('admin.')
+->middleware(['guest']) // change to middleware auth 
+->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 //--------------------------------------------------------------------------------------
     // users
@@ -36,14 +29,15 @@ Route::prefix('dashboard')->namespace('\App\Http\Controllers\Admin')->as('admin.
     });
 
 //--------------------------------------------------------------------------------------
-    // proveedores
-    Route::resource('proveedores', 'ProviderController');
-//--------------------------------------------------------------------------------------
-    // modelos
     Route::prefix('equipos')->group(function(){
+    // proveedores
+        Route::resource('proveedores', 'ProviderController');
+//----------
+    // modelos
 
-    Route::resource('modelos', 'ProviderController');
-});
+
+        Route::resource('modelos', 'ModelController');
+    });
 //--------------------------------------------------------------------------------------
 
     // roles

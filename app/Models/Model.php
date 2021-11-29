@@ -10,4 +10,11 @@ class Model extends LaravelModel
     use HasFactory;
 
     protected $guarded = [];
+
+    // RELATIONS
+
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
 }
