@@ -1,91 +1,73 @@
 <template>
-  <Head title="Reset Password" />
+    <Head title="Reset Password" />
 
-  <jet-authentication-card>
-    <template #logo>
-      <jet-authentication-card-logo />
-    </template>
+    <BreezeValidationErrors class="mb-4" />
 
-
-    <div class="card-body">
-
-      <jet-validation-errors class="mb-3" />
-
-      <form @submit.prevent="submit">
-        <div class="mb-3">
-          <jet-label for="email" value="Email" />
-          <jet-input id="email" type="email" v-model="form.email" required autofocus />
+    <form @submit.prevent="submit">
+        <div>
+            <BreezeLabel for="email" value="Email" />
+            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
         </div>
 
-        <div class="mb-3">
-          <jet-label for="password" value="Password" />
-          <jet-input id="password" type="password" v-model="form.password" required autocomplete="new-password" />
+        <div class="mt-4">
+            <BreezeLabel for="password" value="Password" />
+            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
         </div>
 
-        <div class="mb-3">
-          <jet-label for="password_confirmation" value="Confirm Password" />
-          <jet-input id="password_confirmation" type="password" v-model="form.password_confirmation" required autocomplete="new-password" />
+        <div class="mt-4">
+            <BreezeLabel for="password_confirmation" value="Confirm Password" />
+            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
         </div>
 
-        <div class="mb-0">
-          <div class="d-flex justify-content-end">
-            <jet-button :class="{ 'text-white-50': form.processing }" :disabled="form.processing">
-              <div v-show="form.processing" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              
-              Reset Password
-            </jet-button>
-          </div>
+        <div class="flex items-center justify-end mt-4">
+            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Reset Password
+            </BreezeButton>
         </div>
-      </form>
-    </div>
-  </jet-authentication-card>
+    </form>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { Head } from '@inertiajs/inertia-vue3'
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-import JetButton from '@/Jetstream/Button.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+import BreezeButton from '@/Components/Button.vue'
+import BreezeGuestLayout from '@/Layouts/Guest.vue'
+import BreezeInput from '@/Components/Input.vue'
+import BreezeLabel from '@/Components/Label.vue'
+import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import { Head } from '@inertiajs/inertia-vue3';
 
-export default defineComponent({
-  components: {
-    Head,
-    JetAuthenticationCard,
-    JetAuthenticationCardLogo,
-    JetButton,
-    JetInput,
-    JetLabel,
-    JetValidationErrors
-  },
+export default {
+    layout: BreezeGuestLayout,
 
-  props: {
-    email: String,
-    token: String,
-  },
+    components: {
+        BreezeButton,
+        BreezeInput,
+        BreezeLabel,
+        BreezeValidationErrors,
+        Head,
+    },
 
-  data() {
-    return {
-      form: this.$inertia.form({
-        token: this.token,
-        email: this.email,
-        password: '',
-        password_confirmation: '',
-      })
+    props: {
+        email: String,
+        token: String,
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                token: this.token,
+                email: this.email,
+                password: '',
+                password_confirmation: '',
+            })
+        }
+    },
+
+    methods: {
+        submit() {
+            this.form.post(this.route('password.update'), {
+                onFinish: () => this.form.reset('password', 'password_confirmation'),
+            })
+        }
     }
-  },
-
-  methods: {
-    submit() {
-      this.form.post(this.route('password.update'), {
-        onFinish: () => this.form.reset('password', 'password_confirmation'),
-      })
-    }
-  }
-})
+}
 </script>

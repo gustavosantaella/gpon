@@ -1,5 +1,7 @@
 <template>
-  <li class="nav-item">
+  <li :class="{
+    'nav-link':this.navlink == true
+  }">
     <Link :href="href" :class="classes">
       <slot></slot>
     </Link>
@@ -14,8 +16,9 @@
     components: {
       Link,
     },
-    
-    props: ['href', 'active'],
+
+    props: ['href', 'active', 'navlink'],
+
 
     computed: {
       classes() {

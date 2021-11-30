@@ -8,21 +8,25 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        <script>
+            window.Laravel = {
+                csrfToken:"{{csrf_token()}}",
+                jsPermissions:"{!! auth()->check()?auth()->user()->jsPermissions():null !!}"
+            }
+        </script>
         <!-- Scripts -->
         @routes
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="bg-light">
+    <body class="font-sans antialiased">
         @inertia
 
         @env ('local')
-            <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
+            <script src="http://localhost:8080/js/bundle.js"></script>
         @endenv
     </body>
 </html>

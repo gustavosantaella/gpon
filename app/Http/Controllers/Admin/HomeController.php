@@ -8,6 +8,6 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        return $this->loadView('Welcome');
+        return $this->loadView('Admin.Dashboard');
     }
 }
