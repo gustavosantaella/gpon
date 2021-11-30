@@ -10,14 +10,7 @@ class ModelController extends BaseController
     public function index()
     {
  
-        $models = $this->model('model')
-        ->select([
-            'providers.name as provName',
-            'models.*',
-        ])
-        ->join('providers', 'models.provider_id', '=', 'providers.id')->paginate(5);
-        dd($models);
-
+        $models = $this->model('model')->paginate(5);
         return $this->loadView('Admin.Models.index', compact(
             'models'
         ));

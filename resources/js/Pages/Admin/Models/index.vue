@@ -52,8 +52,8 @@
     </template>
 
     <template v-slot:items>
-    	<tr>
-    		<td>hola</td>
+    	<tr v-for='model in this.models.data' :key='model.id'>
+    		<td>{{model.name}}</td>
     	</tr>
     </template>
 </Datatable>
