@@ -17,6 +17,8 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 
 
 
+
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 const appvue = createInertiaApp({
