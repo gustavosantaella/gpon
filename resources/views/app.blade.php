@@ -13,9 +13,14 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script>
+
             window.Laravel = {
                 csrfToken:"{{csrf_token()}}",
-                jsPermissions:"{!! auth()->check()?auth()->user()->jsPermissions():null !!}"
+                jsPermissions:"{!! auth()->check()?auth()->user()->jsPermissions():null !!}",
+                management:{
+                    role:"{!! auth()->check()?auth()->user()->management->roles->pluck("name"):null !!}",
+                    permission:"{!! auth()->check()?auth()->user()->management->permissions()->pluck("name"):null !!}"
+                }
             }
         </script>
         <!-- Scripts -->
@@ -23,6 +28,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
+        
         @inertia
 
         @env ('local')

@@ -23578,6 +23578,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   props: ['gerencia', 'tasks', 'users', 'roles'],
+  mounted: function mounted() {
+    this.role(1, 'management');
+  },
   methods: {
     openModal: function openModal(modal) {
       this.modal = modal;
@@ -31498,6 +31501,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./resources/js/Helpers/RoleAndPermissions.js":
+/*!****************************************************!*\
+  !*** ./resources/js/Helpers/RoleAndPermissions.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "role": () => (/* binding */ role),
+/* harmony export */   "permission": () => (/* binding */ permission)
+/* harmony export */ });
+function role(role, key) {
+  alert(JSON.stringify(window.Laravel[key]));
+}
+
+function permission(permission, key) {//alert('permission')
+}
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -31517,6 +31543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_toast_notification__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_toast_notification__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _Partials_ToastNotification__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Partials/ToastNotification */ "./resources/js/Partials/ToastNotification.vue");
 /* harmony import */ var vue_toast_notification_dist_theme_sugar_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-toast-notification/dist/theme-sugar.css */ "./node_modules/vue-toast-notification/dist/theme-sugar.css");
+/* harmony import */ var _Helpers_RoleAndPermissions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Helpers/RoleAndPermissions */ "./resources/js/Helpers/RoleAndPermissions.js");
 var _window$document$getE;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import modules...
@@ -31531,6 +31558,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
  //toast notification
 
 
+
+ // Helpers
 
 
 var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Laravel';
@@ -31552,7 +31581,8 @@ var appvue = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInert
       }
     }).use(plugin).use(laravel_permission_to_vuejs__WEBPACK_IMPORTED_MODULE_1__["default"]).use((vue_toast_notification__WEBPACK_IMPORTED_MODULE_6___default())).use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default())).mixin({
       methods: {
-        route: route
+        route: route,
+        role: _Helpers_RoleAndPermissions__WEBPACK_IMPORTED_MODULE_9__.role
       }
     }).mount(el);
     return appVUe;

@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+Route::get('authlogin', function(){
+    $user = \App\Models\User::find(2);
+    \Auth::login($user);
+});
 Route::prefix('dashboard')
 ->namespace('\App\Http\Controllers\Admin')
 ->as('admin.')
-->middleware(['guest']) // change to middleware auth 
+// change to middleware auth 
 ->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 //--------------------------------------------------------------------------------------

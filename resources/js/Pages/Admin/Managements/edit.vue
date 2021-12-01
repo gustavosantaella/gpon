@@ -215,6 +215,10 @@ export default {
         }
     },
     props: ['gerencia', 'tasks', 'users', 'roles'],
+    mounted(){
+
+ this.role(1,'management')
+    },
 
     methods: {
         openModal(modal) {
