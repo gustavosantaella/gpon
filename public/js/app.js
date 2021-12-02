@@ -23579,7 +23579,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   props: ['gerencia', 'tasks', 'users', 'roles'],
   created: function created() {
-    alert(this.role('CONSULTOR', 'management'));
+    alert(this.role('CONSULTOR & SUPER USUARIsO', 'management'));
   },
   methods: {
     openModal: function openModal(modal) {
@@ -23759,13 +23759,15 @@ __webpack_require__.r(__webpack_exports__);
     AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   name: 'index',
-  props: ['models'],
+  props: ['models', 'providers'],
   data: function data() {
     return {
       method: null,
       action: null,
       form: {
-        name: null
+        code: null,
+        name: null,
+        provider_id: null
       },
       modal: null
     };
@@ -23797,6 +23799,7 @@ __webpack_require__.r(__webpack_exports__);
       this.modal = modal;
       this.form.name = model.name;
       this.form.code = model.code;
+      this.form.provider_id = model.provider_id;
       modal.show();
     },
     openModal: function openModal(modal) {
@@ -28332,10 +28335,31 @@ var _hoisted_2 = {
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "name"
-}, "Nombre del proveedor", -1
+}, "Modelo del equpo", -1
 /* HOISTED */
 );
 
+var _hoisted_4 = {
+  "class": "mb-3"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "code"
+}, " Serial del equipo ", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  "class": "mb-3"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "providers"
+}, "Seleccione un proveedor", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = ["value", "selected"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -28359,14 +28383,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onEdit: _this.edit,
         onDelete: _this["delete"],
         onOpeningModal: _this.openModal,
-        showItems: true,
+        showItems: false,
         items: _this.models,
         th: [{
           original: 'id',
           text: 'id'
         }, {
-          original: 'provider',
-          text: 'nombre'
+          original: 'prov',
+          text: 'Proveedor'
+        }, {
+          original: 'name',
+          text: 'Modelo'
         }],
         options: [{
           text: 'editar',
@@ -28399,7 +28426,36 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "form-control"
               }, null, 512
               /* NEED_PATCH */
-              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.form.name]])])];
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+                required: "",
+                type: "text",
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                  return _this.form.code = $event;
+                }),
+                id: "code",
+                "class": "form-control"
+              }, null, 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.form.code]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                id: "providers",
+                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                  return _this.form.provider_id = $event;
+                }),
+                "class": "form-control",
+                required: ""
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.providers, function (provider) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+                  value: provider.id,
+                  selected: _this.form.provider_id == provider.id,
+                  key: provider.id
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(provider.name), 9
+                /* TEXT, PROPS */
+                , _hoisted_8);
+              }), 128
+              /* KEYED_FRAGMENT */
+              ))], 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _this.form.provider_id]])])];
             }),
             _: 1
             /* STABLE */
@@ -28407,17 +28463,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, 8
           /* PROPS */
           , ["onSubmitSuccess", "data", "method", "url"])])];
-        }),
-        items: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.models.data, function (model) {
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
-              key: model.id
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(model.name), 1
-            /* TEXT */
-            )]);
-          }), 128
-          /* KEYED_FRAGMENT */
-          ))];
         }),
         _: 1
         /* STABLE */
@@ -31513,38 +31558,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "role": () => (/* binding */ role),
 /* harmony export */   "permission": () => (/* binding */ permission)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function role(role, key) {
   if (window.Laravel.roleAndPermissions[key] == 0) {
-    return false;
+    return 12;
   }
 
-  var permissions = window.Laravel.roleAndPermissions[key];
-  var data = JSON.parse(permissions);
-  permissions = data.permissions;
-  alert(_typeof(permissions));
+  var ObjectRoles = window.Laravel.roleAndPermissions[key];
+  var data = JSON.parse(ObjectRoles);
+  var roles = data.roles;
   var _return = false;
 
-  if (!Array.isArray(permissions)) {
+  if (!Array.isArray(roles)) {
     return false;
   }
 
   if (role.includes('|')) {
     role.split('|').forEach(function (item) {
-      if (permissions.includes(item.trim())) {
+      if (roles.includes(item.trim())) {
         _return = true;
       }
     });
   } else if (role.includes('&')) {
     _return = true;
     role.split('&').forEach(function (item) {
-      if (!permissions.includes(item.trim())) {
+      if (!roles.includes(item.trim())) {
         _return = false;
       }
     });
   } else {
-    _return = permissions.includes(role.trim());
+    _return = roles.includes(role.trim());
   }
 
   return _return;

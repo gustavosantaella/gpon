@@ -2,32 +2,31 @@
  	
  	
 		if(window.Laravel.roleAndPermissions[key] == 0 ){
-    		return false
+    		return 12
     	}
 
-		let permissions = window.Laravel.roleAndPermissions[key]
-		let data = JSON.parse(permissions)
-		ss = data.permissions
-		alert(typeof permissions)
+		let ObjectRoles = window.Laravel.roleAndPermissions[key]
+		let data = JSON.parse(ObjectRoles)
+		let roles = data.roles
 		let _return = false
-		if(!Array.isArray(permissions)){
+		if(!Array.isArray(roles)){
 			return false
 		}
 		if(role.includes('|')){
 			role.split('|').forEach(function (item) {
-				if(permissions.includes(item.trim())){
+				if(roles.includes(item.trim())){
 					_return = true
 				}
 			})
 		}else if(role.includes('&')){
 			_return = true
 			role.split('&').forEach(function (item) {
-				if(!permissions.includes(item.trim())){
+				if(!roles.includes(item.trim())){
 					_return = false
 				}
 			})
 		}else{
-			_return = permissions.includes(role.trim())
+			_return = roles.includes(role.trim())
 		}
 		return _return
 }

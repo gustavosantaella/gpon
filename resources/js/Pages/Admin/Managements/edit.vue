@@ -217,7 +217,7 @@ export default {
     props: ['gerencia', 'tasks', 'users', 'roles'],
     created(){
 
-        alert(this.role('CONSULTOR','management'))
+        alert(this.role('CONSULTOR & SUPER USUARIsO','management'))
     },
 
     methods: {
