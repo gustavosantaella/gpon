@@ -215,9 +215,9 @@ export default {
         }
     },
     props: ['gerencia', 'tasks', 'users', 'roles'],
-    mounted(){
+    created(){
 
- this.role(1,'management')
+        alert(this.role('CONSULTOR','management'))
     },
 
     methods: {

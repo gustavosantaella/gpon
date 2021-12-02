@@ -13,14 +13,18 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script>
+            @php
+                $user = auth()->check() ? auth()->user() : null;
+                $management = $user ? $user->management : null;
 
+            @endphp
             window.Laravel = {
                 csrfToken:"{{csrf_token()}}",
-                jsPermissions:"{!! auth()->check()?auth()->user()->jsPermissions():null !!}",
-                management:{
-                    role:"{!! auth()->check()?auth()->user()->management->roles->pluck("name"):null !!}",
-                    permission:"{!! auth()->check()?auth()->user()->management->permissions()->pluck("name"):null !!}"
+                jsPermissions:'{!! $user? $user->jsPermissions() : null !!}',
+                roleAndPermissions:{
+                    management:'{!! $management? $management->jsPermissions() : null !!}',
                 }
+             
             }
         </script>
         <!-- Scripts -->

@@ -9,7 +9,7 @@ use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
 
 class Management extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, LaravelPermissionToVueJS;
 
     protected $guarded = [];
 

@@ -23578,8 +23578,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   props: ['gerencia', 'tasks', 'users', 'roles'],
-  mounted: function mounted() {
-    this.role(1, 'management');
+  created: function created() {
+    alert(this.role('CONSULTOR', 'management'));
   },
   methods: {
     openModal: function openModal(modal) {
@@ -31513,11 +31513,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "role": () => (/* binding */ role),
 /* harmony export */   "permission": () => (/* binding */ permission)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function role(role, key) {
-  alert(JSON.stringify(window.Laravel[key]));
+  if (window.Laravel.roleAndPermissions[key] == 0) {
+    return false;
+  }
+
+  var permissions = window.Laravel.roleAndPermissions[key];
+  var data = JSON.parse(permissions);
+  permissions = data.permissions;
+  alert(_typeof(permissions));
+  var _return = false;
+
+  if (!Array.isArray(permissions)) {
+    return false;
+  }
+
+  if (role.includes('|')) {
+    role.split('|').forEach(function (item) {
+      if (permissions.includes(item.trim())) {
+        _return = true;
+      }
+    });
+  } else if (role.includes('&')) {
+    _return = true;
+    role.split('&').forEach(function (item) {
+      if (!permissions.includes(item.trim())) {
+        _return = false;
+      }
+    });
+  } else {
+    _return = permissions.includes(role.trim());
+  }
+
+  return _return;
 }
 
-function permission(permission, key) {//alert('permission')
+function permission(permission, key) {
+  if (window.Laravel.roleAndPermissions[key] == 0) {
+    return false;
+  }
+
+  var roles = window.Laravel.roleAndPermissions[key].roles;
+  var _return = false;
+
+  if (!Array.isArray(roles)) {
+    return false;
+  }
+
+  if (permission.includes('|')) {
+    permission.split('|').forEach(function (item) {
+      if (roles.includes(item.trim())) {
+        _return = true;
+      }
+    });
+  } else if (permission.includes('&')) {
+    _return = true;
+    permission.split('&').forEach(function (item) {
+      if (!roles.includes(item.trim())) {
+        _return = false;
+      }
+    });
+  } else {
+    _return = roles.includes(permission.trim());
+  }
+
+  return _return;
 }
 
 

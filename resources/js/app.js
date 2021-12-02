@@ -16,7 +16,7 @@ import ToastNotification from '@/Partials/ToastNotification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 // Helpers
-import {role, permission} from '@/Helpers/RoleAndPermissions'
+import {role, can} from '@/Helpers/RoleAndPermissions'
 
 
 
