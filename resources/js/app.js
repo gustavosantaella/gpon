@@ -27,15 +27,14 @@ const appvue = createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
-        const appVUe = createApp({ render: () => h(app, props) })
+        const appVue = createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(LaravelPermissionToVueJS)
             .use(VueToast)
             .use(VueSweetalert2)
             .mixin({ methods: { route, role} })
-            .mount(el);
-
-
+           
+	    appVue.mount(el)
             return appVUe;
     },
 });

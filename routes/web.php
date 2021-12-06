@@ -46,4 +46,14 @@ Route::prefix('dashboard')
     // roles
     Route::resource('roles', 'RoleController');
 
+
+//--------------------------------------------------------------------------------------
+
+    // modulos
+   
+    Route::prefix('modulos')->namespace('\Modules')->as('module.')->group(function(){
+    	
+	    Route::get('{management:id}', 'ModuleController@index')->name('index');
+    });
 });
+

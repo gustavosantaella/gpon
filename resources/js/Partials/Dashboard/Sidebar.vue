@@ -13,6 +13,11 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Usuarios
                         </nav-link>
+			 <nav-link :navlink="false" :href='route("admin.modules.planificaciones.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Planificaciones
+                        </nav-link>
+
 			 <div>
 				global variable para los modulos (gerencias)
 			</div>
@@ -75,7 +80,7 @@
 
 <script>
 	import NavLink from '@/Jetstream/NavLink'
-	export default{
+	export default
 		components:{
 			NavLink
 		},
