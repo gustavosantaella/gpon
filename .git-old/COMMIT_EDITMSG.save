@@ -1,0 +1,28 @@
+
+# Por favor ingresa el mensaje del commit para tus cambios. Las
+#  líneas que comiencen con '#' serán ignoradas, y un mensaje
+#  vacío aborta el commit.
+#
+# En la rama seeders
+# Cambios a ser confirmados:
+#	modificado:     app/Http/Controllers/Admin/HomeController.php
+#	renombrado:     app/Models/Mangament.php -> app/Models/Management.php
+#	modificado:     app/Traits/Request.php
+#	modificado:     composer.json
+#	modificado:     composer.lock
+#	modificado:     config/app.php
+#	modificado:     database/migrations/2014_10_12_000000_create_users_table.php
+#	renombrado:     database/migrations/2021_11_15_211019_create_mangaments_table.php -> database/migrations/2021_11_16_174229_create_management_table.php
+#	nuevo archivo:  database/migrations/2021_11_16_180602_user_has_managements.php
+#	nuevo archivo:  database/seeders/ManagementSeeder.php
+#	modificado:     database/seeders/RoleAndPermissionSeeder.php
+#	nuevo archivo:  database/seeders/TerritorioSeeder.php
+#	nuevo archivo:  database/seeders/UserSeeder.php
+#	nuevo archivo:  database/sql/territorio.sql
+#	modificado:     public/js/app.js
+#	modificado:     resources/js/Partials/Dashboard/Sidebar.vue
+#	nuevo archivo:  resources/lang/es.json#	nuevo archivo:  resources/lang/es/auth.php
+	nuevo archivo:  resources/lang/es/pagination.php
+	nuevo archivo:  resources/lang/es/passwords.php
+	nuevo archivo:  resources/lang/es/validation.php
+#

@@ -13,8 +13,9 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Usuarios
                         </nav-link>
-
-
+			 <div>
+				global variable para los modulos (gerencias)
+			</div>
 
 
                         <div class="sb-sidenav-menu-heading">Equipos</div>

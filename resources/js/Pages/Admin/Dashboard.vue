@@ -1,4 +1,5 @@
 <template>
+
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3 fw-bold" href="index.html">GPRA</a>
@@ -63,7 +64,7 @@ import '@/../sb-admin/dash.css'
 import '@/../sb-admin/js.js'
 import Sidebar from "@/Partials/Dashboard/Sidebar"
 export default {
-    components:{
+components:{
         Sidebar
     }
 

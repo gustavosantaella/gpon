@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 c40070808e2675b5b1c3b4efeb4460aef9121c6f gustavosantaella <llxsantaellaxll@gmail.com> 1637068474 +0100	branch: Created from HEAD
+c40070808e2675b5b1c3b4efeb4460aef9121c6f 85c08814a26bd10cd366497d0f6475d9749bfe8d gustavosantaella <llxsantaellaxll@gmail.com> 1637083311 +0100	commit: adicionando RoleSeeder y listado de roles
+85c08814a26bd10cd366497d0f6475d9749bfe8d fbe8ce4bae1f2623e7d41e521da1d22f4e03f9e0 gustavosantaella <llxsantaellaxll@gmail.com> 1637096490 +0100	commit: descargue una sql para adicionar los estados, muncipios y parroquias
+fbe8ce4bae1f2623e7d41e521da1d22f4e03f9e0 cc0d41476464201aeaf5eea0e8c1be309d10941e gustavosantaella <llxsantaellaxll@gmail.com> 1637186300 +0100	commit: se creo un seeder y un factory para las gerencias y ademas se aprovecho
