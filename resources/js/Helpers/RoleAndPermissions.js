@@ -1,8 +1,8 @@
  function role(role, key){
- 	
- 	
+
+
 		if(window.Laravel.roleAndPermissions[key] == 0 ){
-    		return 12
+    		return false;
     	}
 
 		let ObjectRoles = window.Laravel.roleAndPermissions[key]

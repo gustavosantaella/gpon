@@ -111,7 +111,7 @@
                 <div class="col-md-6">
                     <h2>Empleados</h2>
                     <div>
-                      
+
                         <datatable
                             :items="this.users"
                             v-on:openingModal='this.openModalUser'
@@ -217,7 +217,7 @@ export default {
     props: ['gerencia', 'tasks', 'users', 'roles'],
     created(){
 
-        alert(this.role('CONSULTOR & SUPER USUARIsO','management'))
+        alert(this.role('SUPER USUARIO','management'))
     },
 
     methods: {
