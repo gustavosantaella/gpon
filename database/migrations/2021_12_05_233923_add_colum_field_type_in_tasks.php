@@ -13,8 +13,9 @@ class AddColumFieldTypeInTasks extends Migration
      */
     public function up()
     {
+  
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            $table->string('field_type');
         });
     }
 
@@ -26,7 +27,7 @@ class AddColumFieldTypeInTasks extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            $table->dropTable('field_type');
         });
     }
 }

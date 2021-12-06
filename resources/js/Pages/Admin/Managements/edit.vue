@@ -92,6 +92,14 @@
                                                           class="form-control">{{this.task.description}}</textarea>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="field_type">Tipo de campo:</label>
+                                              <select required='true'  v-model='this.task.field_type'
+                                                    id="users" class="form-control">
+                                                <option v-for='(type, key) in this.taskType' :value="key" :key='key'>{{ type }}
+                                                </option>
+                                            </select>
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="end_days">Numero de dias que demora la actividad</label>
                                                 <input required v-model='this.task.end_days' type="number"
                                                        name="end_days"
@@ -199,6 +207,7 @@ export default {
             button: false,
             task: {
                 title: null,
+                field_type:null,
                 description: null,
                 end_days: null,
             },
@@ -214,7 +223,7 @@ export default {
             managementUsers: []
         }
     },
-    props: ['gerencia', 'tasks', 'users', 'roles'],
+    props: ['gerencia', 'tasks', 'users', 'roles', 'taskType'],
     created(){
 
         alert(this.role('SUPER USUARIO','management'))

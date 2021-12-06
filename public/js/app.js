@@ -23562,6 +23562,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       button: false,
       task: {
         title: null,
+        field_type: null,
         description: null,
         end_days: null
       },
@@ -23577,7 +23578,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       managementUsers: []
     };
   },
-  props: ['gerencia', 'tasks', 'users', 'roles'],
+  props: ['gerencia', 'tasks', 'users', 'roles', 'taskType'],
   created: function created() {
     alert(this.role('SUPER USUARIO', 'management'));
   },
@@ -27961,28 +27962,39 @@ var _hoisted_19 = {
 };
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "field_type"
+}, "Tipo de campo:", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = ["value"];
+var _hoisted_22 = {
+  "class": "mb-3"
+};
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "end_days"
 }, "Numero de dias que demora la actividad", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = {
+var _hoisted_24 = {
   "class": "col-md-6"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Empleados", -1
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Empleados", -1
 /* HOISTED */
 );
 
-var _hoisted_23 = {
+var _hoisted_26 = {
   "class": "mb-3"
 };
-var _hoisted_24 = {
+var _hoisted_27 = {
   "for": "users"
 };
-var _hoisted_25 = ["value"];
+var _hoisted_28 = ["value"];
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Roles", -1
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Roles", -1
 /* HOISTED */
 );
 
@@ -28109,9 +28121,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "form-control"
               }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.task.description), 513
               /* TEXT, NEED_PATCH */
-              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.task.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-                required: "",
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.task.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                required: "true",
                 "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                  return _this.task.field_type = $event;
+                }),
+                id: "users",
+                "class": "form-control"
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.taskType, function (type, key) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+                  value: key,
+                  key: key
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(type), 9
+                /* TEXT, PROPS */
+                , _hoisted_21);
+              }), 128
+              /* KEYED_FRAGMENT */
+              ))], 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _this.task.field_type]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+                required: "",
+                "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
                   return _this.task.end_days = $event;
                 }),
                 type: "number",
@@ -28134,7 +28164,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["onEditTask", "onDeleteTask", "onOpeningModal", "options", "items"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+      , ["onEditTask", "onDeleteTask", "onOpeningModal", "options", "items"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
         items: _this.users,
         onOpeningModal: _this.openModalUser,
         onRemoveUser: _this.removeUser,
@@ -28165,12 +28195,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onSubmitSuccess: _this.success
           }, {
             content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_24, "Asignar usuario a la gerencia " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.gerencia.name), 1
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_27, "Asignar usuario a la gerencia " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.gerencia.name), 1
               /* TEXT */
               ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
                 required: "true",
                 name: "user_id",
-                "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+                "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
                   return _this.user.user_id = $event;
                 }),
                 id: "users",
@@ -28181,7 +28211,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   key: user.id
                 }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name), 9
                 /* TEXT, PROPS */
-                , _hoisted_25);
+                , _hoisted_28);
               }), 128
               /* KEYED_FRAGMENT */
               ))], 512
@@ -28200,7 +28230,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["items", "onOpeningModal", "onRemoveUser", "options"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_select, {
+      , ["items", "onOpeningModal", "onRemoveUser", "options"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_select, {
         data: _this.roles,
         route: _ctx.route('admin.gerencias.addOrRemoveRole', {
           gerencia: _this.gerencia.id
