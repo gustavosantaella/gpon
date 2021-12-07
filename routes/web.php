@@ -51,9 +51,9 @@ Route::prefix('dashboard')
 
     // modulos
    
-    Route::prefix('modulos')->namespace('\Modules')->as('modules.')->group(function(){
+    Route::prefix('modulos')->namespace('\App\Http\Controllers\Admin\Modules')->as('modules.')->group(function(){
     	
-	    Route::get('planificaciones', 'ModuleController@index')->name('planificaciones.index');
+	    Route::get('planificaciones', 'PlanificationModule@index')->name('planificaciones.index');
     });
 });
 
