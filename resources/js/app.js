@@ -35,7 +35,7 @@ const appvue = createInertiaApp({
             .mixin({ methods: { route, role} })
            
 	    appVue.mount(el)
-            return appVUe;
+            return appVue;
     },
 });
 

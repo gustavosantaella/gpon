@@ -80,7 +80,7 @@
 
 <script>
 	import NavLink from '@/Jetstream/NavLink'
-	export default
+	export default{
 		components:{
 			NavLink
 		},

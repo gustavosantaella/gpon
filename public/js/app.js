@@ -25124,9 +25124,20 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Partials/Dashboard/Sidebar.vue?vue&type=script&lang=js ***!
   \*********************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /var/www/gpon/resources/js/Partials/Dashboard/Sidebar.vue: Missing semicolon. (4:12)\n\n\u001b[0m \u001b[90m 2 |\u001b[39m \t\u001b[36mimport\u001b[39m \u001b[33mNavLink\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m'@/Jetstream/NavLink'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 3 |\u001b[39m \t\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m \t\tcomponents\u001b[33m:\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m \t\t          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m \t\t\t\u001b[33mNavLink\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 6 |\u001b[39m \t\t}\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m\u001b[0m\n    at Parser._raise (/var/www/gpon/node_modules/@babel/parser/lib/index.js:541:17)\n    at Parser.raiseWithData (/var/www/gpon/node_modules/@babel/parser/lib/index.js:534:17)\n    at Parser.raise (/var/www/gpon/node_modules/@babel/parser/lib/index.js:495:17)\n    at Parser.semicolon (/var/www/gpon/node_modules/@babel/parser/lib/index.js:3557:10)\n    at Parser.parseExportDefaultExpression (/var/www/gpon/node_modules/@babel/parser/lib/index.js:14531:12)\n    at Parser.parseExport (/var/www/gpon/node_modules/@babel/parser/lib/index.js:14439:31)\n    at Parser.parseStatementContent (/var/www/gpon/node_modules/@babel/parser/lib/index.js:13420:27)\n    at Parser.parseStatement (/var/www/gpon/node_modules/@babel/parser/lib/index.js:13312:17)\n    at Parser.parseBlockOrModuleBlockBody (/var/www/gpon/node_modules/@babel/parser/lib/index.js:13901:25)\n    at Parser.parseBlockBody (/var/www/gpon/node_modules/@babel/parser/lib/index.js:13892:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/NavLink */ "./resources/js/Jetstream/NavLink.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    NavLink: _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
 
 /***/ }),
 
@@ -31253,7 +31264,7 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-function render(_ctx, _cache) {
+function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_nav_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("nav-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_nav_link, {
@@ -31732,7 +31743,7 @@ var appvue = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInert
       }
     });
     appVue.mount(el);
-    return appVUe;
+    return appVue;
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
