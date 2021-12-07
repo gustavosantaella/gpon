@@ -23835,7 +23835,8 @@ __webpack_require__.r(__webpack_exports__);
     Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__["default"],
     Datatable: _Partials_Datatable__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
+  },
+  props: ['planifications']
 });
 
 /***/ }),
@@ -28547,9 +28548,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
+  var _component_datatable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("datatable");
+
   var _component_Dashboard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Dashboard");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Dashboard);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, "" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.planifications.data) + "\n", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dashboard, null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+        items: _this.planifications,
+        url: _ctx.route('admin.modules.planificaciones.index'),
+        showItems: false,
+        th: [{
+          original: 'id',
+          text: 'id'
+        }, {
+          original: 'name',
+          text: 'nombre'
+        }, {
+          original: 'stateName',
+          text: 'estado'
+        }, {
+          original: 'munName',
+          text: 'municipio'
+        }, {
+          original: 'parishName',
+          text: 'parroquia'
+        }, {
+          original: 'status',
+          text: 'status'
+        }]
+      }, null, 8
+      /* PROPS */
+      , ["items", "url"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),

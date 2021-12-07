@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parish extends Model
+class Planification extends Model
 {
 	use HasFactory;
 
-	public function municipality()
+	protected $guarded = [];
+
+	public function parish()
 	{
-		return $this->belongsTo(Municipality::class, 'municipality_id', 'id');
+		return $this->belongsTo(Parish::class,'parish_id','id');
 	}
 }

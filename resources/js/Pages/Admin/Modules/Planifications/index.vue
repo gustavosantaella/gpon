@@ -1,6 +1,41 @@
 <template>
+<pre>
+{{this.planifications.data}}
+</pre>
 <Dashboard>
+	<datatable
+	:items='this.planifications'
+	:url="route('admin.modules.planificaciones.index')"
+	:showItems="false"
+	:th="[
+	{
+	original:'id',
+	text:'id'
+	},
+	{
+	original:'name',
+	text:'nombre'
+	},
+	{
+	original:'stateName',
+	text:'estado',
+	},
+	{	
+	original:'munName',
+	text:'municipio'
+	},
+	{
+	original:'parishName',
+	text:'parroquia'
+	},
+	{
+	original:'status',
+	text:'status'
+	}
+	]"
+	>
 
+	</datatable>
 </Dashboard>
 </template>
 
@@ -16,7 +51,9 @@ components:{
 Dashboard,
 AppForm,
 Datatable
-}
+},
+
+props:['planifications']
 
 }
 </script>

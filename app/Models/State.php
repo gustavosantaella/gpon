@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    use HasFactory;
+	use HasFactory;
+
+	protected $guarded = [];
+
+	public function municipalities()
+	{
+		return $this->hasMany(Municipality::class, 'municipality_id', 'id');
+	}
+
+	public function cities()
+	{
+		return $this->hasMany(City::class, 'city_id', 'id');
+	}
 }
