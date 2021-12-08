@@ -23824,19 +23824,158 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Admin/Dashboard */ "./resources/js/Pages/Admin/Dashboard.vue");
-/* harmony import */ var _Partials_Datatable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Partials/Datatable */ "./resources/js/Partials/Datatable.vue");
-/* harmony import */ var _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Partials/AppForm */ "./resources/js/Partials/AppForm.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Admin/Dashboard */ "./resources/js/Pages/Admin/Dashboard.vue");
+/* harmony import */ var _Partials_Datatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Partials/Datatable */ "./resources/js/Partials/Datatable.vue");
+/* harmony import */ var _Partials_AppForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Partials/AppForm */ "./resources/js/Partials/AppForm.vue");
+/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Datatable: _Partials_Datatable__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Datatable: _Partials_Datatable__WEBPACK_IMPORTED_MODULE_2__["default"],
+    DialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['planifications']
+  props: ['planifications'],
+  data: function data() {
+    return {
+      states: [],
+      municipalities: [],
+      parishes: [],
+      form: {
+        stateId: null,
+        municipalityId: null,
+        parishId: null,
+        name: null
+      },
+      modal: {
+        open: false,
+        id: 'newRequeriment'
+      }
+    };
+  },
+  methods: {
+    openModal: function openModal() {
+      this.getStates();
+      var element = document.getElementById(this.modal.id);
+      var modal = new bootstrap.Modal(element);
+      modal.show();
+    },
+    getStates: function getStates() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get(route('admin.xhr.getStates'));
+
+              case 3:
+                response = _context.sent;
+                _this.states = response.data;
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                // statements
+                alert(_context.t0.message);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
+    },
+    getMunicipalities: function getMunicipalities() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get(route('admin.xhr.getMunicipalities', {
+                  state: _this2.form.stateId
+                }));
+
+              case 3:
+                response = _context2.sent;
+                _this2.municipalities = response.data;
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                // statements
+                alert(_context2.t0.message);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    },
+    getParishes: function getParishes() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return axios.get(route('admin.xhr.getParishes', {
+                  municipality: _this3.form.municipalityId
+                }));
+
+              case 3:
+                response = _context3.sent;
+                _this3.parishes = response.data;
+                _context3.next = 10;
+                break;
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](0);
+                // statements
+                alert(_context3.t0.message);
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 7]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -28547,18 +28686,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Crear nuevo requerimiento");
+
+var _hoisted_2 = {
+  "class": "mb-3"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "states"
+}, "Seleccione un estado", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = ["value"];
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "mun"
+}, "Seleccione un municipio", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = ["value"];
+var _hoisted_7 = {
+  "class": "mb-3"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "mun"
+}, "Seleccione una parroquia", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = ["value"];
+var _hoisted_10 = {
+  "class": "mb-3"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "name"
+}, "Nombre", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
+
+  var _component_app_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-form");
+
+  var _component_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dialog-modal");
 
   var _component_datatable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("datatable");
 
   var _component_Dashboard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Dashboard");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, "" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.planifications.data) + "\n", 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dashboard, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Dashboard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dialog_modal, {
+        id: _this.modal.id
+      }, {
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_1];
+        }),
+        content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_form, {
+            data: _this.form,
+            method: "post"
+          }, {
+            content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                onChange: _cache[0] || (_cache[0] = function ($event) {
+                  return _this.getMunicipalities();
+                }),
+                required: "",
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                  return _this.form.stateId = $event;
+                }),
+                id: "states",
+                "class": "form-control"
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.states, function (state) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+                  key: state.id,
+                  value: state.id
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(state.name), 9
+                /* TEXT, PROPS */
+                , _hoisted_4);
+              }), 128
+              /* KEYED_FRAGMENT */
+              ))], 544
+              /* HYDRATE_EVENTS, NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _this.form.stateId]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+                "class": "mb-3",
+                onChange: _cache[3] || (_cache[3] = function ($event) {
+                  return _this.getParishes();
+                })
+              }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                required: "",
+                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                  return _this.form.municipalityId = $event;
+                }),
+                id: "mun",
+                "class": "form-control"
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.municipalities, function (mun) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+                  key: mun.id,
+                  value: mun.id
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(mun.name), 9
+                /* TEXT, PROPS */
+                , _hoisted_6);
+              }), 128
+              /* KEYED_FRAGMENT */
+              ))], 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _this.form.municipalityId]])], 544
+              /* HYDRATE_EVENTS, NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _this.municipalities.length]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                required: "",
+                "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+                  return _this.form.parishId = $event;
+                }),
+                id: "mun",
+                "class": "form-control"
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.parishes, function (parish) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+                  key: parish.id,
+                  value: parish.id
+                }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(parish.name), 9
+                /* TEXT, PROPS */
+                , _hoisted_9);
+              }), 128
+              /* KEYED_FRAGMENT */
+              ))], 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _this.form.parishId]])], 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _this.parishes.length]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+                type: "text",
+                "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                  return _this.form.name = $event;
+                }),
+                id: "name",
+                "class": "form-control"
+              }, null, 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _this.form.name]])])])];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["data"])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["id"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn btn-sm btn-secondary fw-bold",
+        onClick: _cache[6] || (_cache[6] = function ($event) {
+          return _this.openModal();
+        })
+      }, "Nuevo requerimiento"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
         items: _this.planifications,
         url: _ctx.route('admin.modules.planificaciones.index'),
         showItems: false,
@@ -28580,17 +28870,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           original: 'status',
           text: 'status'
+        }],
+        options: [{
+          text: 'editar',
+          method: 'edit',
+          "class": 'btn-primary',
+          permission: _ctx.is('CONSULTOR')
+        }, {
+          text: 'delete',
+          method: 'delete',
+          "class": 'btn-danger',
+          permission: _ctx.is('CONSULTOR')
         }]
       }, null, 8
       /* PROPS */
-      , ["items", "url"])];
+      , ["items", "url", "options"])];
     }),
     _: 1
     /* STABLE */
 
-  })], 64
-  /* STABLE_FRAGMENT */
-  );
+  });
 }
 
 /***/ }),

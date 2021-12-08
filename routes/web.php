@@ -54,6 +54,17 @@ Route::prefix('dashboard')
     Route::prefix('modulos')->namespace('\App\Http\Controllers\Admin\Modules')->as('modules.')->group(function(){
     	
 	    Route::get('planificaciones', 'PlanificationModule@index')->name('planificaciones.index');
+        Route::post('planificaciones', 'PlanificationModule@store')->name('planificaciones.store');
     });
+
+//--------------------------------------------------------------------------------------
+
+    // xhr
+    Route::prefix('xhr')->as('xhr.')->group(function(){
+        Route::get('getStates', [\App\Http\Controllers\Admin\StateController::class, 'getStates'])->name('getStates');
+         Route::get('municipalities-from-state/{state:id}', [\App\Http\Controllers\Admin\MunicipalityController::class, 'getMunicipalities'])->name('getMunicipalities');
+         Route::get('parishes-from-municipality/{municipality:id}', [\App\Http\Controllers\Admin\ParishController::class, 'getParishes'])->name('getParishes');
+    });
+
 });
 

@@ -1,8 +1,44 @@
 <template>
-<pre>
-{{this.planifications.data}}
-</pre>
+
 <Dashboard>
+	<dialog-modal :id='this.modal.id'>
+                <template v-slot:title>Crear nuevo requerimiento</template>
+                <template v-slot:content >
+                	<app-form
+            :data='this.form'
+            :method='"post"'
+            
+                	>
+                	<template v-slot:content>
+                		<div>
+                		<div class='mb-3'>
+                			<label for="states">Seleccione un estado</label>
+                			<select @change='this.getMunicipalities()' required v-model='this.form.stateId' id="states" class='form-control'>
+                				<option v-for='state in this.states' :key='state.id' :value="state.id">{{state.name}}</option>
+                			</select>
+                		</div>
+                		<div class='mb-3' @change='this.getParishes()' v-show='this.municipalities.length'>
+                			<label for="mun">Seleccione un municipio</label>
+                			<select  required v-model='this.form.municipalityId' id="mun" class='form-control'>
+                				<option v-for='mun in this.municipalities' :key='mun.id' :value="mun.id">{{mun.name}}</option>
+                			</select>
+                		</div>
+                		<div class='mb-3' v-show='this.parishes.length'>
+                			<label for="mun">Seleccione una parroquia</label>
+                			<select  required v-model='this.form.parishId' id="mun" class='form-control'>
+                				<option v-for='parish in this.parishes' :key='parish.id' :value="parish.id">{{parish.name}}</option>
+                			</select>
+                		</div>
+                		<div class='mb-3'>
+                			<label for="name">Nombre</label>
+                			<input type="text" v-model="this.form.name" id="name" class="form-control">
+                		</div>
+                	</div>
+                	</template>
+                	</app-form>
+                </template>
+    </dialog-modal>
+	<button class='btn btn-sm btn-secondary fw-bold' @click='this.openModal()'>Nuevo requerimiento</button>
 	<datatable
 	:items='this.planifications'
 	:url="route('admin.modules.planificaciones.index')"
@@ -33,6 +69,17 @@
 	text:'status'
 	}
 	]"
+	:options="[{
+         text:'editar',
+         method:'edit',
+         class:'btn-primary',
+         permission:(is('CONSULTOR'))
+     },{
+         text:'delete',
+         method:'delete',
+         class:'btn-danger',
+         permission:(is('CONSULTOR'))
+     }]"
 	>
 
 	</datatable>
@@ -44,16 +91,75 @@
 import Dashboard from '@/Pages/Admin/Dashboard';
 import Datatable from '@/Partials/Datatable';
 import AppForm from '@/Partials/AppForm';
+import DialogModal from '@/Jetstream/DialogModal'
 
 
 export default{
 components:{
 Dashboard,
 AppForm,
-Datatable
+Datatable,
+DialogModal
 },
 
-props:['planifications']
+props:['planifications'],
+data(){
+	return {
+		states:[],
+		municipalities:[],
+		parishes:[],
+		form:{
+			stateId:null,
+			municipalityId:null,
+			parishId:null,
+			name:null
+		},
+		modal:{
+			open:false,
+			id:'newRequeriment'
+		}
+	}
+},
+methods: {
+  openModal () {
+  	 this.getStates()
+    let element = document.getElementById(this.modal.id);
+    let modal = new bootstrap.Modal(element);
+    modal.show()
+  },
+  async getStates(){
+  	try {
+  		const response = await axios.get(route('admin.xhr.getStates'))
+  		this.states = response.data;
+  	} catch(e) {
+  		// statements
+  		alert(e.message)
+  	}
+  },
+
+  async getMunicipalities(){
+  	try {
+  		const response = await axios.get(route('admin.xhr.getMunicipalities',{
+  			state:this.form.stateId
+  		}))
+  		this.municipalities = response.data;
+  	} catch(e) {
+  		// statements
+  		alert(e.message)
+  	}
+  },
+  async getParishes(){
+  	try {
+  		const response = await axios.get(route('admin.xhr.getParishes',{
+  			municipality:this.form.municipalityId
+  		}))
+  		this.parishes = response.data;
+  	} catch(e) {
+  		// statements
+  		alert(e.message)
+  	}
+  }
+}
 
 }
 </script>

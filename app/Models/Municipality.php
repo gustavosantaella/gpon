@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\State;
 class Municipality extends Model
 {
 	use HasFactory;
@@ -18,6 +18,6 @@ class Municipality extends Model
 
 	public function parishes()
 	{
-		return $this->hasMany(Parish::class,'parish_id', 'id');
+		return $this->hasMany(Parish::class,'municipality_id', 'id');
 	}
 }

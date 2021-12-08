@@ -13,7 +13,7 @@ class State extends Model
 
 	public function municipalities()
 	{
-		return $this->hasMany(Municipality::class, 'municipality_id', 'id');
+		return $this->hasMany(Municipality::class, 'state_id', 'id');
 	}
 
 	public function cities()
