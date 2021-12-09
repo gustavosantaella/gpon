@@ -5,27 +5,29 @@
                 <template v-slot:title>Crear nuevo requerimiento</template>
                 <template v-slot:content >
                 	<app-form
+                	v-on:submitSuccess="this.success"
             :data='this.form'
-            :method='"post"'
+            :url="this.form.action"
+            :method='this.form.method'
             
                 	>
                 	<template v-slot:content>
                 		<div>
                 		<div class='mb-3'>
                 			<label for="states">Seleccione un estado</label>
-                			<select @change='this.getMunicipalities()' required v-model='this.form.stateId' id="states" class='form-control'>
+                			<select @change='this.getMunicipalities()' required v-model='this.form.state_id' id="states" class='form-control'>
                 				<option v-for='state in this.states' :key='state.id' :value="state.id">{{state.name}}</option>
                 			</select>
                 		</div>
                 		<div class='mb-3' @change='this.getParishes()' v-show='this.municipalities.length'>
                 			<label for="mun">Seleccione un municipio</label>
-                			<select  required v-model='this.form.municipalityId' id="mun" class='form-control'>
+                			<select  required v-model='this.form.municipality_id' id="mun" class='form-control'>
                 				<option v-for='mun in this.municipalities' :key='mun.id' :value="mun.id">{{mun.name}}</option>
                 			</select>
                 		</div>
                 		<div class='mb-3' v-show='this.parishes.length'>
                 			<label for="mun">Seleccione una parroquia</label>
-                			<select  required v-model='this.form.parishId' id="mun" class='form-control'>
+                			<select  required v-model='this.form.parish_id' id="mun" class='form-control'>
                 				<option v-for='parish in this.parishes' :key='parish.id' :value="parish.id">{{parish.name}}</option>
                 			</select>
                 		</div>
@@ -109,9 +111,11 @@ data(){
 		municipalities:[],
 		parishes:[],
 		form:{
-			stateId:null,
-			municipalityId:null,
-			parishId:null,
+			mehtod:null,
+			action:null,
+			state_id:null,
+			municipality_id:null,
+			parish_id:null,
 			name:null
 		},
 		modal:{
@@ -123,6 +127,8 @@ data(){
 methods: {
   openModal () {
   	 this.getStates()
+  	 this.form.method = 'post'
+  	 this.form.action = route('admin.modules.planificaciones.store');
     let element = document.getElementById(this.modal.id);
     let modal = new bootstrap.Modal(element);
     modal.show()
@@ -140,7 +146,7 @@ methods: {
   async getMunicipalities(){
   	try {
   		const response = await axios.get(route('admin.xhr.getMunicipalities',{
-  			state:this.form.stateId
+  			state:this.form.state_id
   		}))
   		this.municipalities = response.data;
   	} catch(e) {
@@ -151,13 +157,17 @@ methods: {
   async getParishes(){
   	try {
   		const response = await axios.get(route('admin.xhr.getParishes',{
-  			municipality:this.form.municipalityId
+  			municipality:this.form.municipality_id
   		}))
   		this.parishes = response.data;
   	} catch(e) {
   		// statements
   		alert(e.message)
   	}
+  },
+
+  success(){
+  	alert(123)
   }
 }
 

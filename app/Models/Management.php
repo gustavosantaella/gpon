@@ -26,5 +26,11 @@ class Management extends Model
         return $this->belongsToMany(User::class, 'user_has_managements', 'management_id', 'user_id', 'id', 'id', 'management');
     }
 
+    // Scopes
+    public function scopeFindByName($query, $name)
+    {
+        return $query->whereName($name)->first();
+    }
+
 
 }
