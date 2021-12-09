@@ -32,7 +32,7 @@ class FoModule extends BaseController
     public function edit(Planification $fibra_optica)
     {
           $managemet = $this->model('management')->findByName('fibra optica'); 
-          $task = $managemet->tasks;
-          $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks'));
+          $tasks = $managemet->tasks;
+          return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks'));
     }
 }
