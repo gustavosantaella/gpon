@@ -75,4 +75,13 @@ class User extends Authenticatable
     {
     $this->attributes['name'] = strtoupper($value);
     }
+
+    // Accessors
+
+    // Accessors
+
+    public function getManagementAttribute()
+    {
+        return $this->management()->first();
+    }
 }

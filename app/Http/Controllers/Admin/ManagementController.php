@@ -38,10 +38,17 @@ class ManagementController extends BaseController
 
     public function edit(Management $gerencia): \Inertia\Response
     {
+        $taskType = [
+            'number'=>'Numerico',
+            'text'=>'Texto plano',
+            'file'=>'Subir archivo',
+            'textarea'=>'Texto largo',
+            'date'=>'Ingresar una fecha',
+        ];
         $tasks = $gerencia->tasks()->orderBy('id', 'DESC')->paginate(5, ['*'], 'tasks_page');
         $users = $gerencia->users()->orderBy('id', 'DESC')->paginate(5, ['*'], 'users_page');
         $roles = $this->hasRoles($gerencia);
-        return $this->loadView('Admin.Managements.edit', compact('gerencia', 'tasks', 'users', 'roles'));
+        return $this->loadView('Admin.Managements.edit', compact('gerencia', 'tasks', 'users', 'roles', 'taskType'));
     }
 
     public function update(Management $gerencia)
@@ -64,11 +71,12 @@ class ManagementController extends BaseController
         $this->request()->validate([
             'title' => ['required', 'unique:tasks'],
             'description' => ['required', 'Min:5'],
-            'end_days' => 'required'
+            'end_days' => 'required',
+            'field_type' => 'required'
         ]);
 
 
-        $data = $this->request()->only(['title', 'description', 'end_days']);
+        $data = $this->request()->only(['title', 'description', 'end_days', 'field_type']);
         if ($gerencia)
             $gerencia->tasks()->create($data);
 
@@ -80,10 +88,11 @@ class ManagementController extends BaseController
         $this->request()->validate([
             'title' => ['required', "unique:tasks,title,{$this->request()->id}"],
             'description' => ['required', 'Min:5'],
-            'end_days' => 'required'
+            'end_days' => 'required',
+            'field_type' => 'required'
         ]);
 
-        $data = $this->request()->only(['title', 'description', 'end_days']);
+        $data = $this->request()->only(['title', 'description', 'end_days', 'field_type']);
         if ($gerencia)
             $gerencia->tasks()->find($task->id)->update($data);
 

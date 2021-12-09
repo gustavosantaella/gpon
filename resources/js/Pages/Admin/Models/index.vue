@@ -1,5 +1,6 @@
 <template>
     <Dashboard>
+    
         <Datatable
         :modal="{
             id:'modalProvider',
@@ -12,15 +13,18 @@
         v-on:edit="this.edit"
         v-on:delete="this.delete"
         v-on:openingModal='this.openModal'
-        :showItems='true'
+        :showItems='false'
         :items="this.models"
         :th="[{
           original:'id',
           text:'id'
       },{
-          original:'provider',
-          text:'nombre'
-      }]"
+          original:'prov',
+          text:'Proveedor'
+          },{
+            original:'name',
+            text:'Modelo'
+            }]"
       :options="[{
          text:'editar',
          method:'edit',
@@ -43,18 +47,22 @@
             >
                 <template v-slot:content>
                     <div class="mb-3">
-                        <label for="name">Nombre del proveedor</label>
+                        <label for="name">Modelo del equpo</label>
                         <input required type="text" name="" v-model='this.form.name'  id="name" class="form-control">
+                    </div>
+                    <div class='mb-3'>
+                        <label for='code'> Serial del equipo </label>
+                        <input required type="text" v-model='this.form.code' id="code" class="form-control">
+                    </div>
+                    <div class='mb-3'>
+                        <label for='providers'>Seleccione un proveedor</label>
+                        <select id='providers' v-model='this.form.provider_id' class="form-control" required>
+                            <option :value='provider.id' :selected="this.form.provider_id == provider.id" v-for="provider in this.providers" :key="provider.id">{{provider.name}}</option>
+                        </select>
                     </div>
                 </template>
             </app-form>
         </div>
-    </template>
-
-    <template v-slot:items>
-    	<tr v-for='model in this.models.data' :key='model.id'>
-    		<td>{{model.name}}</td>
-    	</tr>
     </template>
 </Datatable>
 </Dashboard>
@@ -73,14 +81,16 @@
 
         },
         name: 'index',
-        props: ['models'],
+        props: ['models', 'providers'],
 
         data(){
             return {
                 method:null,
                 action:null,
                 form:{
-                    name:null,  
+                    code:null,
+                    name:null,
+                    provider_id:null
                 },
                 modal:null,
             }
@@ -115,6 +125,7 @@
                 this.modal = modal;
                 this.form.name = model.name
                 this.form.code = model.code
+                this.form.provider_id = model.provider_id
                 modal.show()
 
             },

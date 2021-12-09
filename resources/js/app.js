@@ -15,14 +15,15 @@ import VueToast from 'vue-toast-notification';
 import ToastNotification from '@/Partials/ToastNotification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-
+// Helpers
+import {role, permission} from '@/Helpers/RoleAndPermissions'
 
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 const appvue = createInertiaApp({
-  
+
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
@@ -31,7 +32,7 @@ const appvue = createInertiaApp({
             .use(LaravelPermissionToVueJS)
             .use(VueToast)
             .use(VueSweetalert2)
-            .mixin({ methods: { route } })
+            .mixin({ methods: { route, role} })
             .mount(el);
 
 
