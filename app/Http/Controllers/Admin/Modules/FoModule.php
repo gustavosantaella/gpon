@@ -24,15 +24,27 @@ class FoModule extends BaseController
                          ->join('states','states.id','municipalities.state_id')
                          ->orderBy('id','desc')
 
-        ->paginate(5);       
+        ->paginate(5);
 
         return $this->loadView('Admin.Modules.FibraOptica.index', compact('planifications'));
-    } 
+    }
+
+    public function store()
+    {
+        dd($this->request()->parent_id);
+    }
 
     public function edit(Planification $fibra_optica)
     {
-          $managemet = $this->model('management')->findByName('fibra optica'); 
+          $managemet = $this->model('management')->findByName('fibra optica');
           $tasks = $managemet->tasks;
-          return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks'));
+          $route = route('admin.modules.fibra-optica.store',[
+              'parent_id'=>$fibra_optica->id,
+              'management_id'=>$managemet->id
+          ]);
+          return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks','route'));
     }
+
+
+
 }

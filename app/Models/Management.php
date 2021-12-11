@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Management extends Model
 {
@@ -29,8 +30,26 @@ class Management extends Model
     // Scopes
     public function scopeFindByName($query, $name)
     {
-        return $query->whereName($name)->first();
+        $upperName = Str::upper($name);
+        return $query->whereName($upperName)->first();
     }
 
+    // Mutators
+
+    /**
+     * Undocumented function
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setNameAttribute(string $name)
+    {
+        $this->attributes['name'] = Str::upper($name);
+    }
+
+    public function setAcronymAttribute(string $acronym)
+    {
+        $this->attributes['acronym'] = Str::upper($acronym);
+    }
 
 }
