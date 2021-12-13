@@ -85,14 +85,13 @@ export default {
     return {
 
       form: {
-        data: [],
+        data: {
+            data:[]
+        },
       },
     };
   },
   methods: {
-      getValue(){
-
-      },
 
       setValue(element , task){
 
@@ -102,19 +101,17 @@ export default {
               let s =  URL.createObjectURL(value);
             this.$refs[this.label(task)].src = s
           }else{
-
             value = element.target.value;
-
           }
 
-       let result = this.form.data.filter((el)=> {
-           if(el.id === task.id){
-             el.value = task.field_type === 'file'? element : value
+       let result = this.form.data.data.filter((el)=> {
+           if(el.task_id === task.id){
+             el.answer = task.field_type === 'file'? element : value
                return el;
            }
         })
         if(!result.length)
-        this.form.data.push({value,id:task.id})
+        this.form.data.data.push({answer:value,task_id:task.id})
       },
 
     label(task) {

@@ -23837,12 +23837,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        data: []
+        data: {
+          data: []
+        }
       }
     };
   },
   methods: {
-    getValue: function getValue() {},
     setValue: function setValue(element, task) {
       var value;
 
@@ -23854,15 +23855,15 @@ __webpack_require__.r(__webpack_exports__);
         value = element.target.value;
       }
 
-      var result = this.form.data.filter(function (el) {
-        if (el.id === task.id) {
-          el.value = task.field_type === 'file' ? element : value;
+      var result = this.form.data.data.filter(function (el) {
+        if (el.task_id === task.id) {
+          el.answer = task.field_type === 'file' ? element : value;
           return el;
         }
       });
-      if (!result.length) this.form.data.push({
-        value: value,
-        id: task.id
+      if (!result.length) this.form.data.data.push({
+        answer: value,
+        task_id: task.id
       });
     },
     label: function label(task) {
