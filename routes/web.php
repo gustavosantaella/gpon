@@ -55,7 +55,8 @@ Route::prefix('dashboard')
     	   
 
 	    Route::resource('planificaciones', 'PlanificationModule');
-        Route::resource('fibra-optica', 'FoModule');
+        Route::resource('fibra-optica', 'FoModule')->except('update');
+        Route::post('fibra-optica/update', 'FoModule@update')->name('fibra-optica.update');
     });
 
 //--------------------------------------------------------------------------------------

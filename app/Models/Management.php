@@ -7,10 +7,10 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use App\Traits\UpdateOrCreateOnNull;
 class Management extends Model
 {
-    use HasFactory, HasRoles, LaravelPermissionToVueJS;
+    use HasFactory, HasRoles, LaravelPermissionToVueJS,UpdateOrCreateOnNull;
 
     protected $guarded = [];
 
@@ -36,7 +36,8 @@ class Management extends Model
     public function scopeFindByName($query, $name)
     {
         $upperName = Str::upper($name);
-        return $query->whereName($upperName)->first();
+        return $query->whereName($upperName)->first() ?? null;
+
     }
 
     // Mutators

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UpdateOrCreateOnNull;
 
 class Answer extends Model
 {
-    use HasFactory;
+    use HasFactory, UpdateOrCreateOnNull;
 
     protected $guarded = [];
 
@@ -21,6 +22,7 @@ class Answer extends Model
 
     public function scopeGet_management($query, int $id)
     {
+
         return $query->whereManagement_id($id);
     }
 }

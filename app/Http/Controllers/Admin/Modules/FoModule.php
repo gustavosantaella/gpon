@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-
+use App\Models\AnswerLine;
 class FoModule extends BaseController
 {
     public function index()
@@ -37,7 +37,7 @@ class FoModule extends BaseController
         try {
 
             $request = $this->request();
-            dd($request->data);
+          
             $request->validate([
                 'data' => ['required', 'array'],
             ]);
@@ -54,13 +54,14 @@ class FoModule extends BaseController
                 'observation' => 'this is my observation'
             ]);
 
-            foreach ($request->data as $data) {
+            foreach ($request->data as $data) 
+            {
                 $value = $data['answer'];
                 if (File::exists($value)) {
                     $file = $data['answer'];
                     $value = $file->store('files', 'public');
                 }
-                $answer->lines()->updateOrCreate([
+                $answer->lines()->create([
                     'task_id' => $data['task_id'],
                     'answer' => $value
                 ]);
@@ -68,22 +69,60 @@ class FoModule extends BaseController
 
             return redirect()->route('admin.modules.fibra-optica.index')->with('status', 200);
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            return back()->with("error","Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
+            
         }
     }
 
-    public function update()
+    public function update(Planification $fibra_optica)
     {
-        $request = $this->request();
-          dd($request);
+          /**
+           * try {
+           */
+
+            $request = $this->request();
+     dd($request->data);
+            $request->validate([
+                'data' => ['required', 'array'],
+            ]);
+      
+             $planification = $fibra_optica;
+             $managemet = $this->model('management')->findByName('fibra optica');
+            $answer =   $planification->answers()->get_management($managemet->id);
+            
+
+           foreach ($request->data as $data) 
+            {
+                $value = $data['answer'];
+                if (File::exists($value)) {
+                   
+                    $file = $data['answer'];
+                    $value = $file->store('files', 'public');
+                }
+                AnswerLine::UpdateOrCreateOnNull($data['line_id'] ?? null,[ 
+                    'answer' => $value
+                ]);
+            }
+
+                  dd($request->data);
+        /**
+         * 
+         * } catch (\Throwable $th) {
+            
+            return back()->with("error","Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
+            
+        }**/
     }
 
 
     public function edit(Planification $fibra_optica)
     {
+        $planification = $fibra_optica;
         $managemet = $this->model('management')->findByName('fibra optica');
         $tasks = $managemet->tasks;
-        $answer = $fibra_optica->answers()->get_management($managemet->id)->first();
+
+        $answer = $planification->answers()->get_management($managemet->id)->first();
+
         $lines = null;
         if ($answer) {
             $lines = $answer->lines()->with('task')->get();

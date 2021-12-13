@@ -1,6 +1,6 @@
 <template>
     <div class="form-responsive">
-        <form @submit.prevent='this.submiting()'>
+        <form @submit.prevent='this.submiting()' enctype="multipart/form-data">
             <slot name='content'></slot>
 
             <div>
@@ -37,16 +37,19 @@ export default {
             const _this = this;
             this.disabled = true
             this.$inertia[this.method](this.url, this.data, {
+                forceFormData:true,
                 onSuccess() {
 
                     if (_this.$page.props.flash.error) {
-                        return _this.$toast.error(this.$page.props.flash.error,{
+                         _this.disabled = false
+                        return _this.$toast.error(_this.$page.props.flash.error,{
                             position: 'top-right',
                             duration:5000,
                         })
                     }
                     if (_this.$page.props.flash.warning) {
-                        return _this.$toast.warning(this.$page.props.flash.warning,{
+                          _this.disabled = false
+                        return _this.$toast.warning(_this.$page.props.flash.warning,{
                             position: 'top-right',
                             duration:5000,
                         })
@@ -59,6 +62,11 @@ export default {
                             duration:5000,
                         })
                         _this.$emit('submitSuccess');
+                    }else if (_this.$page.props.flash.menssage) {
+                        _this.$toast.warning(_this.$page.props.flash.menssage,{
+                            position: 'top-right',
+                            duration:5000,
+                        })
                     }
 
                 },
@@ -76,6 +84,7 @@ export default {
                     _this.$swal('Ups!, ha sucedido un error', errors(e), 'error')
                 },
                 onFinish() {
+                     _this.disabled = false
                     _this.$toast.success('La peticion se ha ejecutado con exito.',{
                             position: 'top-right',
                             duration:5000,

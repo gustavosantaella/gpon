@@ -93,16 +93,19 @@ export default {
   },
 
   mounted() {
-    this.setValueOnEDit;
+    this.setValueOnEDit();
 
   },
   computed: {
- setValueOnEDit() {
+ 
+  },
+  methods: {
+setValueOnEDit() {
 
       if (this.lines) {
 
       this.route = route(this.routeUrl.update.url, this.routeUrl.update.params);
-     this.method = "put";
+     this.method = "post";
 
 
         for (let line of this.lines) {
@@ -124,9 +127,6 @@ export default {
         }
       }
     },
-  },
-  methods: {
-
     setValue(element, task) {
       let value;
       if (task.field_type === "file") {
