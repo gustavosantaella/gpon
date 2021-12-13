@@ -12,10 +12,21 @@ class Planification extends Model
 
 	protected $guarded = [];
 
+    // Relations
+
 	public function parish()
 	{
 		return $this->belongsTo(Parish::class,'parish_id','id');
 	}
+
+    public function answers()
+    {
+        return $this->morphMany(Answer::class, 'answer');
+    }
+
+    // Scopes
+
+
 
       // Mutators
 

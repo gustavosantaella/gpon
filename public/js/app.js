@@ -23826,6 +23826,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Admin/Dashboard */ "./resources/js/Pages/Admin/Dashboard.vue");
 /* harmony import */ var _Partials_AppForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Partials/AppForm */ "./resources/js/Partials/AppForm.vue");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -23833,9 +23839,11 @@ __webpack_require__.r(__webpack_exports__);
     Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ["tasks", "route"],
+  props: ["tasks", "answerd", "lines", "routeUrl"],
   data: function data() {
     return {
+      route: route(this.routeUrl.store.url, this.routeUrl.store.params),
+      method: 'post',
       form: {
         data: {
           data: []
@@ -23843,11 +23851,52 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  mounted: function mounted() {
+    this.setValueOnEDit;
+  },
+  computed: {
+    setValueOnEDit: function setValueOnEDit() {
+      if (this.lines) {
+        this.route = route(this.routeUrl.update.url, this.routeUrl.update.params);
+        this.method = "put";
+
+        var _iterator = _createForOfIteratorHelper(this.lines),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var line = _step.value;
+            var value = void 0;
+            var search = "task-".concat(line.task_id).trim();
+            var ref = this.$refs[search];
+            var elem = document.getElementById(search);
+
+            if (elem.getAttribute("data-type") === "file") {
+              value = new File([""], this.access(line.answer, true));
+              ref.src = this.access(line.answer, true);
+            } else {
+              value = ref.value = line.answer;
+            }
+
+            this.form.data.data.push({
+              line_id: line.id,
+              answer: value,
+              task_id: parseInt(elem.id.replace("task-", ""))
+            });
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    }
+  },
   methods: {
     setValue: function setValue(element, task) {
       var value;
 
-      if (task.field_type === 'file') {
+      if (task.field_type === "file") {
         value = element.target.files[0];
         var s = URL.createObjectURL(value);
         this.$refs[this.label(task)].src = s;
@@ -23857,7 +23906,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var result = this.form.data.data.filter(function (el) {
         if (el.task_id === task.id) {
-          el.answer = task.field_type === 'file' ? element : value;
+          el.answer = task.field_type === "file" ? element : value;
           return el;
         }
       });
@@ -28803,23 +28852,23 @@ var _hoisted_1 = ["for"];
 var _hoisted_2 = {
   key: 0
 };
-var _hoisted_3 = ["onChange", "id", "type"];
+var _hoisted_3 = ["onChange", "data-type", "id", "type"];
 var _hoisted_4 = {
   key: 1
 };
-var _hoisted_5 = ["onChange", "id", "type"];
+var _hoisted_5 = ["onChange", "data-type", "id", "type"];
 var _hoisted_6 = {
   key: 2
 };
-var _hoisted_7 = ["onChange", "id", "type"];
+var _hoisted_7 = ["onChange", "data-type", "id", "type"];
 var _hoisted_8 = {
   key: 3
 };
-var _hoisted_9 = ["onChange", "id", "type"];
+var _hoisted_9 = ["onChange", "data-type", "id", "type"];
 var _hoisted_10 = {
   key: 4
 };
-var _hoisted_11 = ["onChange", "id", "type"];
+var _hoisted_11 = ["onChange", "data-type", "id", "type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -28832,12 +28881,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dashboard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_form, {
-        method: "post",
+        method: _this.method,
         data: _this.form.data,
         url: _this.route
       }, {
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.tasks, function (task) {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.route) + " = " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.method) + " ", 1
+          /* TEXT */
+          ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.tasks, function (task) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
               key: task.id,
               "class": "mb-3"
@@ -28849,7 +28900,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onChange: function onChange($event) {
                 return _this.setValue($event, task);
               },
-              ref: "photo",
+              ref: _this.label(task),
+              "data-type": task.field_type,
               id: _this.label(task),
               type: task.field_type,
               "class": "form-control"
@@ -28864,7 +28916,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onChange: function onChange($event) {
                 return _this.setValue($event, task);
               },
-              ref: "photo",
+              ref: _this.label(task),
+              "data-type": task.field_type,
               id: _this.label(task),
               type: task.field_type,
               "class": "form-control"
@@ -28874,7 +28927,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onChange: function onChange($event) {
                 return _this.setValue($event, task);
               },
-              ref: "photo",
+              ref: _this.label(task),
+              "data-type": task.field_type,
               id: _this.label(task),
               type: task.field_type,
               "class": "form-control"
@@ -28884,17 +28938,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onChange: function onChange($event) {
                 return _this.setValue($event, task);
               },
-              ref: "photo",
+              ref: _this.label(task),
+              "data-type": task.field_type,
               id: _this.label(task),
               type: task.field_type,
-              "class": "form-control"
+              "class": "form-control ff"
             }, null, 40
             /* PROPS, HYDRATE_EVENTS */
             , _hoisted_9)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), task.field_type === 'date' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
               onChange: function onChange($event) {
                 return _this.setValue($event, task);
               },
-              ref: "photo",
+              ref: _this.label(task),
+              "data-type": task.field_type,
               id: _this.label(task),
               type: task.field_type,
               "class": "form-control"
@@ -28910,7 +28966,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["data", "url"])];
+      , ["method", "data", "url"])];
     }),
     _: 1
     /* STABLE */
@@ -32330,6 +32386,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./resources/js/Helpers/Functions.js":
+/*!*******************************************!*\
+  !*** ./resources/js/Helpers/Functions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "access": () => (/* binding */ access)
+/* harmony export */ });
+var access = function access(url) {
+  var storage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var storageFolder = storage ? 'storage/' : '';
+  return "".concat(window.location.origin, "/").concat(storageFolder).concat(url);
+};
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Helpers/RoleAndPermissions.js":
 /*!****************************************************!*\
   !*** ./resources/js/Helpers/RoleAndPermissions.js ***!
@@ -32432,6 +32509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Partials_ToastNotification__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Partials/ToastNotification */ "./resources/js/Partials/ToastNotification.vue");
 /* harmony import */ var vue_toast_notification_dist_theme_sugar_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-toast-notification/dist/theme-sugar.css */ "./node_modules/vue-toast-notification/dist/theme-sugar.css");
 /* harmony import */ var _Helpers_RoleAndPermissions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Helpers/RoleAndPermissions */ "./resources/js/Helpers/RoleAndPermissions.js");
+/* harmony import */ var _Helpers_Functions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Helpers/Functions */ "./resources/js/Helpers/Functions.js");
 var _window$document$getE;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import modules...
@@ -32448,6 +32526,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
  // Helpers
+
 
 
 var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Laravel';
@@ -32470,7 +32549,8 @@ var appvue = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInert
     }).use(plugin).use(laravel_permission_to_vuejs__WEBPACK_IMPORTED_MODULE_1__["default"]).use((vue_toast_notification__WEBPACK_IMPORTED_MODULE_6___default())).use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default())).mixin({
       methods: {
         route: route,
-        role: _Helpers_RoleAndPermissions__WEBPACK_IMPORTED_MODULE_9__.role
+        role: _Helpers_RoleAndPermissions__WEBPACK_IMPORTED_MODULE_9__.role,
+        access: _Helpers_Functions__WEBPACK_IMPORTED_MODULE_10__.access
       }
     });
     appVue.mount(el);

@@ -22,6 +22,11 @@ class Management extends Model
         return $this->hasMany(Task::class, 'management_id', 'id');
     }
 
+    public function answers()
+    {
+        return $this->morphMany(Answer::class, 'answer');
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_has_managements', 'management_id', 'user_id', 'id', 'id', 'management');

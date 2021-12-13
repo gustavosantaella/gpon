@@ -13,7 +13,7 @@ class FoModule extends BaseController
 {
     public function index()
     {
-       $planifications = $this->model('planification')->select([
+        $planifications = $this->model('planification')->select([
             'planifications.*',
             'parishes.id as parishId',
             'parishes.name as parishName',
@@ -22,69 +22,91 @@ class FoModule extends BaseController
             'states.id as stateid',
             'states.name as stateName'
         ])
-                         ->join('parishes','parishes.id','planifications.parish_id')
-                         ->join('municipalities','municipalities.id','parishes.municipality_id')
-                         ->join('states','states.id','municipalities.state_id')
-                         ->orderBy('id','desc')
+            ->join('parishes', 'parishes.id', 'planifications.parish_id')
+            ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
+            ->join('states', 'states.id', 'municipalities.state_id')
+            ->orderBy('id', 'desc')
 
-        ->paginate(5);
+            ->paginate(5);
 
         return $this->loadView('Admin.Modules.FibraOptica.index', compact('planifications'));
     }
 
     public function store()
     {
-        $request = $this->request();
-        $request->validate([
-            'data'=>['required','array']
-        ]);
-        foreach($request->data as $data){
-            if(!array_key_exists('task_id', $data) && !array_key_exists('answer', $data)){
-                return back()->with('warning','Por favor revise que todos los campos esten completos');
+        try {
+
+            $request = $this->request();
+            dd($request->data);
+            $request->validate([
+                'data' => ['required', 'array'],
+            ]);
+
+            foreach ($request->data as $data) {
+                if (!array_key_exists('task_id', $data) || !array_key_exists('answer', $data)) {
+                    return back()->with('warning', 'Por favor revise que todos los campos esten completos');
+                }
             }
 
-        }
+            $planification = $this->model('planification')->find($request->parent_id);
+            $answer =   $planification->answers()->create([
+                'management_id' => $request->management_id,
+                'observation' => 'this is my observation'
+            ]);
 
-        $managemet = $this->model('management')->find($request->parent_id);
-
-        $answer = $managemet->answer()->create([
-            'management_id'=>$request->management_id,
-            'observation'=>'this is my observation'
-        ]);
-
-        foreach($request->data as $data){
-            $value = $data['answer'];
-            if(File::exists($value))
-            {
-                $file = $data['answer'];
-                $value = $file->store('files','public');
-
+            foreach ($request->data as $data) {
+                $value = $data['answer'];
+                if (File::exists($value)) {
+                    $file = $data['answer'];
+                    $value = $file->store('files', 'public');
+                }
+                $answer->lines()->updateOrCreate([
+                    'task_id' => $data['task_id'],
+                    'answer' => $value
+                ]);
             }
-             $answer->lines()->create([
-                 'task_id'=> $data['task_id'],
-                 'answer'=>$value
-             ]);
+
+            return redirect()->route('admin.modules.fibra-optica.index')->with('status', 200);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
         }
-
-        return redirect()->route('admin.modules.fibra-optica.index')->with('status', 200);
-
-
     }
 
+    public function update()
+    {
+        $request = $this->request();
+          dd($request);
+    }
 
 
     public function edit(Planification $fibra_optica)
     {
-          $managemet = $this->model('management')->findByName('fibra optica');
-          $tasks = $managemet->tasks;
+        $managemet = $this->model('management')->findByName('fibra optica');
+        $tasks = $managemet->tasks;
+        $answer = $fibra_optica->answers()->get_management($managemet->id)->first();
+        $lines = null;
+        if ($answer) {
+            $lines = $answer->lines()->with('task')->get();
+        }
 
-          $route = route('admin.modules.fibra-optica.store',[
-              'parent_id'=>$fibra_optica->id,
-              'management_id'=>$managemet->id
-          ]);
-          return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks','route'));
+
+        $routeUrl = [
+            'store' => [
+                'url' => "admin.modules.fibra-optica.store",
+                'params' => [
+                    'management_id' => $managemet->id,
+                    'parent_id' => $fibra_optica->id
+                ]
+            ],
+
+            'update' => [
+                'url' => "admin.modules.fibra-optica.update",
+                'params' => [
+                    'management_id' => $managemet->id,
+                    'fibra_optica' => $fibra_optica->id
+                ]
+            ],
+        ];
+        return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks', 'lines', 'answer', 'routeUrl'));
     }
-
-
-
 }
