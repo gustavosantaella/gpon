@@ -97,7 +97,7 @@ export default {
 
   },
   computed: {
- 
+
   },
   methods: {
 setValueOnEDit() {
@@ -139,7 +139,7 @@ setValueOnEDit() {
 
       let result = this.form.data.data.filter((el) => {
         if (el.task_id === task.id) {
-          el.answer = task.field_type === "file" ? element : value;
+          el.answer = task.field_type === "file" ? element.target.files[0] : value;
           return el;
         }
       });
