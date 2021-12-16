@@ -8,7 +8,7 @@ Route::get('authlogin', function(){
 Route::prefix('dashboard')
 ->namespace('\App\Http\Controllers\Admin')
 ->as('admin.')
-// change to middleware auth 
+// change to middleware auth
 ->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 //--------------------------------------------------------------------------------------
@@ -50,13 +50,13 @@ Route::prefix('dashboard')
 //--------------------------------------------------------------------------------------
 
     // modulos
-   
+
     Route::prefix('modulos')->namespace('\App\Http\Controllers\Admin\Modules')->as('modules.')->group(function(){
-    	   
+
 
 	    Route::resource('planificaciones', 'PlanificationModule');
         Route::resource('fibra-optica', 'FoModule')->except('update');
-        Route::post('fibra-optica/update', 'FoModule@update')->name('fibra-optica.update');
+        Route::post('fibra-optica/update/', 'FoModule@update')->name('fibra-optica.update');
     });
 
 //--------------------------------------------------------------------------------------

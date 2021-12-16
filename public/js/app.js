@@ -23832,6 +23832,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -23839,11 +23845,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ["tasks", "answerd", "lines", "routeUrl"],
+  props: ["tasks", "answer", "lines", "routeUrl"],
   data: function data() {
     return {
       route: route(this.routeUrl.store.url, this.routeUrl.store.params),
-      method: 'post',
+      method: "post",
       form: {
         data: {
           data: []
@@ -23852,13 +23858,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   mounted: function mounted() {
-    this.setValueOnEDit();
+    this.setValueOnEDit;
   },
-  computed: {},
-  methods: {
+  computed: {
     setValueOnEDit: function setValueOnEDit() {
       if (this.lines) {
-        this.route = route(this.routeUrl.update.url, this.routeUrl.update.params);
+        var params = _objectSpread(_objectSpread({}, this.routeUrl.update.params), {}, {
+          answer_id: this.answer.id
+        });
+
+        this.route = route(this.routeUrl.update.url, params);
         this.method = "post";
 
         var _iterator = _createForOfIteratorHelper(this.lines),
@@ -23868,9 +23877,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var line = _step.value;
             var value = void 0;
+            alert(line.approved);
             var search = "task-".concat(line.task_id).trim();
             var ref = this.$refs[search];
             var elem = document.getElementById(search);
+
+            if (line.approved === false) {
+              elem.style.borderColor = 'red';
+            }
 
             if (elem.getAttribute("data-type") === "file") {
               value = new File([""], this.access(line.answer, true));
@@ -23891,7 +23905,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _iterator.f();
         }
       }
-    },
+    }
+  },
+  methods: {
     setValue: function setValue(element, task) {
       var value;
 

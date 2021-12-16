@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
-use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
+use App\Models\Planification;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
 class PlanificationModule extends BaseController
 {
-	public function index()
-	{
-		$planifications = $this->model('planification')->select([
+    public static function list()
+    {
+        return Planification::select([
 			'planifications.*',
 			'parishes.id as parishId',
 			'parishes.name as parishName',
@@ -24,18 +25,22 @@ class PlanificationModule extends BaseController
 						 ->join('states','states.id','municipalities.state_id')
 						 ->orderBy('id','desc')
 
-		->paginate(5);       
+		->paginate(5);
+    }
+	public function index()
+	{
+		$planifications = self::list();
 	return $this->loadView('Admin.Modules.Planifications.index', compact('planifications'));
 	}
 
 	public function store()
-	{	
+	{
 		$request = $this->request();
 		$request->validate([
 			'parish_id'=>['required','numeric'],
 			'municipality_id'=>['required','numeric'],
 			'state_id'=>['required','numeric'],
-			'name'=>['required','string', 
+			'name'=>['required','string',
 			Rule::unique('planifications')->where(function($query) use($request){
 				return $query->whereName($request->name)
 						     ->whereParish_id($request->parish_id);
