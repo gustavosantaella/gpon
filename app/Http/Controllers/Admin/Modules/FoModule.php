@@ -63,33 +63,10 @@ class FoModule extends BaseController
     {
         $planification = $fibra_optica;
         $managemet = $this->model('management')->findByName('fibra optica');
-        $tasks = $managemet->tasks;
-
-        $answer = $planification->answers()->get_management($managemet->id)->first();
-
-        $lines = null;
-        if ($answer) {
-            $lines = $answer->lines()->with('task')->get();
-        }
+        $form = ModuleController::form($planification, $managemet);
+        return $this->loadView('Admin.Modules.FibraOptica.edit', $form);
 
 
-        $routeUrl = [
-            'store' => [
-                'url' => "admin.modules.fibra-optica.store",
-                'params' => [
-                    'management_id' => $managemet->id,
-                    'parent_id' => $fibra_optica->id
-                ]
-            ],
 
-            'update' => [
-                'url' => "admin.modules.fibra-optica.update",
-                'params' => [
-                    'management_id' => $managemet->id,
-                    'fibra_optica' => $fibra_optica->id
-                ]
-            ],
-        ];
-        return $this->loadView('Admin.Modules.FibraOptica.edit', compact('tasks', 'lines', 'answer', 'routeUrl'));
     }
 }

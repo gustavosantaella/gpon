@@ -17,8 +17,12 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Fibra Optica
                         </nav-link>
+                         <nav-link :navlink="false" :href='route("admin.modules.red-local.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Red local
+                        </nav-link>
 
-		
+
 
 
                         <div class="sb-sidenav-menu-heading">Equipos</div>
@@ -33,7 +37,7 @@
                         </nav-link>
 
                         <div class="sb-sidenav-menu-heading">Cantv</div>
-                        
+
                          <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Usuarios

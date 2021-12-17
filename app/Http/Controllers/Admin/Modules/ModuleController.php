@@ -7,10 +7,45 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\BaseController;
-
+use App\Models\Management;
+use Inertia\Inertia;
 
 class ModuleController extends BaseController
 {
+
+    public static function form(Model $parent_model, Management $management)
+    {
+
+        $tasks = $management->tasks;
+
+        $answer = $parent_model->answers()->get_management($management->id)->first();
+
+        $lines = null;
+        if ($answer) {
+            $lines = $answer->lines()->with('task')->get();
+        }
+
+
+        $routeUrl = [
+            'store' => [
+                'url' => "admin.modules.fibra-optica.store",
+                'params' => [
+                    'management_id' => $management->id,
+                    'parent_id' => $parent_model->id
+                ]
+            ],
+
+            'update' => [
+                'url' => "admin.modules.fibra-optica.update",
+                'params' => [
+                    'management_id' => $management->id,
+                    'fibra_optica' => $parent_model->id
+                ]
+            ],
+        ];
+        return compact('tasks', 'lines', 'answer', 'routeUrl');
+    }
+
     /**
      * Undocumented function
      *

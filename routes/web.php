@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 Route::get('authlogin', function(){
     $user = \App\Models\User::find(2);
-    \Auth::login($user);
+    Auth::login($user);
 });
 Route::prefix('dashboard')
 ->namespace('\App\Http\Controllers\Admin')
@@ -57,6 +58,8 @@ Route::prefix('dashboard')
 	    Route::resource('planificaciones', 'PlanificationModule');
         Route::resource('fibra-optica', 'FoModule')->except('update');
         Route::post('fibra-optica/update/', 'FoModule@update')->name('fibra-optica.update');
+
+        Route::resource('red-local', 'RedLocalModule')->except('update');
     });
 
 //--------------------------------------------------------------------------------------
