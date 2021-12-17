@@ -60,6 +60,14 @@ Route::prefix('dashboard')
         Route::post('fibra-optica/update/', 'FoModule@update')->name('fibra-optica.update');
 
         Route::resource('red-local', 'RedLocalModule')->except('update');
+          Route::post('red-local/update/', 'RedLocalModule@update')->name('red-local.update');
+
+        Route::resource('energia', 'EnergyModule')->except('update');
+          Route::post('energia/update/', 'EnergyModule@update')->name('energia.update');
+
+    Route::resource('infraestructura', 'InfraestructureModule')->except('update');
+          Route::post('infraestructura/update/', 'InfraestructureModule@update')->name('infraestructura.update');
+
     });
 
 //--------------------------------------------------------------------------------------

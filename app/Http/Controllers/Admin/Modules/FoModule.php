@@ -33,16 +33,18 @@ class FoModule extends BaseController
                 return redirect()->route('admin.modules.fibra-optica.index')->with('status', 200);
             } else return  back()->with("error", "Por favor comuniquese con soporte...");
         } catch (\Throwable $th) {
-            dd(12);
+            dd($th->getMessage());
             return  back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
         }
     }
 
     public function update()
     {
+
         try {
             $request = $this->request();
-            $planification = $this->model('planification')->findOrFail($request->fibra_optica);
+            $planification = $this->model('planification')->findOrFail($request->parent_id);
+           
             $answer = $planification->answers()->findOrfail($request->answer_id);
             $module = new ModuleController();
 
@@ -63,7 +65,8 @@ class FoModule extends BaseController
     {
         $planification = $fibra_optica;
         $managemet = $this->model('management')->findByName('fibra optica');
-        $form = ModuleController::form($planification, $managemet);
+        $form = ModuleController::form($planification, $managemet, 'admin.modules.fibra-optica.store', 'admin.modules.fibra-optica.update');
+        
         return $this->loadView('Admin.Modules.FibraOptica.edit', $form);
 
 

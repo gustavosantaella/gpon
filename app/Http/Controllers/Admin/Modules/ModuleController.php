@@ -13,7 +13,7 @@ use Inertia\Inertia;
 class ModuleController extends BaseController
 {
 
-    public static function form(Model $parent_model, Management $management)
+    public static function form(Model $parent_model, Management $management, string $routeStore, string $routeUpdate)
     {
 
         $tasks = $management->tasks;
@@ -28,7 +28,7 @@ class ModuleController extends BaseController
 
         $routeUrl = [
             'store' => [
-                'url' => "admin.modules.fibra-optica.store",
+                'url' => $routeStore,
                 'params' => [
                     'management_id' => $management->id,
                     'parent_id' => $parent_model->id
@@ -36,10 +36,10 @@ class ModuleController extends BaseController
             ],
 
             'update' => [
-                'url' => "admin.modules.fibra-optica.update",
+                'url' => $routeUpdate,
                 'params' => [
                     'management_id' => $management->id,
-                    'fibra_optica' => $parent_model->id
+                    'parent_id' => $parent_model->id
                 ]
             ],
         ];

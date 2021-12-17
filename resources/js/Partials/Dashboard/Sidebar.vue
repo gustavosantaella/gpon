@@ -21,6 +21,14 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Red local
                         </nav-link>
+                          <nav-link :navlink="false" :href='route("admin.modules.energia.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Energia
+                        </nav-link>
+                             <nav-link :navlink="false" :href='route("admin.modules.infraestructura.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Infraestructura
+                        </nav-link>
 
 
 
@@ -91,8 +99,5 @@
 		components:{
 			NavLink
 		},
-
-
 	}
-
 </script>

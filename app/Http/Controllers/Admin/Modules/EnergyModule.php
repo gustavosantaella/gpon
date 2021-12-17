@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Modules\PlanificationModule;
 use App\Models\Planification;
 
-class RedLocalModule extends BaseController
+class EnergyModule extends BaseController
 {
     public function index()
     {
         $planifications = PlanificationModule::list();
 
-        return $this->loadView('Admin.Modules.RedLocal.index', compact('planifications'));
+        return $this->loadView('Admin.Modules.Energia.index', compact('planifications'));
     }
 
-        public function store()
+
+    public function store()
     {
         try {
             $request = $this->request();
@@ -33,16 +34,12 @@ class RedLocalModule extends BaseController
         }
     }
 
-
-    public function edit(Planification $red_local)
+     public function edit(Planification $energium)
     {
 
-         $planification = $red_local;
-        $managemet = $this->model('management')->findByName('red local');
-        ;
-        $form = ModuleController::form($planification, $managemet, 'admin.modules.red-local.store', 'admin.modules.red-local.update');
-  
-
+        $planification = $energium;
+        $managemet = $this->model('management')->findByName('energia');
+        $form = ModuleController::form($planification, $managemet, 'admin.modules.energia.store', 'admin.modules.energia.update');
         return $this->loadView('Admin.Modules.AnswerTask', $form);
     }
 
@@ -51,12 +48,12 @@ class RedLocalModule extends BaseController
          try {
             $request = $this->request();
             $planification = $this->model('planification')->findOrFail($request->parent_id);
-         
+           
             $answer = $planification->answers()->findOrfail($request->answer_id);
             $module = new ModuleController();
 
             if ($module->update($planification, $answer) === true) {
-                return redirect()->route('admin.modules.red-local.index')->with('status', 200);
+                return redirect()->route('admin.modules.energia.index')->with('status', 200);
 
             } else return  back()->with("error", "Por favor comuniquese con soporte...");
 
