@@ -1,8 +1,17 @@
-const access = (url, storage = false) => {
+const access = (url, storage = false, fullPath = false) => {
 
+     let urlPath = ''; 
+     if(fullPath)
+     {
+       urlPath += `${window.location.origin}`
+     }
 
-     let storageFolder = storage ? 'storage/' : '';
-    return `${window.location.origin}/${storageFolder}${url}`
+     if(storage)
+     {
+        urlPath += '/storage'
+     }
+  
+    return `${urlPath}/${url}`
 }
 
 

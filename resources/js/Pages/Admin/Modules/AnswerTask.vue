@@ -66,16 +66,8 @@
       </template>
     </app-form>
     <div v-else>
-      <div class="container-fluid">
-        <div class="card">
-          <div class="card-body">
-            <div>
-            Por favor, debe de insertar al menos una actividad para rellenar este formulario.
-          </div>
-
-          </div>
-        </div>
-          
+      <div class>
+        
       </div>
     </div>
   </Dashboard>

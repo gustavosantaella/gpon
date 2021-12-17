@@ -29179,12 +29179,8 @@ var _hoisted_12 = {
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "container-fluid"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "card"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "card-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " Por favor, debe de insertar al menos una actividad para rellenar este formulario. ")])])], -1
+  "class": ""
+}, null, -1
 /* HOISTED */
 );
 
@@ -33175,8 +33171,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var access = function access(url) {
   var storage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var storageFolder = storage ? 'storage/' : '';
-  return "".concat(window.location.origin, "/").concat(storageFolder).concat(url);
+  var fullPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var urlPath = '';
+
+  if (fullPath) {
+    urlPath += "".concat(window.location.origin);
+  }
+
+  if (storage) {
+    urlPath += '/storage';
+  }
+
+  return "".concat(urlPath, "/").concat(url);
 };
 
 
