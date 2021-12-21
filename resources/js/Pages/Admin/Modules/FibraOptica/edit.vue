@@ -1,8 +1,5 @@
 <template>
-  <pre>
-	{{ this.form.data }}
-</pre
-  >
+
   <Dashboard>
     <app-form :method="this.method" :data="this.form.data" :url="this.route">
       <template v-slot:content>

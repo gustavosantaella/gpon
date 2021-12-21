@@ -4,7 +4,12 @@
 </pre
   >
   <Dashboard>
-    <app-form :method="this.method" :data="this.form.data" :url="this.route" v-if="this.tasks.length">
+    <app-form
+      :method="this.method"
+      :data="this.form.data"
+      :url="this.route"
+      v-if="this.tasks.length"
+    >
       <template v-slot:content>
         {{ this.route }} = {{ this.method }}
         <div v-for="task in this.tasks" :key="task.id" class="mb-3">
@@ -66,8 +71,9 @@
       </template>
     </app-form>
     <div v-else>
-      <div class>
-        
+      <div class="alert alert-warning">
+        Por favor, agregue al menos una tarea/actividad para poder rellenar este
+        formulario
       </div>
     </div>
   </Dashboard>
@@ -102,9 +108,7 @@ export default {
   },
   computed: {
     setValueOnEDit() {
-
       if (this.lines) {
-      
         let params = {
           ...this.routeUrl.update.params,
           answer_id: this.answer.id,
@@ -114,16 +118,14 @@ export default {
 
         for (let line of this.lines) {
           let value;
-          alert(line.approved)
-
           let search = `task-${line.task_id}`.trim();
           let ref = this.$refs[search];
           let elem = document.getElementById(search);
-          if(line.approved === false)
-          {
-              elem.style.borderColor = 'red'
+          if (line.approved === false) {
+            elem.style.borderColor = "red";
           }
           if (elem.getAttribute("data-type") === "file") {
+
             value = new File([""], this.access(line.answer, true));
             ref.src = this.access(line.answer, true);
           } else {
