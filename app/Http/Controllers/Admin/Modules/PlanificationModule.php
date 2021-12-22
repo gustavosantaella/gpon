@@ -9,23 +9,28 @@ use App\Http\Controllers\BaseController;
 
 class PlanificationModule extends BaseController
 {
-    public static function list()
+    public static function list(int $id = null)
     {
-        return Planification::select([
-			'planifications.*',
-			'parishes.id as parishId',
-			'parishes.name as parishName',
-			'municipalities.id as munId',
-			'municipalities.name as munName',
-			'states.id as stateid',
-			'states.name as stateName'
-		])
-						 ->join('parishes','parishes.id','planifications.parish_id')
-						 ->join('municipalities','municipalities.id','parishes.municipality_id')
-						 ->join('states','states.id','municipalities.state_id')
-						 ->orderBy('id','desc')
+        $query =  $id ? Planification::find($id) : Planification::query();
 
-		->paginate(5);
+        $query->select([
+            'planifications.*',
+            'parishes.id as parishId',
+            'parishes.name as parishName',
+            'municipalities.id as munId',
+            'municipalities.name as munName',
+            'states.id as stateid',
+            'states.name as stateName'
+        ]);
+
+
+        $query->join('parishes', 'parishes.id', 'planifications.parish_id')
+        ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
+        ->join('states', 'states.id', 'municipalities.state_id')
+        ->orderBy('id', 'desc');
+
+        return $id ? $query : $query->paginate(5);
+
     }
 	public function index()
 	{
@@ -55,4 +60,9 @@ class PlanificationModule extends BaseController
 
 		return back()->with('status', 200);
 	}
+
+    public function show(Planification $planificacione)
+    {
+        dd($planificacione);
+    }
 }

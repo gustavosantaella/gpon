@@ -23824,8 +23824,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Admin/Dashboard */ "./resources/js/Pages/Admin/Dashboard.vue");
-/* harmony import */ var _Partials_AppForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Partials/AppForm */ "./resources/js/Partials/AppForm.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Admin/Dashboard */ "./resources/js/Pages/Admin/Dashboard.vue");
+/* harmony import */ var _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Partials/AppForm */ "./resources/js/Partials/AppForm.vue");
+
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -23838,12 +23842,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppForm: _Partials_AppForm__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ["tasks", "answer", "lines", "routeUrl"],
   data: function data() {
@@ -23862,48 +23870,115 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     setValueOnEDit: function setValueOnEDit() {
-      if (this.lines) {
-        var params = _objectSpread(_objectSpread({}, this.routeUrl.update.params), {}, {
-          answer_id: this.answer.id
-        });
+      var _this = this;
 
-        this.route = route(this.routeUrl.update.url, params);
-        this.method = "post";
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var params, _iterator, _step, line, value, search, ref, elem, response, blob;
 
-        var _iterator = _createForOfIteratorHelper(this.lines),
-            _step;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!_this.lines) {
+                  _context.next = 43;
+                  break;
+                }
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var line = _step.value;
-            var value = void 0;
-            var search = "task-".concat(line.task_id).trim();
-            var ref = this.$refs[search];
-            var elem = document.getElementById(search);
+                params = _objectSpread(_objectSpread({}, _this.routeUrl.update.params), {}, {
+                  answer_id: _this.answer.id
+                });
+                _this.route = route(_this.routeUrl.update.url, params);
+                _this.method = "post";
+                _iterator = _createForOfIteratorHelper(_this.lines);
+                _context.prev = 5;
 
-            if (line.approved === false) {
-              elem.style.borderColor = "red";
+                _iterator.s();
+
+              case 7:
+                if ((_step = _iterator.n()).done) {
+                  _context.next = 35;
+                  break;
+                }
+
+                line = _step.value;
+                value = void 0;
+                search = "task-".concat(line.task_id).trim();
+                ref = _this.$refs[search];
+                elem = document.getElementById(search);
+
+                if (line.approved === false) {
+                  elem.style.borderColor = "red";
+                }
+
+                if (!(elem.getAttribute("data-type") === "file")) {
+                  _context.next = 31;
+                  break;
+                }
+
+                _context.prev = 15;
+                _context.next = 18;
+                return fetch(_this.access(line.answer, true));
+
+              case 18:
+                response = _context.sent;
+                _context.next = 21;
+                return response.blob();
+
+              case 21:
+                blob = _context.sent;
+                value = new File([blob], _this.access(line.answer, true));
+                ref.src = _this.access(line.answer, true);
+                _context.next = 29;
+                break;
+
+              case 26:
+                _context.prev = 26;
+                _context.t0 = _context["catch"](15);
+
+                _this.$swal('Ups!, ha sucedido un error', _context.t0.getMessage(), 'error');
+
+              case 29:
+                _context.next = 32;
+                break;
+
+              case 31:
+                value = ref.value = line.answer;
+
+              case 32:
+                _this.form.data.data.push({
+                  line_id: line.id,
+                  answer: value,
+                  task_id: parseInt(elem.id.replace("task-", ""))
+                });
+
+              case 33:
+                _context.next = 7;
+                break;
+
+              case 35:
+                _context.next = 40;
+                break;
+
+              case 37:
+                _context.prev = 37;
+                _context.t1 = _context["catch"](5);
+
+                _iterator.e(_context.t1);
+
+              case 40:
+                _context.prev = 40;
+
+                _iterator.f();
+
+                return _context.finish(40);
+
+              case 43:
+              case "end":
+                return _context.stop();
             }
-
-            if (elem.getAttribute("data-type") === "file") {
-              value = new File(["/storage/".concat(this.access(line.answer, false))], this.access(line.answer, true));
-              ref.src = this.access(line.answer, true);
-            } else {
-              value = ref.value = line.answer;
-            }
-
-            this.form.data.data.push({
-              line_id: line.id,
-              answer: value,
-              task_id: parseInt(elem.id.replace("task-", ""))
-            });
           }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      }
+        }, _callee, null, [[5, 37, 40, 43], [15, 26]]);
+      }))();
     }
   },
   methods: {
@@ -24254,7 +24329,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Datatable: _Partials_Datatable__WEBPACK_IMPORTED_MODULE_2__["default"],
     DialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['planifications'],
+  props: ["planifications"],
   data: function data() {
     return {
       states: [],
@@ -24270,15 +24345,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       modal: {
         open: false,
-        id: 'newRequeriment'
+        id: "newRequeriment"
       }
     };
   },
   methods: {
+    show: function show(data) {
+      this.$inertia.visit(route('admin.modules.planificaciones.show', {
+        planificacione: data.id
+      }));
+    },
     openModal: function openModal() {
       this.getStates();
-      this.form.method = 'post';
-      this.form.action = route('admin.modules.planificaciones.store');
+      this.form.method = "post";
+      this.form.action = route("admin.modules.planificaciones.store");
       var element = document.getElementById(this.modal.id);
       var modal = new bootstrap.Modal(element);
       modal.show();
@@ -24294,7 +24374,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.get(route('admin.xhr.getStates'));
+                return axios.get(route("admin.xhr.getStates"));
 
               case 3:
                 response = _context.sent;
@@ -24327,7 +24407,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return axios.get(route('admin.xhr.getMunicipalities', {
+                return axios.get(route("admin.xhr.getMunicipalities", {
                   state: _this2.form.state_id
                 }));
 
@@ -24362,7 +24442,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return axios.get(route('admin.xhr.getParishes', {
+                return axios.get(route("admin.xhr.getParishes", {
                   municipality: _this3.form.municipality_id
                 }));
 
@@ -29855,7 +29935,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[6] || (_cache[6] = function ($event) {
           return _this.openModal();
         })
-      }, "Nuevo requerimiento"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+      }, " Nuevo requerimiento "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
+        onShow: _this.show,
         items: _this.planifications,
         url: _ctx.route('admin.modules.planificaciones.index'),
         showItems: false,
@@ -29888,10 +29969,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           method: 'delete',
           "class": 'btn-danger',
           permission: _ctx.is('CONSULTOR')
+        }, {
+          text: 'Ver datos',
+          method: 'show',
+          "class": 'btn-secondary',
+          permission: _ctx.is('CONSULTOR')
         }]
       }, null, 8
       /* PROPS */
-      , ["items", "url", "options"])];
+      , ["onShow", "items", "url", "options"])];
     }),
     _: 1
     /* STABLE */
@@ -65170,6 +65256,27 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Admin/Modules/Planifications/show.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Modules/Planifications/show.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _var_www_html_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_html_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/Pages/Admin/Modules/Planifications/show.vue"]])
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Admin/Modules/RedLocal/index.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/Pages/Admin/Modules/RedLocal/index.vue ***!
@@ -68636,6 +68743,7 @@ var map = {
 	"./Admin/Modules/Infraestructure/index.vue": "./resources/js/Pages/Admin/Modules/Infraestructure/index.vue",
 	"./Admin/Modules/Planifications/List.vue": "./resources/js/Pages/Admin/Modules/Planifications/List.vue",
 	"./Admin/Modules/Planifications/index.vue": "./resources/js/Pages/Admin/Modules/Planifications/index.vue",
+	"./Admin/Modules/Planifications/show.vue": "./resources/js/Pages/Admin/Modules/Planifications/show.vue",
 	"./Admin/Modules/RedLocal/index.vue": "./resources/js/Pages/Admin/Modules/RedLocal/index.vue",
 	"./Admin/Providers/index.vue": "./resources/js/Pages/Admin/Providers/index.vue",
 	"./Admin/User/index.vue": "./resources/js/Pages/Admin/User/index.vue",

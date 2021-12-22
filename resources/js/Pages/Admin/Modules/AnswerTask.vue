@@ -107,7 +107,7 @@ export default {
     this.setValueOnEDit;
   },
   computed: {
-    setValueOnEDit() {
+   async setValueOnEDit() {
       if (this.lines) {
         let params = {
           ...this.routeUrl.update.params,
@@ -125,16 +125,21 @@ export default {
             elem.style.borderColor = "red";
           }
           if (elem.getAttribute("data-type") === "file") {
+              try{
+                  let response = await fetch(this.access(line.answer, true))
+                  let blob = await response.blob();
+                  value = new File([blob], this.access(line.answer, true));
+                  ref.src = this.access(line.answer, true);
+              }catch(e){
+                   this.$swal('Ups!, ha sucedido un error', e.getMessage(), 'error')
+              }
 
-            value = new File([""], this.access(line.answer, true));
-            ref.src = this.access(line.answer, true);
           } else {
             value = ref.value = line.answer;
           }
           this.form.data.data.push({
             line_id: line.id,
             answer: value,
-
             task_id: parseInt(elem.id.replace("task-", "")),
           });
         }

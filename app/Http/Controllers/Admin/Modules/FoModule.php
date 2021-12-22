@@ -43,7 +43,7 @@ class FoModule extends BaseController
 
         try {
             $request = $this->request();
-            dd($request->data);
+
             $planification = $this->model('planification')->findOrFail($request->parent_id);
 
             $answer = $planification->answers()->findOrfail($request->answer_id);
