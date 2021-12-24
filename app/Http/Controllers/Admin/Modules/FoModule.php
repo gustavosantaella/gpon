@@ -40,7 +40,6 @@ class FoModule extends BaseController
 
     public function update()
     {
-
         try {
             $request = $this->request();
 

@@ -18,7 +18,7 @@
 export default {
 
     name: 'App-Form',
-    props: ['class', 'data', 'method', 'buttonText', 'url'],
+    props: ['class', 'data', 'method', 'buttonText', 'url', 'formData'],
     data() {
         return {
             disabled: false
@@ -37,7 +37,7 @@ export default {
             const _this = this;
             this.disabled = true
             this.$inertia[this.method](this.url, this.data, {
-                forceFormData:true,
+                forceFormData:this.formData,
                 onSuccess() {
 
                     if (_this.$page.props.flash.error) {

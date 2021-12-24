@@ -1,6 +1,13 @@
+/**
+ *
+ * @param {string} url
+ * @param {bool} storage
+ * @param {bool} fullPath
+ * @returns
+ */
 const access = (url, storage = false, fullPath = false) => {
 
-     let urlPath = ''; 
+     let urlPath = '';
      if(fullPath)
      {
        urlPath += `${window.location.origin}`
@@ -10,7 +17,7 @@ const access = (url, storage = false, fullPath = false) => {
      {
         urlPath += '/storage'
      }
-  
+
     return `${urlPath}/${url}`
 }
 

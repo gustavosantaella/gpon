@@ -18,6 +18,11 @@ class Answer extends Model
     {
         return $this->morphMany(AnswerLine::class, 'line');
     }
+
+    public function management()
+    {
+        return $this->belongsTo(Management::class);
+    }
     // Scopes
 
     public function scopeGet_management($query, int $id)

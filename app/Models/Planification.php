@@ -8,27 +8,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Planification extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $guarded = [];
+    protected $guarded = [];
 
     // Relations
 
-	public function parish()
-	{
-		return $this->belongsTo(Parish::class,'parish_id','id');
-	}
+    public function parish()
+    {
+        return $this->belongsTo(Parish::class, 'parish_id', 'id');
+    }
 
     public function answers()
     {
         return $this->morphMany(Answer::class, 'answer');
     }
 
+
     // Scopes
 
 
-
-      // Mutators
+    // Mutators
 
     /**
      * Undocumented function

@@ -63,6 +63,14 @@ class PlanificationModule extends BaseController
 
     public function show(Planification $planificacione)
     {
-        dd($planificacione);
+
+
+            $planification = $planificacione;
+            $answers = $planification->answers()->with(['management', 'lines.task'])->get();
+
+            return $this->loadView('Admin.Modules.Planifications.show', [
+                'answers'=>$answers
+            ]);
+
     }
 }

@@ -46,6 +46,11 @@ class ModuleController extends BaseController
         return compact('tasks', 'lines', 'answer', 'routeUrl');
     }
 
+    public static function show()
+    {
+
+    }
+
     /**
      * Undocumented function
      *

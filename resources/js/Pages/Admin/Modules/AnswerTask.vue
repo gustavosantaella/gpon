@@ -8,6 +8,7 @@
       :method="this.method"
       :data="this.form.data"
       :url="this.route"
+      :formData='true'
       v-if="this.tasks.length"
     >
       <template v-slot:content>
