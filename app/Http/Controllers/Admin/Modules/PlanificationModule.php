@@ -67,8 +67,29 @@ class PlanificationModule extends BaseController
             $answers = $planification->answers()->with(['management.tasks', 'lines.task'])->get();
 
             return $this->loadView('Admin.Modules.Planifications.show', [
-                'answers'=>$answers
+                'answers'=>$answers,
+                "planification"=>$planificacione
             ]);
 
+    }
+
+    public function approved(Planification $planificacione)
+    {
+    	$request = $this->request()->validate([
+    		'approved'=>'required',
+
+    	]);
+    	try {
+    		
+    	if($request['approved'] !==  '')
+    		$planificacione->status = $request['approved'];
+    	
+
+    	$planificacione->update();
+
+    	return back()->with('status', 200);
+    	} catch (Exception $e) {
+    		return back()->with('error', $e->getMessage());
+    	}
     }
 }

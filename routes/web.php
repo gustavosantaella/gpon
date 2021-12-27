@@ -60,6 +60,7 @@ Route::prefix('dashboard')
 
 
 	    Route::resource('planificaciones', 'PlanificationModule');
+        Route::post('planifiaciones/approved/{planificacione}', 'PlanificationModule@approved')->name('planificaciones.approved');
         Route::resource('fibra-optica', 'FoModule')->except('update');
         Route::post('fibra-optica/update/', 'FoModule@update')->name('fibra-optica.update');
 

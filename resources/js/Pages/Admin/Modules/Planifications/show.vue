@@ -5,7 +5,10 @@
   >
   <Dashboard>
     <div>
-      <h1>Revision de tareas</h1>
+      <div class='row'>
+        <h1 class='col-md-5'>Revision de tareas</h1>
+        <span class='rounded-pill text-white fw-bold col-md-2 d-flex justify-content-center align-items-center' :class="this.setStyleStatus()">{{this.planification.status}}</span>
+      </div>
       <div v-for="answer in this.answers" :key="answer.id">
         <div>
           <h5>{{ answer.management.name }}</h5>
@@ -52,9 +55,9 @@
 
       </div>
         <div v-show="this.checkStatusTasks()">
-          <button class="fw-bold me-3 btn btn-sm btn-success">Aprobar</button>
-          <button class="fw-bold me-3 btn btn-sm btn-danger">Declinar</button>
-          <button class="fw-bold me-3 btn btn-sm btn-primary">Solicitar revision</button>
+          <button v-show="this.planification.status !== 'APROBADO'" @click="this.approvedProject('APROBADO', this.planification.id)" class="fw-bold me-3 btn btn-sm btn-success">Aprobar</button>
+          <button @click="this.approvedProject('RECHAZADO', this.planification.id)" class="fw-bold me-3 btn btn-sm btn-danger">Declinar</button>
+          <button @click="this.approvedProject('POR REVISAR', this.planification.id)" v-show="this.planification.status !== 'POR REVISAR' && this.planification.status !== 'APROBADO'" class="fw-bold me-3 btn btn-sm btn-primary">Solicitar revision</button>
         </div>
     </div>
   </Dashboard>
@@ -71,7 +74,7 @@ export default {
     DialogModal,
   },
 
-  props: ["answers"],
+  props: ["answers", "planification"],
 
   data() {
     return {
@@ -86,6 +89,16 @@ export default {
   },
 
   methods: {
+    setStyleStatus(){
+
+      let status = {
+        RECHAZADO:'bg-danger',
+        APROBADO:'bg-success',
+        INCOMPLETO:'bg-warning',
+        "POR REVISAR":'bg-primary'
+      }
+      return status[this.planification.status]
+    },
       checkStatusTasks(){
 
           const _this = this
@@ -106,6 +119,12 @@ export default {
               object_id
           } )
 
+      },
+
+      approvedProject(approved, object_id){
+        this.action(this, 'post', route('admin.modules.planificaciones.approved',{planificacione:object_id}), {
+              approved,              
+          } )
       },
 
     async download(data) {
