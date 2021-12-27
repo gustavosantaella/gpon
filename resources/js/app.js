@@ -12,12 +12,12 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 //toast notification
 import VueToast from 'vue-toast-notification';
-import ToastNotification from '@/Partials/ToastNotification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 // Helpers
 import {role, permission} from '@/Helpers/RoleAndPermissions'
-import { access } from '@/Helpers/Functions';
+import { access, action } from '@/Helpers/Functions';
+
 
 
 
@@ -35,7 +35,7 @@ const appvue = createInertiaApp({
             .use(LaravelPermissionToVueJS)
             .use(VueToast)
             .use(VueSweetalert2)
-            .mixin({ methods: { route, role, access} })
+            .mixin({ methods: { route, role, access, action} })
 
 	    appVue.mount(el)
             return appVue;

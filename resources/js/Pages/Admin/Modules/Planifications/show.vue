@@ -4,32 +4,38 @@
     </pre
   >
   <Dashboard>
-
     <div>
       <h1>Revision de tareas</h1>
       <div v-for="answer in this.answers" :key="answer.id">
         <div>
           <h5>{{ answer.management.name }}</h5>
         </div>
-        <div v-for="(line, index) in answer.lines" :key="line.id">
+        <div v-for="(line) in answer.lines" :key="line.id">
           <div class="row">
             <div class="col-md-12">
               <div class="row">
                 <div class="col-md-3">
-                  <p class="fw-bold">{{ index + 1 }} - {{ line.task.title }}</p>
+                  <ul>
+                      <li class="fw-bold"> {{ line.task.title }}</li>
+                  </ul>
                 </div>
                 <div class="col-md-9">
-                  <button class="btn btn-sm btn-success">
+                  <button @click="this.approved(true, true, line.id)" class="btn ms-1 btn-sm btn-success">
                     <i class="fas fw-bold fa-check"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger">
+                  <button @click="this.approved(false, true, line.id)" class="btn ms-1 btn-sm btn-danger">
                     <i class="fas fw-bold fa-times-circle"></i>
                   </button>
                 </div>
               </div>
 
               <div class="mb-3" v-if="line.task.field_type === 'file'">
-                <button @click="this.download(line)" class="fw-bold btn btn-sm btn-secondary">Descargar archivo</button>
+                <button
+                  @click="this.download(line)"
+                  class="fw-bold btn btn-sm btn-secondary"
+                >
+                  Descargar archivo
+                </button>
               </div>
               <div class="mb-3" v-else>
                 <input
@@ -43,7 +49,13 @@
           </div>
         </div>
         <hr />
+
       </div>
+        <div v-show="this.checkStatusTasks()">
+          <button class="fw-bold me-3 btn btn-sm btn-success">Aprobar</button>
+          <button class="fw-bold me-3 btn btn-sm btn-danger">Declinar</button>
+          <button class="fw-bold me-3 btn btn-sm btn-primary">Solicitar revision</button>
+        </div>
     </div>
   </Dashboard>
 </template>
@@ -56,39 +68,60 @@ import DialogModal from "@/Jetstream/DialogModal";
 export default {
   components: {
     Dashboard,
-    DialogModal
+    DialogModal,
   },
 
   props: ["answers"],
 
-  data(){
-      return {
-          modal:{
-              id:'view_data',
-              data:null
-          }
-      }
+  data() {
+    return {
+        tasks:{
+            statusTasks:false,
+        },
+      modal: {
+        id: "view_data",
+        data: null,
+      },
+    };
   },
 
   methods: {
-      async download(data){
+      checkStatusTasks(){
 
-        try {
+          const _this = this
+          const array =  [];
+            this.answers.map(function(value, index){
+            return value.lines.map(function(value,index){
+                    array.push(value.approved )
+            })
+        })
+        return !array.includes(false) ? true : false;
 
-            let response = await fetch(this.access(data.answer, true, true))
-            const file = await response.blob()
-            let link = document.createElement('a')
-            link.href = URL.createObjectURL(file)
-            link.setAttribute('download', 'file.pdf');
-            link.click();
-            URL.revokeObjectURL(link.href)
-             link.remove();
+      },
 
-        } catch (error) {
-             this.$swal('Ups!, ha sucedido un error', error.message, 'error')
-        }
+      approved(approved, answerIsLine, object_id){
+          this.action(this, 'post', route('admin.answer.approved'), {
+              approved,
+              answerIsLine,
+              object_id
+          } )
 
+      },
+
+    async download(data) {
+      try {
+        let response = await fetch(this.access(data.answer, true, true));
+        const file = await response.blob();
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(file);
+        link.setAttribute("download", "file.pdf");
+        link.click();
+        URL.revokeObjectURL(link.href);
+        link.remove();
+      } catch (error) {
+        this.$swal("Ups!, ha sucedido un error", error.message, "error");
       }
+    },
   },
 };
 </script>

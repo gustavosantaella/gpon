@@ -29,5 +29,9 @@ export default {
         BreezeAuthenticatedLayout,
         Head,
     },
+
+    created(){
+
+    }
 }
 </script>

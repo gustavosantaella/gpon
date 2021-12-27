@@ -33,6 +33,8 @@
     </head>
     <body class="font-sans antialiased">
 
+        {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
         @inertia
 
         @env ('local')

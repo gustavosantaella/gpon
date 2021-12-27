@@ -6,6 +6,10 @@ Route::get('authlogin', function(){
     $user = \App\Models\User::find(2);
     Auth::login($user);
 });
+
+// laravel websockets
+    //host/laravel-websockets
+//----------------------------------
 Route::prefix('dashboard')
 ->namespace('\App\Http\Controllers\Admin')
 ->as('admin.')
@@ -68,6 +72,11 @@ Route::prefix('dashboard')
         Route::resource('infraestructura', 'InfraestructureModule')->except('update');
         Route::post('infraestructura/update/', 'InfraestructureModule@update')->name('infraestructura.update');
 
+
+    });
+        Route::prefix('answer')->as('answer.')->group(function () {
+
+    Route::post('approved/line', 'AnswerController@ApprovedOrDecline')->name('approved');
     });
 
 //--------------------------------------------------------------------------------------
