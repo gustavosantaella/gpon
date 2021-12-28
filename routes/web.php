@@ -73,6 +73,11 @@ Route::prefix('dashboard')
         Route::resource('infraestructura', 'InfraestructureModule')->except('update');
         Route::post('infraestructura/update/', 'InfraestructureModule@update')->name('infraestructura.update');
 
+        //-------------------------------------------------------------------------
+           // Construcciones
+            Route::resource('construcciones', 'ConstructionController');
+        //-------------------------------------------------------------------------
+
 
     });
         Route::prefix('answer')->as('answer.')->group(function () {

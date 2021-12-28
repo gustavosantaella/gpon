@@ -14,7 +14,8 @@ class CreateConstructionsTable extends Migration
     public function up()
     {
         Schema::create('constructions', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->foreignId('planification_id')->references('id')->on('planifications')->onDelete('cascade');
             $table->timestamps();
         });
     }

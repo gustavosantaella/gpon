@@ -24,6 +24,11 @@ class Planification extends Model
         return $this->morphMany(Answer::class, 'answer');
     }
 
+    public function construction()
+    {
+        return $this->hasOne(Construction::class);
+    }
+
 
     // Scopes
 

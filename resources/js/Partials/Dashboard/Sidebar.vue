@@ -13,6 +13,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Planificaciones
                         </nav-link>
+                           
                         <nav-link :navlink="false" :href='route("admin.modules.fibra-optica.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Fibra Optica
@@ -28,6 +29,10 @@
                              <nav-link :navlink="false" :href='route("admin.modules.infraestructura.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Infraestructura
+                        </nav-link>
+                        <nav-link :navlink="false" :href='route("admin.modules.construcciones.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Construcciones
                         </nav-link>
 
 
