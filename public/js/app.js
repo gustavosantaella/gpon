@@ -71508,6 +71508,69 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Admin/Modules/Construction/edit.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Modules/Construction/edit.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/Pages/Admin/Modules/Construction/edit.vue"]])
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Admin/Modules/Construction/index.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Modules/Construction/index.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/Pages/Admin/Modules/Construction/index.vue"]])
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Admin/Modules/Construction/show.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Modules/Construction/show.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_gpon_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/Pages/Admin/Modules/Construction/show.vue"]])
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Admin/Modules/Energia/index.vue":
 /*!************************************************************!*\
   !*** ./resources/js/Pages/Admin/Modules/Energia/index.vue ***!
@@ -75076,6 +75139,9 @@ var map = {
 	"./Admin/Managements/index.vue": "./resources/js/Pages/Admin/Managements/index.vue",
 	"./Admin/Models/index.vue": "./resources/js/Pages/Admin/Models/index.vue",
 	"./Admin/Modules/AnswerTask.vue": "./resources/js/Pages/Admin/Modules/AnswerTask.vue",
+	"./Admin/Modules/Construction/edit.vue": "./resources/js/Pages/Admin/Modules/Construction/edit.vue",
+	"./Admin/Modules/Construction/index.vue": "./resources/js/Pages/Admin/Modules/Construction/index.vue",
+	"./Admin/Modules/Construction/show.vue": "./resources/js/Pages/Admin/Modules/Construction/show.vue",
 	"./Admin/Modules/Energia/index.vue": "./resources/js/Pages/Admin/Modules/Energia/index.vue",
 	"./Admin/Modules/FibraOptica/edit.vue": "./resources/js/Pages/Admin/Modules/FibraOptica/edit.vue",
 	"./Admin/Modules/FibraOptica/index.vue": "./resources/js/Pages/Admin/Modules/FibraOptica/index.vue",
