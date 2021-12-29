@@ -80,14 +80,14 @@ class PlanificationModule extends BaseController
 
     	]);
     	try {
-    		
+
     	if($request['approved'] !==  '')
 
     		$planificacione->status = $request['approved'];
     		$planificacione->update();
     		if($request['approved'] == 'APROBADO'){
     			$construction = $planificacione->construction()->create();
-    			dd($construction);
+
     		}
 
     		return back()->with('status', 200);
