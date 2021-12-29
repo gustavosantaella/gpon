@@ -13,7 +13,7 @@ class ConstructionController extends BaseController
         $query = Construction::query();
           $query->select([
             'constructions.*',
-            'planifications.*',
+            'planifications.name',
             'parishes.id as parishId',
             'parishes.name as parishName',
             'municipalities.id as munId',
@@ -28,8 +28,8 @@ class ConstructionController extends BaseController
 
            
 
-            dd( $query->first());
-        $this->loadView();
+        $construction = $query->paginate(5);
+       return  $this->loadView('Admin.Modules.Construction.index',compact('construction'));
     }
 
     public function show(Construction $construction){}
