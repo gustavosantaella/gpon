@@ -5,7 +5,7 @@
 	<datatable
 	:items='this.construction'
 	v-on:edit="this.edit"
-	v-on:edit="this.show"
+	v-on:show="this.show"
 	:url="route('admin.modules.planificaciones.index')"
 	:showItems="false"
 	:th="[
