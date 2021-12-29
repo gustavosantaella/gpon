@@ -44,5 +44,34 @@ class ManagementSeeder extends Seeder
             'position'=>5,
         ]);
 
+         Management::create([
+            'name'=>'construccion infraestructura',
+            'acronym'=>'cif',
+            'position'=>6,
+            'construction'=>true
+        ]);
+
+        Management::create([
+            'name'=>'construccion fibra optica',
+            'acronym'=>'cfo',
+            'position'=>7,
+            'construction'=>true
+        ]);
+
+         Management::create([
+            'name'=>'construccion red local',
+            'acronym'=>'crl',
+            'position'=>8,
+            'construction'=>true
+        ]);
+
+         Management::create([
+            'name'=>'construccion energia',
+            'acronym'=>'ceg',
+            'position'=>9,
+            'construction'=>true
+        ]);
+
+
     }
 }

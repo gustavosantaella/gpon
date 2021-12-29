@@ -12,6 +12,13 @@ class Task extends Model
 
     protected $guarded = [];
 
+    // Relations
+
+    public function lines()
+    {
+        return $this->hasMany(AnswerLine::class, 'task_id');
+    }
+
     // Mutators
 
     public function setTitleAttribute(string $title)
