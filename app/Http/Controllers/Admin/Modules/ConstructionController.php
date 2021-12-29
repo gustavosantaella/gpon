@@ -30,7 +30,7 @@ class ConstructionController extends BaseController
         $query->with('managements.tasks.lines');
 
         $construction = $query->paginate(5);
-        dd($query->first());
+        
 
        return  $this->loadView('Admin.Modules.Construction.index',compact('construction'));
     }

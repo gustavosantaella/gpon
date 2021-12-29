@@ -1,7 +1,9 @@
 <template>
 
 <Dashboard>
-	
+	<pre>
+{{this.construction}}
+	</pre>
 	<datatable
 	:items='this.construction'
 	v-on:edit="this.edit"
