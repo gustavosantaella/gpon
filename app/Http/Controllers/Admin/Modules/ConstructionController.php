@@ -14,7 +14,7 @@ class ConstructionController extends BaseController
           $query->select([
             'constructions.*',
             'planifications.name',
-            'planificcations.status'
+            'planifications.status'
             'parishes.id as parishId',
             'parishes.name as parishName',
             'municipalities.id as munId',
