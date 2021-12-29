@@ -26,9 +26,10 @@ class ConstructionController extends BaseController
         ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
         ->join('states', 'states.id', 'municipalities.state_id');
 
-           
+        $query->with('managements.tasks.lines');
 
         $construction = $query->paginate(5);
+
        return  $this->loadView('Admin.Modules.Construction.index',compact('construction'));
     }
 
