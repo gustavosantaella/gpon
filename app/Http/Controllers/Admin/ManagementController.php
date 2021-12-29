@@ -18,6 +18,7 @@ class ManagementController extends BaseController
 
     public function index(): \Inertia\Response
     {
+        {{dd(12)}}
         $prevOrNextPageName = 'page';
         $managements = $this->model('management')->where('name', 'like', "%{$this->request()->text}%")->paginate(3);
         return $this->loadView('Admin.Managements.index', compact('managements'));
