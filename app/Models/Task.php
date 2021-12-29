@@ -16,7 +16,7 @@ class Task extends Model
 
     public function lines()
     {
-        return $this->belongsTo(AnswerLine::class, 'task_id');
+        return $this->hasMany(AnswerLine::class, 'task_id');
     }
 
     // Mutators
