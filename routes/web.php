@@ -75,7 +75,8 @@ Route::prefix('dashboard')
 
         //-------------------------------------------------------------------------
            // Construcciones
-            Route::resource('construcciones', 'ConstructionController');
+            Route::resource('construcciones', 'ConstructionController')->except('update');
+            Route::post('construccion/update/', 'ConstructionController@update')->name('construcciones.update');
         //-------------------------------------------------------------------------
 
 

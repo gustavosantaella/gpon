@@ -24,7 +24,7 @@ class Management extends Model
 
     public function answers()
     {
-        return $this->morphMany(Answer::class, 'answer');
+        return $this->hasMany(Answer::class, 'management_id');
     }
 
     public function users()

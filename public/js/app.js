@@ -24035,14 +24035,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'index',
+  name: "index",
   components: {
     Datatable: _Partials_Datatable__WEBPACK_IMPORTED_MODULE_1__["default"],
     Dashboard: _Pages_Admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['construction'],
+  props: ["construction"],
   data: function data() {
-    return {};
+    return {
+      porcent: {
+        total: [],
+        general: 0
+      }
+    };
   },
   methods: {
     edit: function edit(construction) {
@@ -24050,6 +24055,40 @@ __webpack_require__.r(__webpack_exports__);
     },
     show: function show(construction) {
       alert(JSON.stringify(construction));
+    },
+    printPorcent: function printPorcent(management) {
+      if (management.tasks !== undefined && management.tasks.length) {
+        var taskLength = management.tasks.length;
+        var arr = [];
+        var approved = [];
+        var s = management.answers.map(function (value, index) {
+          if (value.lines.length) {
+            return value.lines.map(function (line) {
+              if (line.approved === true) {
+                approved.push(line);
+                return (approved.length * 100 / taskLength).toFixed(0);
+              } else return 0;
+            });
+          }
+        });
+        var porcent = (approved.length * 100 / taskLength).toFixed(0);
+        alert(s);
+        this.porcent.total.push(porcent);
+        return porcent + '%';
+      }
+
+      return "0%";
+    },
+    printGeneralPorcent: function printGeneralPorcent(management) {//alert(this.porcent.total)
+    },
+    redirectOnEdi: function redirectOnEdi(construction) {
+      var management = this.$page.props.flash.userManagement;
+      var ruta = route("admin.modules.construcciones.edit", {
+        construccione: construction.id
+      });
+      this.$inertia.visit(ruta, {
+        management: management.id
+      });
     }
   }
 });
@@ -26052,7 +26091,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     captionColspan: function captionColspan() {
-      return this.options ? this.th.length + 1 : this.th.length;
+      return this.options ? this.th ? this.th.length + 1 : this.th.length : 0;
     },
     openModal: function openModal() {
       var modal = new bootstrap.Modal(document.getElementById(this.modal.id));
@@ -29509,6 +29548,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "ID", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "ESTADO", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "MUNICIPIO", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "PARROQUIA", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "NOMBRE", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "INFRAESTRUCTURA", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "FIBRA OPTICA", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "RED LOCAL", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "ENERGIA", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "AVANCE", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "OPCIONES", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = ["innerHTML"];
+var _hoisted_13 = ["innerHTML"];
+var _hoisted_14 = ["onClick"];
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-edit"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_16 = [_hoisted_15];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -29518,47 +29613,64 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Dashboard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, "" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.construction) + "\n\t", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.construction.data) + "\n\t", 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datatable, {
         items: _this.construction,
-        onEdit: _this.edit,
-        onShow: _this.show,
         url: _ctx.route('admin.modules.planificaciones.index'),
-        showItems: false,
-        th: [{
-          original: 'id',
-          text: 'id'
-        }, {
-          original: 'name',
-          text: 'nombre'
-        }, {
-          original: 'stateName',
-          text: 'estado'
-        }, {
-          original: 'munName',
-          text: 'municipio'
-        }, {
-          original: 'parishName',
-          text: 'parroquia'
-        }, {
-          original: 'status',
-          text: 'status'
-        }],
-        options: [{
-          text: 'editar',
-          method: 'edit',
-          "class": 'btn-primary',
-          permission: _ctx.is('CONSULTOR')
-        }, {
-          text: 'ver datos',
-          method: 'show',
-          "class": 'btn-secondary',
-          permission: _ctx.is('CONSULTOR')
-        }]
-      }, null, 8
+        showItems: true
+      }, {
+        th: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11];
+        }),
+        items: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_this.construction.data, function (construction) {
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+              key: construction.id
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(construction.id), 1
+            /* TEXT */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(construction.stateName), 1
+            /* TEXT */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(construction.munName), 1
+            /* TEXT */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(construction.parishName), 1
+            /* TEXT */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(construction.name), 1
+            /* TEXT */
+            ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(construction.managements, function (management) {
+              return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", {
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-center fw-bold", {
+                  'text-danger': _this.printPorcent(management) === '0%'
+                }]),
+                key: management.id,
+                innerHTML: _this.printPorcent(management)
+              }, null, 10
+              /* CLASS, PROPS */
+              , _hoisted_12);
+            }), 128
+            /* KEYED_FRAGMENT */
+            )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+              innerHTML: _this.printGeneralPorcent(construction.managements)
+            }, null, 8
+            /* PROPS */
+            , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+              onClick: function onClick($event) {
+                return _this.redirectOnEdi(construction);
+              },
+              "class": "btn btn-sm btn-primary"
+            }, _hoisted_16, 8
+            /* PROPS */
+            , _hoisted_14)])]);
+          }), 128
+          /* KEYED_FRAGMENT */
+          ))];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
       /* PROPS */
-      , ["items", "onEdit", "onShow", "url", "options"])];
+      , ["items", "url"])];
     }),
     _: 1
     /* STABLE */

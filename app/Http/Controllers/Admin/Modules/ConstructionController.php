@@ -14,7 +14,7 @@ class ConstructionController extends BaseController
           $query->select([
             'constructions.*',
             'planifications.name',
-            'planifications.status'
+            'planifications.status',
             'parishes.id as parishId',
             'parishes.name as parishName',
             'municipalities.id as munId',
@@ -27,19 +27,65 @@ class ConstructionController extends BaseController
         ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
         ->join('states', 'states.id', 'municipalities.state_id');
 
-        $query->with('managements.tasks.lines');
+        $query->with(['managements.answers.lines', 'managements.tasks.lines']);
+
+         //   dd($this->model('management')->find(11)->answers);
 
         $construction = $query->paginate(5);
-        
 
-       return  $this->loadView('Admin.Modules.Construction.index',compact('construction'));
+
+        $managements = $this->model('management')->whereConstruction(true)->get();
+
+
+       return  $this->loadView('Admin.Modules.Construction.index',compact('construction', 'managements'));
+    }
+
+    public function store()
+    {
+        try {
+            $request = $this->request();
+            $construction = $this->model('construction')->find($request->parent_id);
+
+            $module = new ModuleController();
+
+            if ($module->store($construction) === true) {
+                return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
+            } else return  back()->with("error", "Por favor comuniquese con soporte...");
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return  back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
+        }
     }
 
     public function show(Construction $construction){}
 
-    public function update(Construction $construction){}
+    public function update()
+    {
+        try {
+            $request = $this->request();
 
-    public function edit(Construction $construction){}
+            $planification = $this->model('construction')->findOrFail($request->parent_id);
+
+            $answer = $planification->answers()->findOrfail($request->answer_id);
+            $module = new ModuleController();
+
+            if ($module->update($planification, $answer) === true) {
+
+                return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
+            } else return  back()->with("error", "Por favor comuniquese con soporte...");
+        } catch (\Throwable $th) {
+
+            return back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
+        }
+    }
+
+    public function edit(Construction $construccione){
+
+
+        $managemet = auth()->user()->management;
+        $form = ModuleController::form($construccione, $managemet, 'admin.modules.construcciones.store', 'admin.modules.construcciones.update');
+        return $this->loadView('Admin.Modules.AnswerTask', $form);
+    }
 
     public function destroy(Construction $construction){}
 }

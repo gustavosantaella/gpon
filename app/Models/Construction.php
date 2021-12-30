@@ -9,7 +9,7 @@ class Construction extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    
+
     // Relations
 
     public function planification()
@@ -21,4 +21,11 @@ class Construction extends Model
     {
         return $this->belongsToMany(Management::class, 'management_constructions');
     }
+
+    public function answers()
+    {
+        return $this->morphMany(Answer::class, 'answer');
+    }
+
+
 }

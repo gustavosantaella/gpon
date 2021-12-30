@@ -23,6 +23,6 @@ class Task extends Model
 
     public function setTitleAttribute(string $title)
     {
-        $this->attributes['titl'] = Str::upper($title);
+        $this->attributes['title'] = Str::upper($title);
     }
 }

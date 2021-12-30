@@ -56,7 +56,7 @@
                     </button>
                 </td>
             </tr>
-         
+
         </tbody>
     </table>
     <div v-if="this.items" class="d-flex justify-content-end">
@@ -122,7 +122,8 @@
                 }
             },
             captionColspan() {
-                return this.options ? this.th.length + 1 : this.th.length;
+
+                return this.options ? this.th ? this.th.length + 1 : this.th.length : 0;
             },
              openModal(){
 
