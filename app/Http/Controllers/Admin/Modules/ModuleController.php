@@ -71,11 +71,17 @@ class ModuleController extends BaseController
             }
         }
 
+        $management = $this->model('management')->find($request->management_id);
 
+        $calc = (count($request->data) * 100) / $management->tasks()->count();
+        $porcent = round($calc, 0);
         $answer =   $parent_model->answers()->create([
             'management_id' => $request->management_id,
-            'observation' => 'this is my observation'
-        ]);
+            'observation' => 'this is my observation',
+            'porcent'=>$porcent
+            ]);
+
+
 
         foreach ($request->data as $data) {
 

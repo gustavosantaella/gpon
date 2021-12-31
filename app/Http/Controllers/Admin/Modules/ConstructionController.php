@@ -27,14 +27,14 @@ class ConstructionController extends BaseController
         ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
         ->join('states', 'states.id', 'municipalities.state_id');
 
-        $query->with(['answers','managements']);
+        $query->with(['answers','managements.answers']);
 
          //   dd($this->model('management')->find(11)->answers);
 
-        $construction = $query->paginate(5);
+        $construction = $query->get();
 
 
-        $managements = $this->model('management')->whereConstruction(true)->get();
+        $managements = $this->model('management')->whereConstruction(true)->with('answers')->get();
 
 
        return  $this->loadView('Admin.Modules.Construction.index',compact('construction', 'managements'));

@@ -1,10 +1,7 @@
 <template>
-  <pre>
-        {{ this.answers }}
-    </pre
-  >
+
   <Dashboard>
-    <div v-if="this.tasks.length">
+    <div v-if="this.answers.length">
       <div class="row">
         <h1 class="col-md-5">Revision de tareas</h1>
         <span
@@ -71,7 +68,7 @@
         </div>
         <hr />
       </div>
-      <div v-show="this.checkStatusTasks() && this.tasks.length">
+      <div v-show="this.checkStatusTasks() && this.answers.length">
         <button
           v-show="this.planification.status !== 'APROBADO'"
           @click="this.approvedProject('APROBADO', this.planification.id)"

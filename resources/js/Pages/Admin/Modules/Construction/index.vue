@@ -1,9 +1,6 @@
 <template>
   <Dashboard>
-    <pre
-      >{{ this.construction.data }}
-	</pre
-    >
+    <canvas id="myChart" width="400" height="200"></canvas>
     <datatable
       :items="this.construction"
       :url="route('admin.modules.planificaciones.index')"
@@ -26,10 +23,7 @@
         <th>OPCIONES</th>
       </template>
       <template v-slot:items>
-        <tr
-          v-for="construction in this.construction.data"
-          :key="construction.id"
-        >
+        <tr v-for="construction in this.construction" :key="construction.id">
           <td>{{ construction.id }}</td>
           <td>{{ construction.stateName }}</td>
           <td>{{ construction.munName }}</td>
@@ -39,7 +33,7 @@
             class="text-center fw-bold"
             :data-construction="`construction-porcent-${construction.id}`"
             :class="{
-               'text-danger': this.printPorcent(construction, key) === '0%',
+              'text-danger': this.printPorcent(construction, key) === '0%',
               'text-warning': this.printPorcent(construction, key) === '50%',
               'text-success': this.printPorcent(construction, key) === '100%',
             }"
@@ -51,12 +45,16 @@
           <td
             class="fw-bold text-center"
             :class="{
-              'text-danger': this.printGeneralPorcent(construction.answers) === '0%',
-              'text-warning': this.printGeneralPorcent(construction.answers) === '50%',
-              'text-success': this.printGeneralPorcent(construction.answers) === '100%',
+              'text-danger':
+                this.printGeneralPorcent(construction.answers) == '0',
+              'text-warning':
+                this.printGeneralPorcent(construction.answers) == '50',
+              'text-success':
+                this.printGeneralPorcent(construction.answers) == '100',
             }"
-            v-html="this.printGeneralPorcent(construction.answers)"
-          ></td>
+          >
+            {{ `${this.printGeneralPorcent(construction.answers)}%` }}
+          </td>
           <td>
             <button
               @click="this.redirectOnEdi(construction)"
@@ -75,6 +73,7 @@ import Dashboard from "@/Pages/Admin/Dashboard";
 import Datatable from "@/Partials/Datatable";
 import AppForm from "@/Partials/AppForm";
 import DialogModal from "@/Jetstream/DialogModal";
+import Chart from "chart.js";
 export default {
   name: "index",
   components: {
@@ -91,7 +90,60 @@ export default {
     };
   },
 
+  mounted() {
+    const _this = this;
+    const ctx = document.getElementById("myChart");
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        tension: 0.1,
+        labels: this.construction.map((construction) => construction.name),
+        datasets: this.managements.map((management) => {
+          return {
+            label: management.name,
+             fill: false,
+             tension: 0.1,
+            borderColor: _this.randomColor(),
+            data: this.construction.map((construction) =>
+              this.printGeneralPorcent(construction.answers)
+            ),
+          };
+        }),
+      },
+      options: {
+        tooltips: {
+          mode: "index",
+          callbacks: {
+            label: function (tooltipItem, data) {
+              let label = data.datasets[tooltipItem.datasetIndex].label;
+              let d =
+                _this.construction[tooltipItem.index].answers[
+                  tooltipItem.datasetIndex
+                ] === undefined
+                  ? 0
+                  : _this.construction[tooltipItem.index].answers[
+                      tooltipItem.datasetIndex
+                    ].porcent;
+              return `${label}: ${d}%`;
+            },
+          },
+        },
+        hover: {
+          mode: "index",
+        },
+      },
+    });
+  },
+
   methods: {
+    randomColor() {
+      const randomBetween = (min, max) =>
+        min + Math.floor(Math.random() * (max - min + 1));
+      const r = randomBetween(0, 255);
+      const g = randomBetween(0, 255);
+      const b = randomBetween(0, 255);
+    return`rgb(${r},${g},${b})`;
+    },
     edit(construction) {
       alert(JSON.stringify(construction));
     },
@@ -104,20 +156,18 @@ export default {
         return a.id - b.id;
       });
       let porcents = order.map((answer) => {
-
         return answer.porcent;
       })[key];
+      this.porcent.total.push(porcents);
       return porcents === undefined ? `0%` : `${porcents}%`;
     },
 
     printGeneralPorcent(answers) {
-
-       if(answers !== undefined && answers.length)
-        return `${Math.floor(answers.map(answer => answer.porcent).reduce((a,b)=>a+b) / 4).toFixed(0)}%`
-        else
-        return 0+'%';
-
-
+      if (answers !== undefined && answers.length)
+        return Math.floor(
+          answers.map((answer) => answer.porcent).reduce((a, b) => a + b) / 4
+        ).toFixed(0);
+      else return 0;
     },
 
     redirectOnEdi(construction) {
