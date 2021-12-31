@@ -27,7 +27,7 @@ class ConstructionController extends BaseController
         ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
         ->join('states', 'states.id', 'municipalities.state_id');
 
-        $query->with(['managements.answers.lines', 'managements.tasks.lines']);
+        $query->with(['answers','managements']);
 
          //   dd($this->model('management')->find(11)->answers);
 

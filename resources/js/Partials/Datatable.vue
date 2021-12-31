@@ -46,7 +46,7 @@
 
             <tbody>
                    <slot name="items"></slot>
-                <tr v-show="this.items && !this.showItems" v-for='(item, key) in this.items.data' :key='key'>
+                <tr v-show="this.items && !this.showItems" v-for='(item, key) in (this.items? this.items.data ? this.items.data: this.items :this.items )' :key='key'>
                     <td  v-show='this.th ' v-for='(th, key) in this.th' :key='key'>{{ item[th.original] }}</td>
                     <td v-show="this.options">
                         <button  class='btn fw-bold btn-sm' v-for="(option, key) in this.options" :key="key" :class="[option.class]"
@@ -59,7 +59,7 @@
 
         </tbody>
     </table>
-    <div v-if="this.items" class="d-flex justify-content-end">
+    <div v-if="this.items && this.items.current_page" class="d-flex justify-content-end">
         <a href="#" class='ml-2'
         @click="this.prevPage()"><i class="fas fa-arrow-left"></i></a>
         <div>

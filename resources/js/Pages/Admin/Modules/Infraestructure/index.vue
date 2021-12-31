@@ -1,7 +1,7 @@
 <template>
 
 <Dashboard>
-	
+
 	<datatable
 	:items='this.planifications'
 	v-on:edit="this.edit"
@@ -20,7 +20,7 @@
 	original:'stateName',
 	text:'estado',
 	},
-	{	
+	{
 	original:'munName',
 	text:'municipio'
 	},

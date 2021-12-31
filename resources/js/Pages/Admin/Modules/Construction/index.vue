@@ -15,10 +15,13 @@
         <th>MUNICIPIO</th>
         <th>PARROQUIA</th>
         <th>NOMBRE</th>
-        <th>INFRAESTRUCTURA</th>
+        <!-- <th>INFRAESTRUCTURA</th>
         <th>FIBRA OPTICA</th>
         <th>RED LOCAL</th>
-        <th>ENERGIA</th>
+        <th>ENERGIA</th> -->
+        <th v-for="management in this.managements" :key="management.id">
+          {{ management.name.replace("CONSTRUCCION", "") }}
+        </th>
         <th>AVANCE</th>
         <th>OPCIONES</th>
       </template>
@@ -34,12 +37,26 @@
           <td>{{ construction.name }}</td>
           <td
             class="text-center fw-bold"
-            :class="{ 'text-danger': this.printPorcent(management) === '0%' }"
-            v-for="management in construction.managements"
+            :data-construction="`construction-porcent-${construction.id}`"
+            :class="{
+               'text-danger': this.printPorcent(construction, key) === '0%',
+              'text-warning': this.printPorcent(construction, key) === '50%',
+              'text-success': this.printPorcent(construction, key) === '100%',
+            }"
+            v-for="(management, key) of this.managements"
             :key="management.id"
-            v-html="this.printPorcent(management)"
+            :ref="`construction-porcent-${construction.id}`"
+            v-html="this.printPorcent(construction, key)"
           ></td>
-          <td v-html="this.printGeneralPorcent(construction.managements)"></td>
+          <td
+            class="fw-bold text-center"
+            :class="{
+              'text-danger': this.printGeneralPorcent(construction.answers) === '0%',
+              'text-warning': this.printGeneralPorcent(construction.answers) === '50%',
+              'text-success': this.printGeneralPorcent(construction.answers) === '100%',
+            }"
+            v-html="this.printGeneralPorcent(construction.answers)"
+          ></td>
           <td>
             <button
               @click="this.redirectOnEdi(construction)"
@@ -64,7 +81,7 @@ export default {
     Datatable,
     Dashboard,
   },
-  props: ["construction"],
+  props: ["construction", "managements"],
   data() {
     return {
       porcent: {
@@ -82,36 +99,25 @@ export default {
       alert(JSON.stringify(construction));
     },
 
-    printPorcent(management) {
-      if (management.tasks !== undefined && management.tasks.length) {
-        let taskLength = management.tasks.length;
-            let arr = [];
-            let approved = [];
-          let s=   management.answers.map((value, index) => {
-          if (value.lines.length) {
-            return value.lines.map((line) => {
-              if (line.approved === true) {
+    printPorcent(construction, key) {
+      let order = construction.answers.sort(function (a, b) {
+        return a.id - b.id;
+      });
+      let porcents = order.map((answer) => {
 
-                  approved.push(line)
-                  return ((approved.length * 100) / taskLength).toFixed(0);
-              }else return 0;
-
-            });
-          }
-        });
-        let porcent  =((approved.length * 100) / taskLength).toFixed(0)
-
-        alert(s)
-        this.porcent.total.push(porcent);
-
-        return   porcent + '%'
-      }
-
-      return `0%`;
+        return answer.porcent;
+      })[key];
+      return porcents === undefined ? `0%` : `${porcents}%`;
     },
 
-    printGeneralPorcent(management) {
-        //alert(this.porcent.total)
+    printGeneralPorcent(answers) {
+
+       if(answers !== undefined && answers.length)
+        return `${Math.floor(answers.map(answer => answer.porcent).reduce((a,b)=>a+b) / 4).toFixed(0)}%`
+        else
+        return 0+'%';
+
+
     },
 
     redirectOnEdi(construction) {

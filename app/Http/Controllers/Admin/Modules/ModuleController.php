@@ -48,7 +48,6 @@ class ModuleController extends BaseController
 
     public static function show()
     {
-
     }
 
     /**
@@ -105,10 +104,12 @@ class ModuleController extends BaseController
         $request->validate([
             'data' => ['required', 'array'],
         ]);
+        $management = $this->model('management')->find($request->management_id);
 
+        $calc = (count($request->data) * 100) / $management->tasks()->count();
+        $porcent = round($calc, 0);
+        $answer->porcent = $porcent;
         foreach ($request->data as $data) {
-
-
             $value = $data['answer'];
             if (File::exists($value)) {
 
@@ -120,10 +121,8 @@ class ModuleController extends BaseController
                     'answer' => $value,
                 ]);
             } else $this->create($answer, $value, $data['task_id']);
-
-
         }
-
+        $answer->save();
         return true;
     }
 }
