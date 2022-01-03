@@ -13,9 +13,10 @@ class ManagementSeeder extends Seeder
      */
     public function run()
     {
+        Management::truncate();
         // Management::factory(400)->create();
         Management::create([
-            'name'=>'panificaciones',
+            'name'=>'planificaciones',
             'acronym'=>'pcc',
             'position'=>1,
         ]);
