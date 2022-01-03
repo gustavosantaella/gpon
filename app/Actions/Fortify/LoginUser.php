@@ -27,7 +27,7 @@ class LoginUser
         $prefix = '@cantv.com.ve';
         $containPrefix = \Str::contains($request->email, $prefix);
         $email = $containPrefix ? $request->email : "$request->email$prefix";
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', \Str::upper($email))->first();
 
         if($user && Hash::check($request->password, $user->password))
         {

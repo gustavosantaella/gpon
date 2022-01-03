@@ -1,17 +1,18 @@
 <template>
     <Head title="Log in" />
 
-    <BreezeValidationErrors class="mb-4" />
+  
 <div class="container-fluid d-flex justify-content-center card col-md-4 mt-5">
+       <BreezeValidationErrors class="mt-3" />
         <div class="card-body">
               <form @submit.prevent="submit">
         <div>
-            <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="form-control" v-model="form.email" required autofocus autocomplete="username" />
+            <BreezeLabel for="email" value="Nombre de usuario de red o Email" />
+            <BreezeInput id="email" type="text" class="form-control" v-model="form.email" required autofocus autocomplete="username" />
         </div>
 
         <div class="mt-4">
-            <BreezeLabel for="password" value="Password" />
+            <BreezeLabel for="password" value="Clave" />
             <BreezeInput id="password" type="password" class="form-control" v-model="form.password" required autocomplete="current-password" />
         </div>
 

@@ -2,6 +2,8 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use App\Models\User;
+
 
 return [
 

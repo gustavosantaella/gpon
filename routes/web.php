@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 Route::get('authlogin', function(){
     $user = \App\Models\User::find(2);
     Auth::logout(auth()->user());
@@ -13,8 +14,7 @@ Route::get('authlogin', function(){
 Route::prefix('dashboard')
 ->namespace('\App\Http\Controllers\Admin')
 ->as('admin.')
-
-// change to middleware auth
+->middleware('auth')
 ->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 //--------------------------------------------------------------------------------------
