@@ -19,13 +19,12 @@ class LoginUser
     public static function login()
     {
         $request = request();
-
         $request->validate([
             'email'=>'required',
             'password'=>'required'
         ]);
         $prefix = '@cantv.com.ve';
-        $containPrefix = \Str::contains($request->email, $prefix);
+        $containPrefix = \Str::contains($request->email, \Str::upper($prefix));
         $email = $containPrefix ? $request->email : "$request->email$prefix";
         $user = User::where('email', \Str::upper($email))->first();
 

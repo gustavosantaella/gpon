@@ -8,6 +8,8 @@ Route::get('authlogin', function(){
     Auth::logout(auth()->user());
 });
 
+
+
 // laravel websockets
     //host/laravel-websockets
 //----------------------------------

@@ -52,7 +52,9 @@
           <li><a class="dropdown-item" href="#!">Settings</a></li>
           <li><a class="dropdown-item" href="#!">Activity Log</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#!">Logout</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+          <li> <span class="dropdown-item" @click="this.action(this, 'post', route('logout.session'))">Cerrar sesion</span></li>
+        
         </ul>
       </li>
     </ul>
@@ -94,9 +96,12 @@ import Dropdown from "@/Jetstream/Dropdown";
 import "@/../sb-admin/dash.css";
 import "@/../sb-admin/js.js";
 import Sidebar from "@/Partials/Dashboard/Sidebar";
+  import NavLink from '@/Jetstream/NavLink'
+
 export default {
   components: {
     Sidebar,
+    NavLink
   },
 
 };
