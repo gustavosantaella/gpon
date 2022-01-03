@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
         'password'=> Hash::make('password')
                 ]);
 
-        $user->assignRole('SUPER USUARIO');
+        //$user->assignRole('SUPER USUARIO');
     }
 }

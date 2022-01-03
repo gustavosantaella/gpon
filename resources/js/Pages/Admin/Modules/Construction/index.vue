@@ -1,5 +1,4 @@
 <template>
-  <Dashboard>
     <canvas id="myChart" width="400" height="200"></canvas>
     <datatable
       :items="this.construction"
@@ -66,7 +65,7 @@
         </tr>
       </template>
     </datatable>
-  </Dashboard>
+
 </template>
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard";
@@ -76,6 +75,9 @@ import DialogModal from "@/Jetstream/DialogModal";
 import Chart from "chart.js";
 export default {
   name: "index",
+
+  layout:Dashboard, 
+  
   components: {
     Datatable,
     Dashboard,
