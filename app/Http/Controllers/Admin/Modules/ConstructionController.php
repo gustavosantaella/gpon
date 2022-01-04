@@ -81,8 +81,9 @@ class ConstructionController extends BaseController
 
     public function edit(Construction $construccione){
 
-
-        $managemet = auth()->user()->management;
+        $array = [6,7,8,9];
+         $managemet = $this->model('management')->find($array[array_rand($array,1)]);
+       // $managemet = auth()->user()->management;
         $form = ModuleController::form($construccione, $managemet, 'admin.modules.construcciones.store', 'admin.modules.construcciones.update');
         return $this->loadView('Admin.Modules.AnswerTask', $form);
     }

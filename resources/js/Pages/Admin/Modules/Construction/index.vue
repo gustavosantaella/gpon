@@ -167,7 +167,7 @@ export default {
     printGeneralPorcent(answers) {
       if (answers !== undefined && answers.length)
         return Math.floor(
-          answers.map((answer) => answer.porcent).reduce((a, b) => a + b) / 4
+          answers.map((answer) => answer.porcent).reduce((a, b) => parseInt(a) + parseInt(b)) / this.managements.length
         ).toFixed(0);
       else return 0;
     },
@@ -179,7 +179,8 @@ export default {
         construccione: construction.id,
       });
       this.$inertia.visit(ruta, {
-        management: management.id,
+         management: 6,
+       // management: management.id,
       });
     },
   },
