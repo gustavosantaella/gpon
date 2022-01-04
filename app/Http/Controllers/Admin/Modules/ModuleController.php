@@ -111,7 +111,9 @@ class ModuleController extends BaseController
             'data' => ['required', 'array'],
         ]);
         $management = $this->model('management')->find($request->management_id);
-
+        if($management->construction){
+            return $this->test($parent_model, $answer, $management);
+        }
         $calc = (count($request->data) * 100) / $management->tasks()->count();
         $porcent = round($calc, 0);
         $answer->porcent = $porcent;
@@ -130,5 +132,29 @@ class ModuleController extends BaseController
         }
         $answer->save();
         return true;
+    }
+
+    public function test(Model $parent_model, Model $answer, $management)
+    {
+         $request = $this->request();
+           $request->validate([
+            'data.*.answer' => ['numeric', 'required'],
+        ]);
+         
+        $taskCount = $management->tasks()->count();
+        
+        
+        $porcent = 0; 
+         foreach ($request->data as $data) {
+            $value = $data['answer'];
+            $porcent+= $value;
+            if (isset($data['line_id'])) {
+                $lines = $answer->lines()->find($data['line_id'])->update([
+                    'answer' => $value,
+                ]);
+            } else $this->create($answer, $value, $data['task_id']);
+        }
+         $answer->porcent = $porcent;
+        return $answer->save();
     }
 }
