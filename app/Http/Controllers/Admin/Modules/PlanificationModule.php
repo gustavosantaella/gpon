@@ -18,6 +18,7 @@ class PlanificationModule extends BaseController
 
         $query->select([
             'planifications.*',
+            'models.name as modelName',
             'parishes.id as parishId',
             'parishes.name as parishName',
             'municipalities.id as munId',
@@ -30,6 +31,7 @@ class PlanificationModule extends BaseController
         $query->join('parishes', 'parishes.id', 'planifications.parish_id')
             ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
             ->join('states', 'states.id', 'municipalities.state_id')
+             ->join('models', 'models.id', 'planifications.model_id')
             ->orderBy('id', 'desc');
 
         return $id ? $query : $query->paginate(5);
@@ -46,6 +48,7 @@ class PlanificationModule extends BaseController
         $request->validate([
             'parish_id' => ['required', 'numeric'],
             'municipality_id' => ['required', 'numeric'],
+            'model_id' => ['required', 'numeric'],
             'state_id' => ['required', 'numeric'],
             'name' => [
                 'required', 'string',
@@ -57,7 +60,8 @@ class PlanificationModule extends BaseController
         ]);
         $request = $this->request()->only([
             'parish_id',
-            'name'
+            'name',
+            'model_id'
         ]);
         $this->model('planification')->create($request);
 

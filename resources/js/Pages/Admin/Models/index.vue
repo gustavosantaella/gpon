@@ -47,7 +47,7 @@
             >
                 <template v-slot:content>
                     <div class="mb-3">
-                        <label for="name">Modelo del equpo</label>
+                        <label for="name">Nombre y Modelo del equipo</label>
                         <input required type="text" name="" v-model='this.form.name'  id="name" class="form-control">
                     </div>
                     <div class='mb-3'>

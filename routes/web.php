@@ -96,6 +96,7 @@ Route::prefix('dashboard')
         Route::get('getStates', [\App\Http\Controllers\Admin\StateController::class, 'getStates'])->name('getStates');
          Route::get('municipalities-from-state/{state:id}', [\App\Http\Controllers\Admin\MunicipalityController::class, 'getMunicipalities'])->name('getMunicipalities');
          Route::get('parishes-from-municipality/{municipality:id}', [\App\Http\Controllers\Admin\ParishController::class, 'getParishes'])->name('getParishes');
+          Route::get('get-models', [\App\Http\Controllers\Admin\ModelController::class, 'getModels'])->name('getModels');
     });
 
 });

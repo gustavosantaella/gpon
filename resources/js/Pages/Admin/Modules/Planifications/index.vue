@@ -67,6 +67,23 @@
                   </option>
                 </select>
               </div>
+               <div class="mb-3">
+                <label for="model">Seleccione un equipo</label>
+                <select
+                  required
+                  v-model="this.form.model_id"
+                  id="model"
+                  class="form-control"
+                >
+                  <option
+                    v-for="model in this.models"
+                    :key="model.id"
+                    :value="model.id"
+                  >
+                    {{ model.name }}
+                  </option>
+                </select>
+              </div>
               <div class="mb-3">
                 <label for="name">Nombre</label>
                 <input
@@ -109,6 +126,10 @@
         {
           original: 'parishName',
           text: 'parroquia',
+        },
+        {
+          original: 'modelName',
+          text: 'equipo',
         },
         {
           original: 'status',
@@ -158,6 +179,7 @@ export default {
   data() {
     return {
       states: [],
+      models:[],
       municipalities: [],
       parishes: [],
       form: {
@@ -166,6 +188,7 @@ export default {
         state_id: null,
         municipality_id: null,
         parish_id: null,
+        model_id:null,
         name: null,
       },
       modal: {
@@ -183,6 +206,7 @@ export default {
 
     openModal() {
       this.getStates();
+      this.getModels();
       this.form.method = "post";
       this.form.action = route("admin.modules.planificaciones.store");
       let element = document.getElementById(this.modal.id);
@@ -193,6 +217,15 @@ export default {
       try {
         const response = await axios.get(route("admin.xhr.getStates"));
         this.states = response.data;
+      } catch (e) {
+        // statements
+        alert(e.message);
+      }
+    },
+     async getModels() {
+      try {
+        const response = await axios.get(route("admin.xhr.getModels"));
+        this.models = response.data;
       } catch (e) {
         // statements
         alert(e.message);
