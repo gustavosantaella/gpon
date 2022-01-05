@@ -23,6 +23,7 @@
                 jsPermissions:'{!! $user? $user->jsPermissions() : null !!}',
                 roleAndPermissions:{
                     management:'{!! $management? $management->jsPermissions() : null !!}',
+                    user:'{!! $user? $user->jsPermissions() : null !!}',
                 }
 
             }

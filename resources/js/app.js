@@ -15,7 +15,7 @@ import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 // Helpers
-import {role, permission} from '@/Helpers/RoleAndPermissions'
+import {hasRolesOrPermissions, permission} from '@/Helpers/RoleAndPermissions'
 import { access, action } from '@/Helpers/Functions';
 
 
@@ -35,7 +35,7 @@ const appvue = createInertiaApp({
             .use(LaravelPermissionToVueJS)
             .use(VueToast)
             .use(VueSweetalert2)
-            .mixin({ methods: { route, role, access, action} })
+            .mixin({ methods: { route, hasRolesOrPermissions, access, action} })
 
 	    appVue.mount(el)
             return appVue;

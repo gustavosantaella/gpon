@@ -1,6 +1,7 @@
 <template>
 <Dashboard>
     <div class="table-responsive">
+      <button class='btn btn-primary' v-show="this.hasRolesOrPermissions('CREAR USUARIOS', 'user', 'permissions')" @click='this.$inertia.visit(route())'>Crear nuevo usuario</button>
    <Datatable
        
         :url="route('admin.usuarios.index')"
