@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\BaseController;
 use App\Models\Management;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class ModuleController extends BaseController
 {
@@ -72,17 +73,14 @@ class ModuleController extends BaseController
         }
 
         $management = $this->model('management')->find($request->management_id);
-
-        $calc = (count($request->data) * 100) / $management->tasks()->count();
-        $porcent = round($calc, 0);
-        $answer =   $parent_model->answers()->create([
+          $answer =   $parent_model->answers()->create([
             'management_id' => $request->management_id,
             'observation' => 'this is my observation',
-            'porcent'=>$porcent
             ]);
-
-
-
+            if($management->construction){
+            return $this->test($parent_model, $answer, $management);
+        }
+    
         foreach ($request->data as $data) {
 
             $value = $data['answer'];
@@ -128,7 +126,7 @@ class ModuleController extends BaseController
                 $lines = $answer->lines()->find($data['line_id'])->update([
                     'answer' => $value,
                 ]);
-            } else $this->create($answer, $value, $data['task_id']);
+            }else $this->create($answer, $value, $data['task_id']);
         }
         $answer->save();
         return true;
@@ -144,17 +142,54 @@ class ModuleController extends BaseController
         $taskCount = $management->tasks()->count();
         
         
+        $notPorcents = []; 
         $porcent = 0; 
+        $condition = false;
          foreach ($request->data as $data) {
             $value = $data['answer'];
-            $porcent+= $value;
+        if($value > 100) {
+            $notPorcents[] = $value;
+            $value = 0;
+        }else $porcent += $value;
+
             if (isset($data['line_id'])) {
+                
                 $lines = $answer->lines()->find($data['line_id'])->update([
                     'answer' => $value,
                 ]);
             } else $this->create($answer, $value, $data['task_id']);
         }
-         $answer->porcent = $porcent;
-        return $answer->save();
+
+ 
+        
+        if(count($notPorcents) > 0) 
+        {
+              Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
+            $return =   redirect()->route("admin.modules.construcciones.index");
+           
+        } else{
+             Session::flash('status', 200);
+            $return =   redirect()->route("admin.modules.construcciones.index");
+        }
+
+       $totalPorcent =  floor($porcent / $taskCount);
+        if(!$answer->porcent){
+            if($totalPorcent < $answer->porcent){
+                $return =redirect()->route("admin.modules.construcciones.index")->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
+
+            }else $answer->porcent =  ($totalPorcent); 
+        }else{
+            if($totalPorcent < $answer->porcent){
+                $return =redirect()->route("admin.modules.construcciones.index")->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
+            }
+                else $answer->porcent =  ($totalPorcent); 
+
+        } 
+
+        $answer->save();
+       
+       // dd($porcent);
+         
+        return $return;
     }
 }

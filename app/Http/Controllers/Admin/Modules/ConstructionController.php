@@ -10,6 +10,7 @@ class ConstructionController extends BaseController
 {
     public function index()
     {
+       
         $query = Construction::query();
           $query->select([
             'constructions.*',
@@ -48,9 +49,11 @@ class ConstructionController extends BaseController
 
             $module = new ModuleController();
 
-            if ($module->store($construction) === true) {
+            $moduleAction = $module->store($construction);
+
+            if ($moduleAction === true) {
                 return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
-            } else return  back()->with("error", "Por favor comuniquese con soporte...");
+            } else return $moduleAction;
         } catch (\Throwable $th) {
             dd($th->getMessage());
             return  back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
@@ -69,10 +72,7 @@ class ConstructionController extends BaseController
             $answer = $planification->answers()->findOrfail($request->answer_id);
             $module = new ModuleController();
 
-            if ($module->update($planification, $answer) === true) {
-
-                return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
-            } else return  back()->with("error", "Por favor comuniquese con soporte...");
+           return $module->update($planification, $answer);
         } catch (\Throwable $th) {
 
             return back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
@@ -85,6 +85,7 @@ class ConstructionController extends BaseController
          $managemet = $this->model('management')->find($array[array_rand($array,1)]);
        // $managemet = auth()->user()->management;
         $form = ModuleController::form($construccione, $managemet, 'admin.modules.construcciones.store', 'admin.modules.construcciones.update');
+
         return $this->loadView('Admin.Modules.AnswerTask', $form);
     }
 

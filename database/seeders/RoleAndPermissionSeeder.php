@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\{
     Role,
-    Permission
+    Permission,
+    User
 };
 
 
@@ -22,8 +23,16 @@ class RoleAndPermissionSeeder extends Seeder
 
 
 // permissions
+Permission::truncate();
+Role::truncate();
         $permissionArray =
             [
+                 [
+                    'name' => 'acceso al sistema',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
                 [
                     'name' => 'Crear gernecias',
                     'guard_name' => 'web',
@@ -78,6 +87,44 @@ class RoleAndPermissionSeeder extends Seeder
                     'guard_name' => 'web',
                     'created_at' => now(),
                     'updated_at' => now(),
+                ],
+                 [
+                    'name' => 'crear requerimiento',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                 [
+                    'name' => 'editar requerimiento',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                
+                 [
+                    'name' => 'ver requerimiento',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                
+                 [
+                    'name' => 'editar construccion',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                 [
+                    'name' => 'eliminar construccion',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'crear construccion',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]
             ];
         $permissionId = [];
@@ -91,9 +138,10 @@ class RoleAndPermissionSeeder extends Seeder
             'name' => 'super usuario',
             'guard_name' => 'web',
         ]);
-
-        $role1->syncPermissions($permissionId);
-
+        
+        $role1->permissions()->attach($permissionId);
+        User::find(2)->assignRole($role1);
+        
         $role2 = Role::create([
             'name' => 'consultor',
             'guard_name' => 'web',

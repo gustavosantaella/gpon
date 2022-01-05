@@ -33,6 +33,7 @@
                 </div>
                 <div class="col-md-9">
                   <button
+                  v-show="!line.approved"
                     @click="this.approved(true, true, line.id)"
                     class="btn ms-1 btn-sm btn-success"
                   >

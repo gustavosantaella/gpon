@@ -102,8 +102,8 @@ class PlanificationModule extends BaseController
                     return back()->with('status', 200);
                     break;
                 case 'RECHAZADO':
-
-                    return back()->with('status', 200);
+                    $planificacione->delete();
+                    return redirect()->route('admin.modules.planificaciones.index')->with('status', 200);
                     break;
                 case 'POR REVISAR':
 
