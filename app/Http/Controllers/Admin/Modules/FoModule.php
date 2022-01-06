@@ -61,6 +61,7 @@ class FoModule extends BaseController
 
     public function edit(Planification $fibra_optica)
     {
+
         $planification = $fibra_optica;
         $managemet = $this->model('management')->findByName('fibra optica');
         $form = ModuleController::form($planification, $managemet, 'admin.modules.fibra-optica.store', 'admin.modules.fibra-optica.update');

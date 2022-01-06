@@ -60,7 +60,7 @@ class HandleInertiaRequests extends Middleware
                     if(auth()->check()){
                         $user = auth()->user();
                         if($user->management){
-                            return $user->management;
+                            return collect($user->management);
                         }
 
                         return null;

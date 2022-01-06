@@ -76,8 +76,8 @@ import Chart from "chart.js";
 export default {
   name: "index",
 
-  layout:Dashboard, 
-  
+  layout:Dashboard,
+
   components: {
     Datatable,
     Dashboard,
