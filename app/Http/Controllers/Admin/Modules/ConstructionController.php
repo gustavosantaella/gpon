@@ -10,7 +10,7 @@ class ConstructionController extends BaseController
 {
     public function index()
     {
-       
+
         $query = Construction::query();
           $query->select([
             'constructions.*',
@@ -26,7 +26,8 @@ class ConstructionController extends BaseController
             $query->join('planifications', 'planification_id', 'planifications.id');
               $query->join('parishes', 'parishes.id', 'planifications.parish_id')
         ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
-        ->join('states', 'states.id', 'municipalities.state_id');
+        ->join('states', 'states.id', 'municipalities.state_id')
+        ->where('planifications.deleted_at',null);
 
         $query->with(['answers','managements.answers']);
 

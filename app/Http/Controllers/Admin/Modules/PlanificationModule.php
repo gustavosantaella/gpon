@@ -106,7 +106,7 @@ class PlanificationModule extends BaseController
                     return redirect()->route('admin.modules.planificaciones.index')->with('status', 200);
                     break;
                 case 'POR REVISAR':
-
+                    return back()->with('info', 'Se ha solicitado la revision con exito');
                 break;
             }
         } catch (Exception $e) {

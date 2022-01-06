@@ -47,6 +47,13 @@ export default {
                             duration:5000,
                         })
                     }
+                    if (_this.$page.props.flash.info) {
+                         _this.disabled = false
+                        return _this.$toast.info(_this.$page.props.flash.info,{
+                            position: 'top-right',
+                            duration:5000,
+                        })
+                    }
                     if (_this.$page.props.flash.warning) {
                           _this.disabled = false
                         return _this.$toast.warning(_this.$page.props.flash.warning,{

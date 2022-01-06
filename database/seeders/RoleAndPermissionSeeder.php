@@ -100,7 +100,7 @@ Role::truncate();
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                
+
                  [
                     'name' => 'ver requerimiento',
                     'guard_name' => 'web',
@@ -137,7 +137,7 @@ Role::truncate();
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                
+
                  [
                     'name' => 'editar construccion',
                     'guard_name' => 'web',
@@ -168,10 +168,10 @@ Role::truncate();
             'name' => 'super usuario',
             'guard_name' => 'web',
         ]);
-        
+
         $role1->permissions()->attach($permissionId);
-        User::find(2)->assignRole($role1);
-        
+        User::whereEmail('GSANTA01@CANTV.COM.VE')->first()->assignRole($role1);
+
         $role2 = Role::create([
             'name' => 'consultor',
             'guard_name' => 'web',

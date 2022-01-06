@@ -37,6 +37,13 @@ const action = (app, method, route, params = {}) => {
                     duration: 5000,
                 });
             }
+                if (_this.$page.props.flash.info) {
+                    _this.disabled = false;
+                    return _this.$toast.info(_this.$page.props.flash.info, {
+                        position: "top-right",
+                        duration: 5000,
+                    });
+                }
 
             if (Inertia.page.props.flash.status === 200) {
 
@@ -72,7 +79,7 @@ const action = (app, method, route, params = {}) => {
                 duration: 5000,
             });
         },
-        onwaiting() {
+        onWaiting() {
             alert("esperando");
         },
     });
