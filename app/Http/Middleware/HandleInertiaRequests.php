@@ -48,7 +48,25 @@ class HandleInertiaRequests extends Middleware
                     return $request->session()->get('success');
                 },
                 'warning' => function () use ($request) {
-                    return $request->session()->get('success');
+                    return $request->session()->get('warning');
+                },
+                'info' => function () use ($request) {
+                    return $request->session()->get('info');
+                },
+                'menssage' => function () use ($request) {
+                    return $request->session()->get('menssage');
+                },
+                'userManagement' => function () use ($request) {
+                    if(auth()->check()){
+                        $user = auth()->user();
+                        if($user->management){
+                            return collect($user->management);
+                        }
+
+                        return null;
+                    }
+
+                    return null;
                 }
             ],
         ]);

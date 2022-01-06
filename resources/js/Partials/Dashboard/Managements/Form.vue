@@ -22,13 +22,10 @@
 
 	<script>
 		export default {
-
 			name: 'Form',
 			props:['data'],
-
 			data () {
 				return {
-
 				}
 			}
 		}

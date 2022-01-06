@@ -224,10 +224,6 @@ export default {
         }
     },
     props: ['gerencia', 'tasks', 'users', 'roles', 'taskType'],
-    created(){
-
-        alert(this.role('SUPER USUARIO','management'))
-    },
 
     methods: {
         openModal(modal) {

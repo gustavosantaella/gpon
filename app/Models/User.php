@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasPermissions;
 use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
 
 class User extends Authenticatable
@@ -76,7 +77,11 @@ class User extends Authenticatable
     $this->attributes['name'] = strtoupper($value);
     }
 
-    // Accessors
+     public function setEmailAttribute($value)
+    {
+    $this->attributes['email'] = strtoupper($value);
+    }
+
 
     // Accessors
 

@@ -1,4 +1,4 @@
- function role(role, key){
+ function hasRolesOrPermissions(role, key, search){
 
 
 		if(window.Laravel.roleAndPermissions[key] == 0 ){
@@ -7,7 +7,7 @@
 
 		let ObjectRoles = window.Laravel.roleAndPermissions[key]
 		let data = JSON.parse(ObjectRoles)
-		let roles = data.roles
+		let roles = data[search]
 		let _return = false
 		if(!Array.isArray(roles)){
 			return false
@@ -60,6 +60,6 @@ function permission(permission, key){
 }
 
 export {
-	role,
+	hasRolesOrPermissions,
 	permission
 }

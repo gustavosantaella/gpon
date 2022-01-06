@@ -8,12 +8,21 @@ use App\Models\Model;
 
 class ModelController extends BaseController
 {
+
+    public function getModels(){
+
+        $models = Model::get(['name','id']);
+
+        return response()->json($models);
+    }
+
     public function index()
     {
  
         $models = $this->model('model')
                        ->select(['providers.name as prov', 'providers.id as provider_id','models.* as model'])
                         ->join('providers','providers.id','models.provider_id')
+                        ->orderBy('id','desc')
                         ->paginate(5);
        $providers = $this->model('provider')->all(); 
         return $this->loadView('Admin.Models.index', compact(

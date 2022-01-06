@@ -68,6 +68,7 @@ class ManagementController extends BaseController
 
     public function storeTask(Management $gerencia)
     {
+
         $this->request()->validate([
             'title' => ['required', 'unique:tasks'],
             'description' => ['required', 'Min:5'],
@@ -85,6 +86,7 @@ class ManagementController extends BaseController
 
     public function updateTask(Management $gerencia, Task $task)
     {
+
         $this->request()->validate([
             'title' => ['required', "unique:tasks,title,{$this->request()->id}"],
             'description' => ['required', 'Min:5'],

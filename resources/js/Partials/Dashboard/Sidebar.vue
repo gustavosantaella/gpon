@@ -9,9 +9,30 @@
                         </nav-link>
                         <div class="sb-sidenav-menu-heading">Modulos</div>
 
-                         <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
+			             <nav-link :navlink="false" :href='route("admin.modules.planificaciones.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Usuarios
+                           Planificaciones
+                        </nav-link>
+                           
+                        <nav-link :navlink="false" :href='route("admin.modules.fibra-optica.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Fibra Optica
+                        </nav-link>
+                         <nav-link :navlink="false" :href='route("admin.modules.red-local.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Red local
+                        </nav-link>
+                          <nav-link :navlink="false" :href='route("admin.modules.energia.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Energia
+                        </nav-link>
+                             <nav-link :navlink="false" :href='route("admin.modules.infraestructura.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Infraestructura
+                        </nav-link>
+                        <nav-link :navlink="false" :href='route("admin.modules.construcciones.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                           Construcciones
                         </nav-link>
 
 
@@ -30,13 +51,18 @@
 
                         <div class="sb-sidenav-menu-heading">Cantv</div>
 
+                         <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Usuarios
+                        </nav-link>
+
                         <nav-link :navlink="false" :href='route("admin.usuarios.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Centrales
                         </nav-link>
                         <nav-link :navlink="false" :href='route("admin.gerencias.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Gerencias
+                            Unidades
                         </nav-link>
                         <nav-link   :navlink="false" :href='route("admin.roles.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -78,8 +104,5 @@
 		components:{
 			NavLink
 		},
-
-
 	}
-
 </script>

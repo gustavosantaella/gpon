@@ -9,6 +9,7 @@ class UserController extends BaseController
 {
     public function index()
     {
-        $this->loadView('Admin.users.index');
+        $users = $this->model('user')->all()->except(auth()->id());
+      return  $this->loadView('Admin.User.index',compact('users'));
     }
 }

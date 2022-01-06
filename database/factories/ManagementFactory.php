@@ -17,7 +17,7 @@ class ManagementFactory extends Factory
         return [
             'name'=>$this->faker->name(),
             'position'=>0,
-            'acronym'=>'ACRO'
+            'acronym'=>$this->faker->name()
         ];
     }
 }
