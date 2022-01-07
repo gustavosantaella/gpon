@@ -12,30 +12,10 @@ class ConstructionController extends BaseController
     {
 
         $query = Construction::query();
-          $query->select([
-            'constructions.*',
-            'planifications.name',
-            'planifications.status',
-            'parishes.id as parishId',
-            'parishes.name as parishName',
-            'municipalities.id as munId',
-            'municipalities.name as munName',
-            'states.id as stateid',
-            'states.name as stateName'
-        ]);
-            $query->join('planifications', 'planification_id', 'planifications.id');
-              $query->join('parishes', 'parishes.id', 'planifications.parish_id')
-        ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
-        ->join('states', 'states.id', 'municipalities.state_id')
-        ->where('planifications.deleted_at',null);
 
-        $query->with(['answers','managements.answers']);
 
-         //   dd($this->model('management')->find(11)->answers);
-
+        $query->with(['answers','managements.answers', 'planification.parish.municipality.state']);
         $construction = $query->get();
-
-
         $managements = $this->model('management')->whereConstruction(true)->with('answers')->get();
 
 

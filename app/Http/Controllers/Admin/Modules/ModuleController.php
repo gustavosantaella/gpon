@@ -138,6 +138,7 @@ class ModuleController extends BaseController
         $request = $this->request();
         $request->validate([
             'data.*.answer' => ['required'],
+            'data.*.observation' => ['required'],
         ]);
 
         $taskCount = $management->tasks()->count();
@@ -171,21 +172,21 @@ class ModuleController extends BaseController
 
         if (count($notPorcents) > 0) {
             Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
-            $return =   redirect()->route("admin.modules.construcciones.index");
+            $return =   back();
         } else {
             Session::flash('status', 200);
-            $return =   redirect()->route("admin.modules.construcciones.index");
+            $return =   redirect()->route('admin.modules.construcciones.index');
         }
 
         $totalPorcent =  floor($porcent / $taskCount);
         $answer->porcent =  ($totalPorcent);
         if (!$answer->porcent) {
             if ($totalPorcent < $answer->porcent) {
-                $return = redirect()->route("admin.modules.construcciones.index")->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
+                $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
             } else $answer->porcent =  ($totalPorcent);
         } else {
             if ($totalPorcent < $answer->porcent) {
-                $return = redirect()->route("admin.modules.construcciones.index")->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
+                $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
             } else $answer->porcent =  ($totalPorcent);
         }
 

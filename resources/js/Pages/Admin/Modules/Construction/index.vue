@@ -24,10 +24,10 @@
       <template v-slot:items>
         <tr v-for="construction in this.construction" :key="construction.id">
           <td>{{ construction.id }}</td>
-          <td>{{ construction.stateName }}</td>
-          <td>{{ construction.munName }}</td>
-          <td>{{ construction.parishName }}</td>
-          <td>{{ construction.name }}</td>
+          <td>{{ construction.planification.parish.municipality.state.name }}</td>
+          <td>{{ construction.planification.parish.municipality.name }}</td>
+          <td>{{ construction.planification.parish.name }}</td>
+          <td>{{ construction.planification.name }}</td>
           <td
             class="text-center fw-bold"
             :data-construction="`construction-porcent-${construction.id}`"

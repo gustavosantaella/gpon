@@ -1,6 +1,6 @@
 <template>
   <pre>
-	{{ $page.props.flash.userManagement }}
+	{{ this.form.data.data }}
 </pre
   >
   <Dashboard>
