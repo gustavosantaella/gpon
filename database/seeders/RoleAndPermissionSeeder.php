@@ -170,7 +170,7 @@ Role::truncate();
         ]);
 
         $role1->permissions()->attach($permissionId);
-        User::whereEmail('GSANTA01@CANTV.COM.VE')->first()->assignRole($role1);
+        User::whereEmail('gsanta01@cantv.com.ve')->first()->assignRole($role1);
 
         $role2 = Role::create([
             'name' => 'consultor',
