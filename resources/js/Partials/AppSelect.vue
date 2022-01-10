@@ -51,12 +51,11 @@ export default {
         selected(selectedOption) {
             let selected_id;
             selected_id = this.multipe || Array.isArray(selectedOption)? selectedOption.map(e => e.id) : selectedOption.id;
-            this.send(selected_id)
+            this.$emit('selected', selected_id)
         },
         unselect(){
             let selected = (this.selected_id)
-
-            this.send(selected);
+           this.$emit('selected', selected)
         },
         send(selected_id){
             axios.post(this.route,{

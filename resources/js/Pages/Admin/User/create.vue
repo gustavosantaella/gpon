@@ -7,6 +7,7 @@
         :managements="this.managements"
         :url="route('admin.usuarios.store')"
          method='post'
+         :user="this.user"
         />
     </div>
   </div>
@@ -18,7 +19,8 @@ import Dashboard from "@/Pages/Admin/Dashboard";
 import Form from './Form';
 export default {
   layout: Dashboard,
-  props: ["managements"],
+  props: ["managements", "user"],
+
   components: {
 
     'FormUser':Form

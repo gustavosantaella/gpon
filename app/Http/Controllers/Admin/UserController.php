@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BaseController;
+use App\Traits\RolesAndPermissions;
 
 class UserController extends BaseController
 {
+    use RolesAndPermissions; 
+
     public function index()
     {
         $users = $this->model('user')->all();
@@ -18,8 +21,10 @@ class UserController extends BaseController
 
     public function create()
     {
+        $user = (new User)->toArray(); 
         $managements = $this->model('management')->all();
-        return $this->loadView('Admin.User.create', compact('managements'));
+         $user += ['roles'=>$this->hasRoles(new User)];
+        return $this->loadView('Admin.User.create', compact('managements', 'user'));
     }
 
     public function store(Request $request)
@@ -30,8 +35,10 @@ class UserController extends BaseController
                 'name' => ['required', 'string'],
                 'email' => ['unique:users,email', 'required'],
                   'dni' => ['unique:users,dni', 'required'],
+                  'management_id'=>['required','numeric'],
+                    'role'=>['array', 'required'],
+                  'role.*'=>['required']
             ]);
-
 
             $management = $request->management_id;
 
@@ -42,6 +49,8 @@ class UserController extends BaseController
                 'password' => Hash::make('password')
             ]);
 
+            $roles = $this->request()->role;
+            $user->roles()->attach($roles);
             $man =  $user->management()->attach($management);
             return back()->with('status', 200);
         } catch (\Throwable $th) {
@@ -51,12 +60,13 @@ class UserController extends BaseController
 
     public function  edit(User $usuario)
     {
-     
-         $user = $usuario->load(['roles'])->toArray();
+      
+         $user = $usuario->toArray();
         $user += ['permissions'=>$usuario->getAllPermissions()];
         $user += ['management'=>$usuario->management];
         $managements = $this->model('management')->all();
-       
+        $user += ['roles'=>$this->hasRoles($usuario)];
+
           return $this->loadView('Admin.User.Edit', compact('managements', 'user'));
     }
 
@@ -67,6 +77,7 @@ class UserController extends BaseController
                 'name' => ['required', 'string'],
                 'email' => ["unique:users,email,{$usuario->id},id", 'required'],
                 'dni' => ["unique:users,dni,$usuario->id", 'required'],
+                      'management_id'=>['required','numeric']
             ]);
 
             $management = $request->management_id;
@@ -76,9 +87,12 @@ class UserController extends BaseController
                 'dni'=>$request->dni,
              
             ]);
-
+              $roles = $this->request()->role;
+              $usuario->syncRoles($roles);
             $man =  $usuario->management()->sync($management);
             return back()->with('status', 200);
 
     }
+
+   
 }

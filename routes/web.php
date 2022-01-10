@@ -23,7 +23,7 @@ Route::prefix('dashboard')
     // users
     Route::resource('usuarios', 'UserController');
     Route::group(['prefix' => 'usuarios', 'as'=>'usuarios.'], function() {
-
+        Route::post('addOrRemoveRole', 'UserController@addOrRemoveRole')->name('addOrRemoveRole');
     });
 
 //--------------------------------------------------------------------------------------

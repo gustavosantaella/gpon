@@ -44,15 +44,29 @@
           </option>
         </select>
       </div>
+      <div class="mb-4">
+        <label for="roles">Seleccioinar roles</label>
+           <app-select
+           v-on:selected="selected"
+                    :data="user.roles"
+                    :route="route('admin.usuarios.addOrRemoveRole',{
+                        id:user.id,
+                        type:'user'
+                    })"
+                ></app-select>
+            
+      </div>
     </template>
   </app-form>
 </template>
 
 <script>
 import AppForm from "@/Partials/AppForm";
+import AppSelect from '@/Partials/AppSelect';
 export default {
   components: {
     AppForm,
+    AppSelect
   },
   props: ["url", "method", "managements", "user"],
   data() {
@@ -61,7 +75,8 @@ export default {
         name: null,
         email: null,
         dni: null,
-        management_id:null
+        management_id:null,
+        role:[],
       },
     };
   },
@@ -77,8 +92,13 @@ export default {
       this.form.name = this.user.name;
       this.form.email = this.user.email;
       this.form.dni = this.user.dni;
+      if(this.user.management)
       this.form.management_id = this.user.management.id
     },
+
+    selected(data){
+      this.form.role = data
+    }
   },
 };
 </script>

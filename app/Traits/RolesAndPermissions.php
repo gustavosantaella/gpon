@@ -25,4 +25,12 @@ trait RolesAndPermissions
         return $array_roles;
 
     }
+
+       public function addOrRemoveRole()
+    {
+        $roles = $this->request()->selected;
+        $model = $this->model(strtolower($this->request()->type))->find($this->request()->id);
+       $model->syncRoles($roles);
+        return response()->json($model->roles);
+    }
 }
