@@ -36,7 +36,7 @@ class ConstructionController extends BaseController
                 return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
             } else return $moduleAction;
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+          
             return  back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
         }
     }

@@ -64,15 +64,28 @@ class ModuleController extends BaseController
 
         $request->validate([
             'data' => ['required', 'array'],
+             'data.*' => ['required'],
+             'data.*.observation' => ['required'],
         ]);
-
+        $management = $this->model('management')->find($request->management_id);
         foreach ($request->data as $data) {
             if (!array_key_exists('task_id', $data) || !array_key_exists('answer', $data)) {
                 return back()->with('warning', 'Por favor revise que todos los campos esten completos');
             }
+
+            if($management->construction){
+                if (!File::exists($data['answer']) && is_numeric($data['answer'])) {
+                        if($data['answer'] >100){
+
+                            Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
+                            return back();
+                        }
+      
+                 } 
+            }
         }
 
-        $management = $this->model('management')->find($request->management_id);
+       
         $answer =   $parent_model->answers()->create([
             'management_id' => $request->management_id,
             'observation' => 'this is my observation',
