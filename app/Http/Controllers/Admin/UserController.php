@@ -12,18 +12,19 @@ class UserController extends BaseController
 {
     public function index()
     {
-      $users = $this->model('user')->all()->except(auth()->id());
-      return  $this->loadView('Admin.User.index',compact('users'));
+        $users = $this->model('user')->all()->except(auth()->id());
+        return  $this->loadView('Admin.User.index', compact('users'));
     }
 
     public function create()
     {
         $managements = $this->model('management')->all();
-         return $this->loadView('Admin.User.create', compact('managements'));
+        return $this->loadView('Admin.User.create', compact('managements'));
     }
 
     public function store(Request $request)
-    {try {
+    {
+        try {
 
             $s = $this->request()->validate([
                 'name' => ['required', 'string'],
@@ -41,9 +42,8 @@ class UserController extends BaseController
 
             $man =  $user->management()->attach($management);
             return back()->with('status', 200);
-    } catch (\Throwable $th) {
-        return back()->with('error', $th->getMessage());
-    }
-
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 }
