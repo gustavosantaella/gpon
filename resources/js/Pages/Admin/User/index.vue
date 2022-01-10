@@ -7,7 +7,7 @@
 
         :url="route('admin.usuarios.index')"
         :filters="true"
-        v-on:edit="this.edit"
+        v-on:edit="edit"
         v-on:delete="this.delete"
         v-on:openingModal='this.openModal'
         :showItems='false'
@@ -55,6 +55,15 @@ export default {
   data () {
     return {
 
+    }
+  },
+
+  methods:{
+    edit(user){
+      let url = route('admin.usuarios.edit',{
+        usuario:user.id
+      });
+      this.$inertia.visit(url)
     }
   }
 }

@@ -12,7 +12,7 @@ class UserController extends BaseController
 {
     public function index()
     {
-        $users = $this->model('user')->all()->except(auth()->id());
+        $users = $this->model('user')->all();
         return  $this->loadView('Admin.User.index', compact('users'));
     }
 
@@ -28,7 +28,8 @@ class UserController extends BaseController
 
             $s = $this->request()->validate([
                 'name' => ['required', 'string'],
-                'email' => ['unique:users,email']
+                'email' => ['unique:users,email', 'required'],
+                  'dni' => ['unique:users,dni', 'required'],
             ]);
 
 
@@ -37,6 +38,7 @@ class UserController extends BaseController
             $user = $this->model('user')->create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'dni'=>$request->dni,
                 'password' => Hash::make('password')
             ]);
 
@@ -45,5 +47,38 @@ class UserController extends BaseController
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
+    }
+
+    public function  edit(User $usuario)
+    {
+     
+         $user = $usuario->load(['roles'])->toArray();
+        $user += ['permissions'=>$usuario->getAllPermissions()];
+        $user += ['management'=>$usuario->management];
+        $managements = $this->model('management')->all();
+       
+          return $this->loadView('Admin.User.Edit', compact('managements', 'user'));
+    }
+
+    public function update(Request $request, User $usuario)
+    {
+
+        $this->request()->validate([
+                'name' => ['required', 'string'],
+                'email' => ["unique:users,email,{$usuario->id},id", 'required'],
+                'dni' => ["unique:users,dni,$usuario->id", 'required'],
+            ]);
+
+            $management = $request->management_id;
+            $user = $usuario->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'dni'=>$request->dni,
+             
+            ]);
+
+            $man =  $usuario->management()->sync($management);
+            return back()->with('status', 200);
+
     }
 }

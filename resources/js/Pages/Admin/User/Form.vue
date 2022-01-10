@@ -25,7 +25,7 @@
             <label class="fw-bold" for="number">P00</label>
             <input
               class="form-control"
-              v-model="form.p00"
+              v-model="form.dni"
               type="number"
               id="number"
             />
@@ -60,21 +60,24 @@ export default {
       form: {
         name: null,
         email: null,
-        p00: null,
+        dni: null,
         management_id:null
       },
     };
   },
 
   mounted() {
-    this.setValues();
+   
+   if(this.user !== undefined) this.setValues();
   },
 
   methods: {
     setValues() {
-     // this.form.name = this.user.name;
-     // this.form.email = this.user.email;
-      //this.form.p00 = this.user.p00;
+      
+      this.form.name = this.user.name;
+      this.form.email = this.user.email;
+      this.form.dni = this.user.dni;
+      this.form.management_id = this.user.management.id
     },
   },
 };
