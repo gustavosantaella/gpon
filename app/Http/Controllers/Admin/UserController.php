@@ -23,7 +23,8 @@ class UserController extends BaseController
     }
 
     public function store(Request $request)
-    {
+    {try {
+
             $s = $this->request()->validate([
                 'name' => ['required', 'string'],
                 'email' => ['unique:users,email']
@@ -40,6 +41,9 @@ class UserController extends BaseController
 
             $man =  $user->management()->attach($management);
             return back()->with('status', 200);
+    } catch (\Throwable $th) {
+        return back()->with('error', $th->getMessage());
+    }
 
     }
 }
