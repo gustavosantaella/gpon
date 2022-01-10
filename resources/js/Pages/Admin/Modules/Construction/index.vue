@@ -99,7 +99,7 @@ export default {
       type: "line",
       data: {
         tension: 0.1,
-        labels: this.construction.map((construction) => construction.name),
+        labels: this.construction.map((construction) => construction.planification.name),
         datasets: this.managements.map((management) => {
           return {
             label: management.name,
