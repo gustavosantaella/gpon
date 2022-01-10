@@ -1,6 +1,6 @@
 <template>
     <div class="form-responsive">
-        <form @submit.prevent='this.submiting()' enctype="multipart/form-data">
+        <form @submit.prevent='this.submiting()'  enctype="multipart/form-data">
             <slot name='content'></slot>
 
             <div>

@@ -3,11 +3,12 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
-use Illuminate\Http\Request;
 
 class LoginUser
 {
@@ -23,10 +24,11 @@ class LoginUser
             'email'=>'required',
             'password'=>'required'
         ]);
+
         $prefix = '@cantv.com.ve';
-        $containPrefix = \Str::contains($request->email, \Str::upper($prefix));
+        $containPrefix = Str::contains($request->email, Str::lower($prefix));
         $email = $containPrefix ? $request->email : "$request->email$prefix";
-        $user = User::where('email', \Str::upper($email))->first();
+        $user = User::where('email', Str::lower($email))->first();
 
         if($user && Hash::check($request->password, $user->password))
         {

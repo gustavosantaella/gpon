@@ -52,9 +52,8 @@
           <li><a class="dropdown-item" href="#!">Settings</a></li>
           <li><a class="dropdown-item" href="#!">Activity Log</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#">Logout</a></li>
-          <li> <span class="dropdown-item" @click="this.action(this, 'post', route('logout.session'))">Cerrar sesion</span></li>
-        
+          <li> <span class="dropdown-item" @click="this.action(this, 'post', route('logout'))">Cerrar sesion</span></li>
+
         </ul>
       </li>
     </ul>

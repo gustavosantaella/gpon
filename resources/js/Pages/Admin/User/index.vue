@@ -1,9 +1,10 @@
 <template>
 <Dashboard>
+
     <div class="table-responsive">
-      <button class='btn btn-primary' v-show="this.hasRolesOrPermissions('CREAR USUARIOS', 'user', 'permissions')" @click='this.$inertia.visit(route())'>Crear nuevo usuario</button>
+      <button class='btn btn-primary mb-3 fw-bold' v-show="this.hasRolesOrPermissions('CREAR USUARIOS', 'user', 'permissions')" @click='this.$inertia.visit(route("admin.usuarios.create"))'>Crear nuevo usuario</button>
    <Datatable
-       
+
         :url="route('admin.usuarios.index')"
         :filters="true"
         v-on:edit="this.edit"
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-  import Dashboard from '@/Pages/Admin/Dashboard'; 
+  import Dashboard from '@/Pages/Admin/Dashboard';
   import Datatable from '@/Partials/Datatable';
 
 export default {
