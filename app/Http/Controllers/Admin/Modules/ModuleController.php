@@ -80,12 +80,12 @@ class ModuleController extends BaseController
                             Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
                             return back();
                         }
-      
-                 } 
+
+                 }
             }
         }
 
-       
+
         $answer =   $parent_model->answers()->create([
             'management_id' => $request->management_id,
             'observation' => 'this is my observation',
@@ -192,7 +192,7 @@ class ModuleController extends BaseController
         }
 
         $totalPorcent =  floor($porcent / $taskCount);
-        $answer->porcent =  ($totalPorcent);
+
         if (!$answer->porcent) {
             if ($totalPorcent < $answer->porcent) {
                 $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
