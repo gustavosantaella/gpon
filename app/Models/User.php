@@ -64,7 +64,7 @@ class User extends Authenticatable
     public function management()
     {
         return $this->belongsToMany(Management::class, 'user_has_managements', 'user_id', 'management_id', 'id', 'id',
-            'users');
+            'users')->withPivot('responsable');
     }
 
         // Mutators

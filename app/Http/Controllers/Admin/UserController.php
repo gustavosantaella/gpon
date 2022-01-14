@@ -11,7 +11,7 @@ use App\Traits\RolesAndPermissions;
 
 class UserController extends BaseController
 {
-    use RolesAndPermissions; 
+    use RolesAndPermissions;
 
     public function index()
     {
@@ -21,7 +21,7 @@ class UserController extends BaseController
 
     public function create()
     {
-        $user = (new User)->toArray(); 
+        $user = (new User)->toArray();
         $managements = $this->model('management')->all();
          $user += ['roles'=>$this->hasRoles(new User)];
         return $this->loadView('Admin.User.create', compact('managements', 'user'));
@@ -51,7 +51,9 @@ class UserController extends BaseController
 
             $roles = $this->request()->role;
             $user->roles()->attach($roles);
-            $man =  $user->management()->attach($management);
+            $man =  $user->management()->attach($management, [
+                'responsable'=>$request->responsable
+            ]);
             return back()->with('status', 200);
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
@@ -60,10 +62,11 @@ class UserController extends BaseController
 
     public function  edit(User $usuario)
     {
-      
+
          $user = $usuario->toArray();
         $user += ['permissions'=>$usuario->getAllPermissions()];
-        $user += ['management'=>$usuario->management];
+        $user += ['management' => $usuario->management];
+
         $managements = $this->model('management')->all();
         $user += ['roles'=>$this->hasRoles($usuario)];
 
@@ -85,14 +88,19 @@ class UserController extends BaseController
                 'name' => $request->name,
                 'email' => $request->email,
                 'dni'=>$request->dni,
-             
+
             ]);
               $roles = $this->request()->role;
+
               $usuario->syncRoles($roles);
-            $man =  $usuario->management()->sync($management);
+
+
+            $man =  $usuario->management()->syncWithPivotValues($management, [
+                'responsable'=>$request->responsable
+            ]);
             return back()->with('status', 200);
 
     }
 
-   
+
 }
