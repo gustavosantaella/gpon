@@ -17,7 +17,7 @@ class UserController extends BaseController
         $this->middleware('can:CREAR USUARIOS', ['only' => ['create', 'store']]);
         $this->middleware('can:EDITAR USUARIOS', ['only' => ['edit', 'update']]);
         $this->middleware('can:ELIMINAR USUARIOS', ['only' => ['delete']]);
-        $this->middleware('can:LISTAR USUARIOS', ['only' => ['index']]);
+        //$this->middleware('can:LISTAR USUARIOS', ['only' => ['index']]);
     }
 
     public function index()

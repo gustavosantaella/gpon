@@ -131,12 +131,13 @@ Role::truncate();
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                  [
-                    'name' => 'aprobar respuesta',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
+            [
+                'name' => 'aprobar respuesta',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
                   [
                     'name' => 'reprobar respuesta',
                     'guard_name' => 'web',
@@ -150,18 +151,18 @@ Role::truncate();
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                 [
-                    'name' => 'eliminar construccion',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'name' => 'crear construccion',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
+            [
+                'name' => 'eliminar construccion',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'listar construcciones',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             ];
         $permissionId = [];
         foreach ($permissionArray as $data):
