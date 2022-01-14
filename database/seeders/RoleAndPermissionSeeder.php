@@ -61,12 +61,18 @@ Role::truncate();
                     'updated_at' => now(),
                 ],
 
-                [
-                    'name' => 'Eliminar usuarios',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
+            [
+                'name' => 'Eliminar usuarios',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'listar usuarios',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
 
                 [
                     'name' => 'editar usuarios',

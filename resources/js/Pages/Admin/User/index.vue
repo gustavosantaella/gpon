@@ -23,15 +23,15 @@
             text:'correo'
             }]"
       :options="[{
-         text:'editar',
+         icon:'fas fa-edit',
          method:'edit',
          class:'btn-primary',
-         permission:(is('CONSULTOR'))
+            permission:this.hasRolesOrPermissions('EDITAR USUARIOS', 'user', 'permissions')
      },{
-         text:'delete',
+         icon:'fas fa-trash',
          method:'delete',
          class:'btn-danger',
-         permission:(is('CONSULTOR'))
+         permission:this.hasRolesOrPermissions('ELIMINAR USUARIOS', 'user', 'permissions')
      }]">
 
    </Datatable>

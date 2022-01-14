@@ -13,8 +13,16 @@ class UserController extends BaseController
 {
     use RolesAndPermissions;
 
+    public function __construct(){
+        $this->middleware('can:CREAR USUARIOS', ['only' => ['create', 'store']]);
+        $this->middleware('can:EDITAR USUARIOS', ['only' => ['edit', 'update']]);
+        $this->middleware('can:ELIMINAR USUARIOS', ['only' => ['delete']]);
+        $this->middleware('can:LISTAR USUARIOS', ['only' => ['index']]);
+    }
+
     public function index()
     {
+
         $users = $this->model('user')->all();
         return  $this->loadView('Admin.User.index', compact('users'));
     }
