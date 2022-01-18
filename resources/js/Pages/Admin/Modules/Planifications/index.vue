@@ -14,7 +14,7 @@
               <div class="mb-3">
                 <label for="states">Seleccione un estado</label>
                 <select
-                  @change="this.getMunicipalities()"
+                  @change="getMunicipalities()"
                   required
                   v-model="this.form.state_id"
                   id="states"
@@ -31,7 +31,7 @@
               </div>
               <div
                 class="mb-3"
-                @change="this.getParishes()"
+                @change="getParishes()"
                 v-show="this.municipalities.length"
               >
                 <label for="mun">Seleccione un municipio</label>
@@ -67,7 +67,7 @@
                   </option>
                 </select>
               </div>
-               <div class="mb-3">
+              <div class="mb-3">
                 <label for="model">Seleccione un equipo</label>
                 <select
                   required
@@ -98,11 +98,19 @@
         </app-form>
       </template>
     </dialog-modal>
-    <button class="btn btn-sm btn-secondary fw-bold" @click="this.openModal()">
+    <button
+      v-show="this.hasRolesOrPermissions(
+              'CREAR REQUERIMIENTO',
+              'user',
+              'permissions'
+            )"
+      class="btn btn-sm btn-secondary fw-bold"
+      @click="this.openModal()"
+    >
       Nuevo requerimiento
     </button>
     <datatable
-    v-on:show='this.show'
+      v-on:show="this.show"
       :items="this.planifications"
       :url="route('admin.modules.planificaciones.index')"
       :showItems="false"
@@ -141,19 +149,31 @@
           text: 'editar',
           method: 'edit',
           class: 'btn-primary',
-          permission: is('CONSULTOR'),
+          permission: this.hasRolesOrPermissions(
+            'EDITAR REQUERIMIENTO',
+            'user',
+            'permissions'
+          ),
         },
         {
           text: 'delete',
           method: 'delete',
           class: 'btn-danger',
-          permission: is('CONSULTOR'),
+          permission: this.hasRolesOrPermissions(
+            'ELIMINAR REQUERIMIENTO',
+            'user',
+            'permissions'
+          ),
         },
         {
           text: 'Ver datos',
           method: 'show',
           class: 'btn-secondary',
-          permission: is('CONSULTOR'),
+          permission: this.hasRolesOrPermissions(
+            'VER REQUERIMIENTO',
+            'user',
+            'permissions'
+          ),
         },
       ]"
     >
@@ -179,7 +199,7 @@ export default {
   data() {
     return {
       states: [],
-      models:[],
+      models: [],
       municipalities: [],
       parishes: [],
       form: {
@@ -188,7 +208,7 @@ export default {
         state_id: null,
         municipality_id: null,
         parish_id: null,
-        model_id:null,
+        model_id: null,
         name: null,
       },
       modal: {
@@ -198,11 +218,13 @@ export default {
     };
   },
   methods: {
-      show(data){
-          this.$inertia.visit(route('admin.modules.planificaciones.show',{
-              planificacione:data.id
-          }));
-      },
+    show(data) {
+      this.$inertia.visit(
+        route("admin.modules.planificaciones.show", {
+          planificacione: data.id,
+        })
+      );
+    },
 
     openModal() {
       this.getStates();
@@ -222,7 +244,7 @@ export default {
         alert(e.message);
       }
     },
-     async getModels() {
+    async getModels() {
       try {
         const response = await axios.get(route("admin.xhr.getModels"));
         this.models = response.data;

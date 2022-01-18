@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin\Modules;
 
 use Exception;
+use App\Models\User;
 use App\Models\Planification;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\BaseController;
+use App\Notifications\StatusPlanificationNotify;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
 
 
 class PlanificationModule extends BaseController
@@ -31,7 +34,7 @@ class PlanificationModule extends BaseController
         $query->join('parishes', 'parishes.id', 'planifications.parish_id')
             ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
             ->join('states', 'states.id', 'municipalities.state_id')
-             ->join('models', 'models.id', 'planifications.model_id')
+            ->join('models', 'models.id', 'planifications.model_id')
             ->orderBy('id', 'desc');
 
         return $id ? $query : $query->paginate(5);
@@ -96,18 +99,34 @@ class PlanificationModule extends BaseController
             });
             switch ($request['approved']) {
                 case 'APROBADO':
+                    $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
+                    Notification::send($users, new StatusPlanificationNotify([
+                        'message' => "requerimiento *APROBADO*",
 
+                    ]));
                     $construction = $planificacione->construction()->create();
                     $construction->managements()->attach($managements);
                     return back()->with('status', 200);
                     break;
                 case 'RECHAZADO':
                     $planificacione->delete();
+                    $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
+                    Notification::send($users, new StatusPlanificationNotify([
+                        'message' => "el requerimiento tiene un status de *$request[approved]* por ende sera eliminado.",
+
+                    ]));
                     return redirect()->route('admin.modules.planificaciones.index')->with('status', 200);
                     break;
                 case 'POR REVISAR':
+                    $users = (User::whereRelation('roles', 'name', 'SUPER USUARIO')->get());
+                    Notification::send($users, new StatusPlanificationNotify([
+                        'message' => "Planificaciones ha solicitado una revision status: $request[approved]",
+
+                        'planification' => $planificacione,
+                        'route' => route('admin.modules.planificaciones.show', [$planificacione])
+                    ]));
                     return back()->with('info', 'Se ha solicitado la revision con exito');
-                break;
+                    break;
             }
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());

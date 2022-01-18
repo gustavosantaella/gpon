@@ -33,13 +33,14 @@
                 </div>
                 <div class="col-md-9">
                   <button
-                  v-show="!line.approved"
+                  v-show="!line.approved && planification.status !== 'APROBADO'"
                     @click="this.approved(true, true, line.id)"
                     class="btn ms-1 btn-sm btn-success"
                   >
                     <i class="fas fw-bold fa-check"></i>
                   </button>
                   <button
+                   v-show="planification.status !== 'APROBADO'"
                     @click="this.approved(false, true, line.id)"
                     class="btn ms-1 btn-sm btn-danger"
                   >
