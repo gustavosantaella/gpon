@@ -91,7 +91,6 @@ class PlanificationModule extends BaseController
         try {
 
             if ($request['approved'] !==  '')
-
                 $planificacione->status = $request['approved'];
             $planificacione->update();
             $managements = $this->model('management')->whereConstruction(true)->get()->map(function ($value, $key) {

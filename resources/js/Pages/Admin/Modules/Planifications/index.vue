@@ -18,7 +18,7 @@
                   required
                   v-model="this.form.state_id"
                   id="states"
-                  class="form-control"
+                  class="form-select"
                 >
                   <option
                     v-for="state in this.states"
@@ -39,7 +39,7 @@
                   required
                   v-model="this.form.municipality_id"
                   id="mun"
-                  class="form-control"
+                  class="form-select"
                 >
                   <option
                     v-for="mun in this.municipalities"
@@ -56,7 +56,7 @@
                   required
                   v-model="this.form.parish_id"
                   id="mun"
-                  class="form-control"
+                  class="form-select"
                 >
                   <option
                     v-for="parish in this.parishes"
@@ -73,7 +73,7 @@
                   required
                   v-model="this.form.model_id"
                   id="model"
-                  class="form-control"
+                  class="form-select"
                 >
                   <option
                     v-for="model in this.models"

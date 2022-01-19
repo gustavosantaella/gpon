@@ -1,6 +1,6 @@
  function hasRolesOrPermissions(role, key, search){
 
-
+        role = role.toUpperCase();
 		if(window.Laravel.roleAndPermissions[key] == 0 ){
     		return false;
     	}
@@ -14,6 +14,7 @@
 		}
 		if(role.includes('|')){
 			role.split('|').forEach(function (item) {
+
 				if(roles.includes(item.trim())){
 					_return = true
 				}

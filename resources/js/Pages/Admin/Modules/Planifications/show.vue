@@ -72,13 +72,22 @@
       </div>
       <div v-show="this.checkStatusTasks() && this.answers.length">
         <button
-          v-show="this.planification.status !== 'APROBADO'"
+          v-show="this.planification.status !== 'APROBADO' && this.hasRolesOrPermissions(
+              'APROBAR REQUERIMIENTO',
+              'user',
+              'permissions'
+            )"
           @click="this.approvedProject('APROBADO', this.planification.id)"
           class="fw-bold me-3 btn btn-sm btn-success"
         >
           Aprobar
         </button>
         <button
+        v-show="this.hasRolesOrPermissions(
+              'eliminar REQUERIMIENTO',
+              'user',
+              'permissions'
+            )"
           @click="this.approvedProject('RECHAZADO', this.planification.id)"
           class="fw-bold me-3 btn btn-sm btn-danger"
         >
@@ -88,8 +97,11 @@
           @click="this.approvedProject('POR REVISAR', this.planification.id)"
           v-show="
             this.planification.status !== 'POR REVISAR' &&
-            this.planification.status !== 'APROBADO'
-          "
+            this.planification.status !== 'APROBADO' && this.hasRolesOrPermissions(
+              'SOLICITAR REQUERIMIENTO',
+              'user',
+              'permissions'
+            )"
           class="fw-bold me-3 btn btn-sm btn-primary"
         >
           Solicitar revision
