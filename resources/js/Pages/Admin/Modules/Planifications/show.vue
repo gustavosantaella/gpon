@@ -73,7 +73,7 @@
       <div v-show="this.checkStatusTasks() && this.answers.length">
         <button
           v-show="this.planification.status !== 'APROBADO' && this.hasRolesOrPermissions(
-              'APROBAR REQUERIMIENTO',
+              'aprobar requerimiento',
               'user',
               'permissions'
             )"
@@ -83,7 +83,7 @@
           Aprobar
         </button>
         <button
-        v-show="this.hasRolesOrPermissions(
+        v-show="!planification.construnction && this.hasRolesOrPermissions(
               'eliminar REQUERIMIENTO',
               'user',
               'permissions'

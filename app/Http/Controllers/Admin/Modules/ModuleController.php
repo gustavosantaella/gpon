@@ -65,16 +65,13 @@ class ModuleController extends BaseController
         $request->validate([
             'data' => ['required', 'array'],
              'data.*' => ['required'],
+             'data.*.observation'=>['required']
 
         ]);
 
         $management = $this->model('management')->find($request->management_id);
 
         foreach ($request->data as $data) {
-            if (!array_key_exists('task_id', $data) || !array_key_exists('answer', $data)) {
-                return back()->with('warning', 'Por favor revise que todos los campos esten completos');
-            }
-
             if($management->construction){
                 if (!File::exists($data['answer']) && is_numeric($data['answer'])) {
                         if($data['answer'] >100){
@@ -88,10 +85,11 @@ class ModuleController extends BaseController
         }
 
 
-        $answer =   $parent_model->answers()->create([
+        $answer =  $parent_model->answers()->create([
             'management_id' => $request->management_id,
             'observation' => 'this is my observation',
         ]);
+
         if ($management->construction) {
             return $this->test($parent_model, $answer, $management);
         }
@@ -163,16 +161,19 @@ class ModuleController extends BaseController
         $porcent = 0;
         foreach ($request->data as $data) {
             $value = $data['answer'];
+
             if (File::exists($value)) {
                 $file = $data['answer'];
                 $value = $file->store('files', 'public');
                 $porcent += 100;
             } else {
+
                 if ($value > 100) {
                     $notPorcents[] = $value;
                     $value = 0;
                 } else $porcent += $value;
             }
+
 
             if (isset($data['line_id'])) {
 

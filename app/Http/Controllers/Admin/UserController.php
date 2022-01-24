@@ -37,16 +37,16 @@ class UserController extends BaseController
 
     public function store(Request $request)
     {
-        try {
 
-            $s = $this->request()->validate([
-                'name' => ['required', 'string'],
-                'email' => ['unique:users,email', 'required'],
-                  'dni' => ['unique:users,dni', 'required'],
-                  'management_id'=>['required','numeric'],
-                    'role'=>['array', 'required'],
-                  'role.*'=>['required']
-            ]);
+        $this->request()->validate([
+            'name' => ['required', 'string'],
+            'email' => ['unique:users,email', 'required'],
+            'dni' => ['unique:users,dni', 'required'],
+            'management_id' => ['required', 'numeric'],
+            'role' => ['array', 'required'],
+            'role.*' => ['required']
+        ]);
+        try {
 
             $management = $request->management_id;
 

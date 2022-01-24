@@ -7,26 +7,47 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </nav-link>
-                        <div class="sb-sidenav-menu-heading">Modulos</div>
 
-			             <nav-link :navlink="false" :href='route("admin.modules.planificaciones.index")'>
+			           <div v-show="$page.props.flash.userManagement">
+                           <div class="sb-sidenav-menu-heading">Modulos</div>
+                             <nav-link  v-show="$page.props.flash.userManagement.name == 'PLANIFICACIONES' || this.hasRolesOrPermissions(
+            'super usuario|administrador',
+            'user',
+            'roles'
+          )" :navlink="false" :href='route("admin.modules.planificaciones.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Planificaciones
                         </nav-link>
 
-                        <nav-link :navlink="false" :href='route("admin.modules.fibra-optica.index")'>
+                        <nav-link v-show="$page.props.flash.userManagement.name == 'FIBRA OPTICA' || this.hasRolesOrPermissions(
+            'super usuario|administrador',
+            'user',
+            'roles'
+          )" :navlink="false" :href='route("admin.modules.fibra-optica.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Fibra Optica
                         </nav-link>
-                         <nav-link :navlink="false" :href='route("admin.modules.red-local.index")'>
+                         <nav-link  v-show="$page.props.flash.userManagement.name == 'RED LOCAL' || this.hasRolesOrPermissions(
+            'super usuario|administrador',
+            'user',
+            'roles'
+          )" :navlink="false" :href='route("admin.modules.red-local.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Red local
                         </nav-link>
-                          <nav-link :navlink="false" :href='route("admin.modules.energia.index")'>
+                          <nav-link  v-show="$page.props.flash.userManagement.name == 'ENERGIA' || this.hasRolesOrPermissions(
+            'super usuario|administrador',
+            'user',
+            'roles'
+          )" :navlink="false" :href='route("admin.modules.energia.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Energia
                         </nav-link>
-                             <nav-link :navlink="false" :href='route("admin.modules.infraestructura.index")'>
+                             <nav-link  v-show="$page.props.flash.userManagement.name == 'INFRAESTRUCTURA' || this.hasRolesOrPermissions(
+            'super usuario|administrador',
+            'user',
+            'roles'
+          )" :navlink="false" :href='route("admin.modules.infraestructura.index")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Infraestructura
                         </nav-link>
@@ -36,6 +57,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Construcciones
                         </nav-link>
+                       </div>
 
 
 

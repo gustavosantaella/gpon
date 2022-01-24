@@ -36,7 +36,7 @@ class ConstructionController extends BaseController
                 return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
             } else return $moduleAction;
         } catch (\Throwable $th) {
-          
+
             return  back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
         }
     }
@@ -70,5 +70,13 @@ class ConstructionController extends BaseController
         return $this->loadView('Admin.Modules.AnswerTask', $form);
     }
 
-    public function destroy(Construction $construction){}
+    public function destroy(Construction $construccione)
+    {
+        try {
+            $construccione->delete();
+            return back()->with("status", 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

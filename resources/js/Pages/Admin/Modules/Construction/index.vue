@@ -56,10 +56,22 @@
           </td>
           <td>
             <button
+            v-show="this.$page.props.flash.userManagement.construction"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >
               <i class="fas fa-edit"></i>
+            </button>
+              <button
+              v-show=" this.hasRolesOrPermissions(
+            'eliminar construccion',
+            'user',
+            'permissions'
+          )"
+              @click="this.destroy(construction)"
+              class="btn btn-sm btn-danger"
+            >
+              <i class="fas fa-trash"></i>
             </button>
           </td>
         </tr>
@@ -179,10 +191,16 @@ export default {
         construccione: construction.id,
       });
       this.$inertia.visit(ruta, {
-         management: 6,
+         management: management.id,
        // management: management.id,
       });
     },
+
+    destroy(construction){
+        this.$destroyNotify(route('admin.modules.construcciones.destroy', {
+            construccione: construction.id,
+        }))
+    }
   },
 };
 </script>

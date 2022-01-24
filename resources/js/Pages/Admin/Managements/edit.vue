@@ -31,7 +31,7 @@
               </template>
             </app-form>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="row">
                         <h2 class="col-md-6">Actividades</h2>
                     </div>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <h2>Empleados</h2>
                     <div>
 
@@ -169,7 +169,7 @@
 
 
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <div>

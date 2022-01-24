@@ -1,4 +1,7 @@
 import { Inertia } from '@inertiajs/inertia'
+import Swal from "sweetalert2";
+
+
 /**
  *
  * @param {string} url
@@ -85,4 +88,21 @@ const action = (app, method, route, params = {}) => {
     });
 };
 
-export { access, action };
+
+const $destroyNotify = (url) => {
+     new Swal({
+        title: "Estas seguro?",
+        text: "Si eliminas este registro, se eliminara permanentemente del sistema.",
+        icon: "warning",
+        dangerMode: true,
+        showCancelButton: true,
+      }).then((e) => {
+        if (e.isConfirmed) {
+
+            Inertia.delete(url)
+
+        }
+      });
+}
+
+export { access, action, $destroyNotify };

@@ -114,7 +114,7 @@ class RoleAndPermissionSeeder extends Seeder
                     'updated_at' => now(),
                 ],
                 [
-                    'name' => 'aprobar requirimiento',
+                    'name' => 'aprobar requerimiento',
                     'guard_name' => 'web',
                     'created_at' => now(),
                     'updated_at' => now(),

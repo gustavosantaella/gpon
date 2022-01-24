@@ -73,7 +73,7 @@ class PlanificationModule extends BaseController
 
     public function show(Planification $planificacione)
     {
-        $planification = $planificacione;
+        $planification = $planificacione->load('construction');
         $answers = $planification->answers()->with(['management.tasks', 'lines.task'])->get();
 
         return $this->loadView('Admin.Modules.Planifications.show', [
@@ -92,6 +92,9 @@ class PlanificationModule extends BaseController
 
             if ($request['approved'] !==  '')
                 $planificacione->status = $request['approved'];
+                if($planificacione->construction){
+                    return back()->with('warning', 'No se puede rechazar el requerimiento. Ya esta en construccion');
+                };
             $planificacione->update();
             $managements = $this->model('management')->whereConstruction(true)->get()->map(function ($value, $key) {
                 return $value->id;
@@ -108,7 +111,7 @@ class PlanificationModule extends BaseController
                     return back()->with('status', 200);
                     break;
                 case 'RECHAZADO':
-                    $planificacione->delete();
+                    //$planificacione->delete();
                     $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
                     Notification::send($users, new StatusPlanificationNotify([
                         'message' => "el requerimiento tiene un status de *$request[approved]* por ende sera eliminado.",
