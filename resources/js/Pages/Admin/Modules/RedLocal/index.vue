@@ -1,7 +1,7 @@
 <template>
 
 <Dashboard>
-	
+
 	<datatable
 	:items='this.planifications'
 	v-on:edit="this.edit"
@@ -20,7 +20,7 @@
 	original:'stateName',
 	text:'estado',
 	},
-	{	
+	{
 	original:'munName',
 	text:'municipio'
 	},
@@ -37,7 +37,7 @@
          text:'editar',
          method:'edit',
          class:'btn-primary',
-         permission:(is('CONSULTOR'))
+         permission:(this.hasRolesOrPermissions('completar requerimiento', 'user', 'permissions'))
      }]"
 	>
 

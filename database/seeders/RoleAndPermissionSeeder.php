@@ -40,12 +40,39 @@ class RoleAndPermissionSeeder extends Seeder
                     'updated_at' => now(),
                 ],
 
-                [
-                    'name' => 'Editar unidad',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
+            [
+                'name' => 'Editar unidad',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'name' => 'agregar modelos',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'editar modelos',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'name' => 'eliminar modelos',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'listar modelos',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
 
                 [
                     'name' => 'Eliminar unidad',
@@ -119,12 +146,18 @@ class RoleAndPermissionSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                [
-                    'name' => 'solicitar requerimiento',
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
+            [
+                'name' => 'solicitar requerimiento',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'completar requerimiento',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
                 [
                     'name' => 'eliminar requerimiento',
                     'guard_name' => 'web',

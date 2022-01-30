@@ -56,7 +56,7 @@
           </td>
           <td>
             <button
-            v-show="this.$page.props.flash.userManagement.construction"
+            v-show="!this.$page.props.flash.userManagement.construction"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >

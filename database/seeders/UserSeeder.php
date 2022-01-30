@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
 
         User::factory(10)->create();
 
-        //$user->assignRole('SUPER USUARIO');
+        $user->assignRole('SUPER USUARIO');
+        // $user->management()->sync();
     }
 }
