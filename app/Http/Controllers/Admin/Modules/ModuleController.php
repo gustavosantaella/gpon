@@ -65,11 +65,17 @@ class ModuleController extends BaseController
         $request->validate([
             'data' => ['required', 'array'],
              'data.*' => ['required'],
-             'data.*.observation'=>['required']
+
 
         ]);
 
         $management = $this->model('management')->find($request->management_id);
+        if($management->construction){
+            $request->validate([
+                'data.*.observation' => ['required']
+
+            ]);
+        }
 
         foreach ($request->data as $data) {
             if($management->construction){
@@ -123,6 +129,12 @@ class ModuleController extends BaseController
             'data' => ['required', 'array'],
         ]);
         $management = $this->model('management')->find($request->management_id);
+        if ($management->construction) {
+            $request->validate([
+                'data.*.observation' => ['required']
+
+            ]);
+        }
         if ($management->construction) {
             return $this->test($parent_model, $answer, $management);
         }
