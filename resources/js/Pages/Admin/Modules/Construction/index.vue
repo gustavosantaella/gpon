@@ -1,8 +1,10 @@
 <template>
-    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <canvas  v-show="constructionFilter.length" id="myChart" width="400" height="200"></canvas>
     <datatable
+
       :items="this.construction"
-      :url="route('admin.modules.planificaciones.index')"
+      :url="route('admin.modules.construcciones.index')"
       :showItems="true"
     >
       <template v-slot:th>
@@ -22,7 +24,7 @@
         <th>OPCIONES</th>
       </template>
       <template v-slot:items>
-        <tr v-for="construction in this.construction" :key="construction.id">
+        <tr v-for="construction in constructionFilter" :key="construction.id">
           <td>{{ construction.id }}</td>
           <td>{{ construction.planification.parish.municipality.state.name }}</td>
           <td>{{ construction.planification.parish.municipality.name }}</td>
@@ -56,7 +58,7 @@
           </td>
           <td>
             <button
-            v-show="!this.$page.props.flash.userManagement.construction"
+            v-show="this.$page.props.flash.userManagement.construction"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >
@@ -95,6 +97,7 @@ export default {
     Dashboard,
   },
   props: ["construction", "managements"],
+
   data() {
     return {
       porcent: {
@@ -103,8 +106,14 @@ export default {
       },
     };
   },
-
+    computed:{
+      constructionFilter(){
+          let s =  this.construction.filter(e => e.planification)
+          return s;
+      }
+    },
   mounted() {
+
     const _this = this;
     const ctx = document.getElementById("myChart");
     const myChart = new Chart(ctx, {

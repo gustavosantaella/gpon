@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers\Admin\Modules;
 
-use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\Construction;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
 class ConstructionController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $query = Construction::query();
 
 
-        $query->with(['answers','managements.answers', 'planification.parish.municipality.state']);
+        $query->
+        with(['answers', 'managements', 'managements.answers', 'planification'=> function($builder) use($request){
+
+              return $builder->where('name', 'like', '%' . Str::upper($request->text) . '%');
+
+
+
+
+
+        },'planification.parish.municipality.state']);
+
         $construction = $query->get();
+
         $managements = $this->model('management')->whereConstruction(true)->with('answers')->get();
 
-
-       return  $this->loadView('Admin.Modules.Construction.index',compact('construction', 'managements'));
+        return  $this->loadView('Admin.Modules.Construction.index', compact('construction', 'managements'));
     }
 
     public function store()
@@ -41,7 +53,9 @@ class ConstructionController extends BaseController
         }
     }
 
-    public function show(Construction $construction){}
+    public function show(Construction $construction)
+    {
+    }
 
     public function update()
     {
@@ -53,19 +67,20 @@ class ConstructionController extends BaseController
             $answer = $planification->answers()->findOrfail($request->answer_id);
             $module = new ModuleController();
 
-           return $module->update($planification, $answer);
+            return $module->update($planification, $answer);
         } catch (\Throwable $th) {
 
             return back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");
         }
     }
 
-    public function edit(Construction $construccione){
+    public function edit(Construction $construccione)
+    {
 
         //$array = [6];
-       //  $managemet = $this->model('management')->find($array[array_rand($array,1)]);
+        //  $managemet = $this->model('management')->find($array[array_rand($array,1)]);
         $managemet = auth()->user()->management;
-        if(!$managemet->construction) return back();
+        if (!$managemet->construction) return back();
         $form = ModuleController::form($construccione, $managemet, 'admin.modules.construcciones.store', 'admin.modules.construcciones.update');
 
         return $this->loadView('Admin.Modules.AnswerTask', $form);
