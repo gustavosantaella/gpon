@@ -230,6 +230,12 @@
     </nav>
 </template>
 
+<style scoped>
+#sidenavAccordion{
+    background: linear-gradient(70deg,#0606ec, #f2f2f2)
+}
+</style>
+
 <script>
 import NavLink from "@/Jetstream/NavLink";
 export default {

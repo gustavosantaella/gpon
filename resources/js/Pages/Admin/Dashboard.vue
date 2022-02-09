@@ -1,5 +1,5 @@
 <template>
-  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="header-nav">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3 fw-bold" href="index.html">GPRA</a>
     <!-- Sidebar Toggle-->
@@ -46,6 +46,9 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-5 py-3">
+          <pre>
+{{$page.props.userManagement}}
+          </pre>
           <slot></slot>
         </div>
       </main>
@@ -68,6 +71,10 @@
 #nav-items .nav-link {
   color: #fff !important;
   text-decoration: none;
+}
+
+#header-nav{
+  background: linear-gradient(184deg,#0606ec, #f2f2f2);
 }
 </style>
 
