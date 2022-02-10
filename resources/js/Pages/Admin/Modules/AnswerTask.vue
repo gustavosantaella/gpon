@@ -1,8 +1,5 @@
 <template>
-  <pre>
-	{{ this.form.data.data }}
-</pre
-  >
+
   <Dashboard>
     <dialog-modal :id="'comment'" v-show='this.management.construction'>
       <template v-slot:title> Detalle </template>

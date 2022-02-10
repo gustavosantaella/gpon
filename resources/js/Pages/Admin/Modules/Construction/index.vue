@@ -58,7 +58,12 @@
           </td>
           <td>
             <button
-            v-show="this.$page.props.flash.userManagement.construction"
+            v-show="this.$page.props.flash.userManagement.construction   ||
+                            this.hasRolesOrPermissions(
+                                'super usuario|administrador',
+                                'user',
+                                'roles'
+                            )"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >
@@ -74,6 +79,17 @@
               class="btn btn-sm btn-danger"
             >
               <i class="fas fa-trash"></i>
+            </button>
+             <button
+              v-show=" this.hasRolesOrPermissions(
+            'ver construccion',
+            'user',
+            'permissions'
+          )"
+              @click="this.destroy(construction)"
+              class="btn btn-sm btn-dark"
+            >
+              <i class="fas fa-eye"></i>
             </button>
           </td>
         </tr>
