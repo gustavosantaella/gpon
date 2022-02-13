@@ -16,16 +16,10 @@ class ConstructionController extends BaseController
         $query = Construction::query();
 
 
-        $query->
-        with(['answers', 'managements', 'managements.answers', 'planification'=> function($builder) use($request){
+        $query->with(['answers', 'managements', 'managements.answers', 'planification' => function ($builder) use ($request) {
 
-              return $builder->where('name', 'like', '%' . Str::upper($request->text) . '%');
-
-
-
-
-
-        },'planification.parish.municipality.state']);
+                return $builder->where('name', 'like', '%' . Str::upper($request->text) . '%');
+            }, 'planification.parish.municipality.state']);
 
         $construction = $query->get();
 
@@ -53,8 +47,12 @@ class ConstructionController extends BaseController
         }
     }
 
-    public function show(Construction $construction)
+    public function show(Construction $construccione)
     {
+        $construction = $construccione->load(['managements.tasks','planification.parish.municipality.state', 'answers.lines.task', 'answers.management']);
+        $managements = $this->model('management')->whereConstruction(true)->with(['answers', 'tasks'])->get();
+        $porcent = request()->porcent;
+        return $this->loadView('Admin.Modules.Construction.show', compact('construction', 'managements', 'porcent'));
     }
 
     public function update()
@@ -68,9 +66,9 @@ class ConstructionController extends BaseController
             $module = new ModuleController();
 
             $status =  $module->update($planification, $answer);
-            if($status){
-                
-                 return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
+            if ($status) {
+
+                return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
             }
         } catch (\Throwable $th) {
 
@@ -81,9 +79,9 @@ class ConstructionController extends BaseController
     public function edit(Construction $construccione)
     {
 
-        $array = [6,7,8,9];
-          $managemet = $this->model('management')->find($array[array_rand($array,1)]);
-       // $managemet = auth()->user()->management;
+        $array = [8];
+        $managemet = $this->model('management')->find($array[array_rand($array, 1)]);
+        // $managemet = auth()->user()->management;
         if (!$managemet->construction) return back();
         $form = ModuleController::form($construccione, $managemet, 'admin.modules.construcciones.store', 'admin.modules.construcciones.update');
 

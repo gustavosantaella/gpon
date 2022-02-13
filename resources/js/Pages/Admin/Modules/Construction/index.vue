@@ -1,6 +1,7 @@
 <template>
 
     <canvas  v-show="constructionFilter.length" id="myChart" width="400" height="200"></canvas>
+
     <datatable
 
       :items="this.construction"
@@ -33,12 +34,12 @@
           <td
             class="text-center fw-bold"
             :data-construction="`construction-porcent-${construction.id}`"
+               v-for="(management, key) of this.managements"
             :class="{
               'text-danger': this.printPorcent(construction, key) === '0%',
               'text-warning': this.printPorcent(construction, key) === '50%',
               'text-success': this.printPorcent(construction, key) === '100%',
             }"
-            v-for="(management, key) of this.managements"
             :key="management.id"
             :ref="`construction-porcent-${construction.id}`"
             v-html="this.printPorcent(construction, key)"
@@ -81,7 +82,7 @@
             'user',
             'permissions'
           )"
-              @click="this.destroy(construction)"
+              @click="this.show(construction)"
               class="btn btn-sm btn-dark"
             >
               <i class="fas fa-eye"></i>
@@ -182,18 +183,29 @@ export default {
       alert(JSON.stringify(construction));
     },
     show(construction) {
-      alert(JSON.stringify(construction));
+
+        let generalPorcent = this.printGeneralPorcent(construction.answers)
+            let url = route('admin.modules.construcciones.show', {
+            construccione:construction.id,
+            porcent:generalPorcent
+        });
+        this.$inertia.visit(url)
     },
 
     printPorcent(construction, key) {
-      let order = construction.answers.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      let porcents = order.map((answer) => {
-        return answer.porcent;
-      })[key];
-      this.porcent.total.push(porcents);
-      return porcents === undefined ? `0%` : `${porcents}%`;
+    //   let order = construction.answers.sort(function (a, b) {
+    //     return a.id - b.id;
+    //   });
+
+    //   let porcents = order.map((answer) => {
+    //     return answer.porcent;
+    //   })[key];
+
+        let porcents = this.managements.map(management => {
+           return !management.answers ? 23 : management.answers.map(answer => answer.porcent)
+        })[key]
+
+      return porcents.length === 0 ? `0%` : `${porcents}%`;
     },
 
     printGeneralPorcent(answers) {

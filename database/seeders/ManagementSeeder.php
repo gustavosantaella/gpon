@@ -74,7 +74,7 @@ class ManagementSeeder extends Seeder
         ]);
 
           Management::create([
-            'name'=>'implementacion',
+            'name'=>'conmutacion',
             'acronym'=>'imp',
             'position'=>10,
             'construction'=>true

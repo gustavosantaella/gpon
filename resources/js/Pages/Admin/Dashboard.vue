@@ -1,9 +1,10 @@
 <template>
-  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="header-nav">
+  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark justify-content-between" id="header-nav">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3 fw-bold" href="index.html">GPRA</a>
     <!-- Sidebar Toggle-->
-    <button
+    <div class='d-flex'>
+        <button
       class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
       id="sidebarToggle"
       href="#!"
@@ -38,6 +39,7 @@
         </ul>
       </li>
     </ul>
+    </div>
   </nav>
   <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -74,7 +76,7 @@
 }
 
 #header-nav{
-  background: linear-gradient(184deg,#0606ec, #f2f2f2);
+  background: linear-gradient(181deg,#0606ec, #f2f2f2);
 }
 </style>
 

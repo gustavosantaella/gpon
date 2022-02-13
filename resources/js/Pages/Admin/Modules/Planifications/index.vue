@@ -85,7 +85,7 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label for="name">Nombre</label>
+                <label for="name">Nombre del proyecto</label>
                 <input
                   type="text"
                   v-model="this.form.name"

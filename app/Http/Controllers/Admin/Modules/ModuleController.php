@@ -17,7 +17,7 @@ class ModuleController extends BaseController
     public static function form(Model $parent_model, Management $management, string $routeStore, string $routeUpdate)
     {
 
-        $tasks = $management->tasks()->orderBy('id','desc')->get();
+        $tasks = $management->tasks()->orderBy('id', 'desc')->get();
 
         $answer = $parent_model->answers()->get_management($management->id)->first();
 
@@ -64,13 +64,13 @@ class ModuleController extends BaseController
 
         $request->validate([
             'data' => ['required', 'array'],
-             'data.*' => ['required'],
+            'data.*' => ['required'],
 
 
         ]);
 
         $management = $this->model('management')->find($request->management_id);
-        if($management->construction){
+        if ($management->construction) {
             $request->validate([
                 'data.*.observation' => ['required']
 
@@ -78,15 +78,14 @@ class ModuleController extends BaseController
         }
 
         foreach ($request->data as $data) {
-            if($management->construction){
+            if ($management->construction) {
                 if (!File::exists($data['answer']) && is_numeric($data['answer'])) {
-                        if($data['answer'] >100){
+                    if ($data['answer'] > 100) {
 
-                            Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
-                            return back();
-                        }
-
-                 }
+                        Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
+                        return back();
+                    }
+                }
             }
         }
 
@@ -180,6 +179,8 @@ class ModuleController extends BaseController
                 $porcent += 100;
             } else {
 
+
+
                 if ($value > 100) {
                     $notPorcents[] = $value;
                     $value = 0;
@@ -189,10 +190,13 @@ class ModuleController extends BaseController
 
             if (isset($data['line_id'])) {
 
-                $lines = $answer->lines()->find($data['line_id'])->update([
+               $lines = $answer->lines()->find($data['line_id']);
+               if($value >= $lines->answer){
+                   $lines->update([
                     'answer' => $value,
                     'observation' => $data['observation'] ?? null
                 ]);
+               }
             } else $this->create($answer, $value, $data);
         }
 
@@ -200,6 +204,7 @@ class ModuleController extends BaseController
 
         if (count($notPorcents) > 0) {
             Session::flash('menssage', 'Los porcentajes(%) no pueden ser mayor a 100(%)');
+
             $return =   back();
         } else {
             Session::flash('status', 200);
@@ -208,17 +213,17 @@ class ModuleController extends BaseController
 
         $totalPorcent =  floor($porcent / $taskCount);
 
-        if (!$answer->porcent) {
-            if ($totalPorcent < $answer->porcent) {
-                $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
-            } else $answer->porcent =  ($totalPorcent);
+
+        if ($totalPorcent < $answer->porcent) {
+            $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
         } else {
-            if ($totalPorcent < $answer->porcent) {
-                $return = back()->with('error', 'La sumatoria de porcentajes no puede ser menor al porcentaje de la construccion');
-            } else $answer->porcent =  ($totalPorcent);
+
+            $answer->porcent =  ($totalPorcent);
+            $answer->save();
         }
 
-        $answer->save();
+
+
 
         // dd($porcent);
 
