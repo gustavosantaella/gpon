@@ -44,13 +44,21 @@
                                     text:'editar',
                                     method:'editTask',
                                     class:'btn btn-sm fw-bold btn-primary',
-                                    permission:(is('CONSULTOR'))
+                                    permission:  this.hasRolesOrPermissions(
+              'editar actividad',
+              'user',
+              'permissions'
+            ),
                                 },
                                 {
                                     text:'eliminar',
                                     method:'deleteTask',
                                     class:'btn btn-sm fw-bold btn-danger',
-                                    permission:(is('CONSULTOR'))
+                                    permission:  this.hasRolesOrPermissions(
+              'remover actividad',
+              'user',
+              'permissions'
+            ),
                                 },
                                 ]"
                                             :modal="{

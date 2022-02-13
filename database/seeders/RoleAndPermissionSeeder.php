@@ -196,6 +196,24 @@ class RoleAndPermissionSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
+                 [
+                    'name' => 'agregar actividad',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+            [
+                'name' => 'editar actividad',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'remover actividad',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             ];
         $permissionId = [];
         foreach ($permissionArray as $data) :

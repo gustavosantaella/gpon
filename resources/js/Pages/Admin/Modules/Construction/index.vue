@@ -58,7 +58,7 @@
           </td>
           <td>
             <button
-            v-show="this.$page.props.flash.userManagement.construction"
+            v-show="this.$page.props.flash.userManagement.construction || true"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >
@@ -200,7 +200,7 @@ export default {
         construccione: construction.id,
       });
       this.$inertia.visit(ruta, {
-         management: management.id,
+        // management: management.id,
        // management: management.id,
       });
     },

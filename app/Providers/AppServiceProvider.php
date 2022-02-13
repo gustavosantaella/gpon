@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Management;
 use App\Models\Subscription;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      $energia =   Management::whereName('CONSTRUCCION ENERGIA')->with('tasks')->first();
+      $energia_tasks = [
+
+      ];
 
     }
 }
