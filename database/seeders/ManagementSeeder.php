@@ -73,6 +73,13 @@ class ManagementSeeder extends Seeder
             'construction'=>true
         ]);
 
+          Management::create([
+            'name'=>'implementacion',
+            'acronym'=>'imp',
+            'position'=>10,
+            'construction'=>true
+        ]);
+
 
     }
 }

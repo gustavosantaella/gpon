@@ -75,6 +75,17 @@
             >
               <i class="fas fa-trash"></i>
             </button>
+             <button
+              v-show=" this.hasRolesOrPermissions(
+            'ver construccion',
+            'user',
+            'permissions'
+          )"
+              @click="this.destroy(construction)"
+              class="btn btn-sm btn-dark"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
           </td>
         </tr>
       </template>

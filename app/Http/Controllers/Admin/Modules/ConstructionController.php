@@ -67,7 +67,11 @@ class ConstructionController extends BaseController
             $answer = $planification->answers()->findOrfail($request->answer_id);
             $module = new ModuleController();
 
-            return $module->update($planification, $answer);
+            $status =  $module->update($planification, $answer);
+            if($status){
+                
+                 return redirect()->route('admin.modules.construcciones.index')->with('status', 200);
+            }
         } catch (\Throwable $th) {
 
             return back()->with("error", "Por favor comuniquese con soporte... Mensaje: {$th->getMessage()}");

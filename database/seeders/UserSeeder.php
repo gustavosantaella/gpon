@@ -14,15 +14,36 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        User::truncate();
+        $gustavo = User::create([
         'name'=>'gustavo santaella',
         'email'=>'gsanta01@cantv.com.ve',
         'password'=> Hash::make('password')
                 ]);
 
+         $erika = User::create([
+        'name'=>'erika ortiz',
+        'email'=>'eorti1@cantv.com.ve',
+        'password'=> Hash::make('password')
+                ]);
+
+              $alexis = User::create([
+        'name'=>'alexis marcano',
+        'email'=>'amarca02@cantv.com.ve',
+        'password'=> Hash::make('password')
+                ]);
+
+                 $andres = User::create([
+        'name'=>'andres sobczack',
+        'email'=>'asobcz01@cantv.com.ve',
+        'password'=> Hash::make('password')
+                ]);
+
         User::factory(10)->create();
 
-        $user->assignRole('SUPER USUARIO');
+        
+
+        $gustavo->assignRole('SUPER USUARIO');
         // $user->management()->sync();
     }
 }
