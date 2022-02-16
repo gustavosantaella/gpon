@@ -14,18 +14,16 @@
         <th>MUNICIPIO</th>
         <th>PARROQUIA</th>
         <th>NOMBRE</th>
-        <!-- <th>INFRAESTRUCTURA</th>
-        <th>FIBRA OPTICA</th>
-        <th>RED LOCAL</th>
-        <th>ENERGIA</th> -->
+
         <th v-for="management in this.managements" :key="management.id">
-          {{ management.name.replace("CONSTRUCCION", "") }}
+          {{ management.name }}
         </th>
         <th>AVANCE</th>
         <th>OPCIONES</th>
       </template>
       <template v-slot:items>
-        <tr v-for="construction in constructionFilter" :key="construction.id">
+        <tr v-for="(construction, index) in constructionFilter" :key="construction.id">
+         
           <td>{{ construction.id }}</td>
           <td>{{ construction.planification.parish.municipality.state.name }}</td>
           <td>{{ construction.planification.parish.municipality.name }}</td>
@@ -34,16 +32,21 @@
           <td
             class="text-center fw-bold"
             :data-construction="`construction-porcent-${construction.id}`"
-               v-for="(management, key) of this.managements"
+               v-for="(answer, key) in print([{
+                               porcent:10,
+                               id:1
+                              },{
+                               porcent:20,
+                               id:2
+                              }])"
             :class="{
-              'text-danger': this.printPorcent(construction, key) === '0%',
-              'text-warning': this.printPorcent(construction, key) === '50%',
-              'text-success': this.printPorcent(construction, key) === '100%',
+              'text-danger': answer.porcent <=20,
+              'text-warning': answer.porcent <= 60,
+              'text-success': answer.porcent === 100,
             }"
-            :key="management.id"
-            :ref="`construction-porcent-${construction.id}`"
-            v-html="this.printPorcent(construction, key)"
-          ></td>
+            :key="answer.id"
+            
+          >{{answer.porcent}}%</td>
           <td
             class="fw-bold text-center"
             :class="{
@@ -171,6 +174,17 @@ export default {
   },
 
   methods: {
+
+    print(answers){
+   
+      return answers;
+    },
+
+      printManagements(){
+   
+      return 2;
+    },
+
     randomColor() {
       const randomBetween = (min, max) =>
         min + Math.floor(Math.random() * (max - min + 1));
@@ -192,7 +206,7 @@ export default {
         this.$inertia.visit(url)
     },
 
-    printPorcent(construction, key) {
+    printPorcent(construction, key, management, index) {
     //   let order = construction.answers.sort(function (a, b) {
     //     return a.id - b.id;
     //   });
@@ -201,11 +215,26 @@ export default {
     //     return answer.porcent;
     //   })[key];
 
-        let porcents = this.managements.map(management => {
-           return !management.answers ? 23 : management.answers.map(answer => answer.porcent)
-        })[key]
+    const { answers, id } = construction
+   
+    var is = -1;
+    answers.find((item, i) => {
+     
+      if(item.answer_id == id && item.management_id == management.id)
+        {
+          is = i
+          return i
+        }
+        
+    })
 
-      return porcents.length === 0 ? `0%` : `${porcents}%`;
+   if(this.construction[index].answers[is] == undefined) return 0
+
+    return this.construction[index].answers[is].porcent
+
+    return 0
+
+
     },
 
     printGeneralPorcent(answers) {

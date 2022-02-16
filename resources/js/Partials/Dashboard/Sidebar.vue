@@ -7,7 +7,7 @@
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    Dashboard
+                    Panel de control
                 </nav-link>
 
                 <div v-show="true ||$page.props.flash.userManagement">
