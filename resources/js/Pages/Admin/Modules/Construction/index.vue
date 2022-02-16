@@ -18,9 +18,16 @@
         <th>FIBRA OPTICA</th>
         <th>RED LOCAL</th>
         <th>ENERGIA</th> -->
-        <th v-for="management in this.managements" :key="management.id">
+        <template  v-for="management in this.managements" :key="management.id">
+        <th>
           {{ management.name.replace("CONSTRUCCION", "") }}
         </th>
+
+        <th>
+          {{ management.porcent }}
+        </th>
+         </template>
+        
         <th>AVANCE</th>
         <th>OPCIONES</th>
       </template>
@@ -34,16 +41,16 @@
           <td
             class="text-center fw-bold"
             :data-construction="`construction-porcent-${construction.id}`"
-               v-for="(management, key) of this.managements"
+               v-for="(answer, key) in construction.answers"
             :class="{
-              'text-danger': this.printPorcent(construction, key) === '0%',
-              'text-warning': this.printPorcent(construction, key) === '50%',
-              'text-success': this.printPorcent(construction, key) === '100%',
+              'text-danger': answer.porcent === '0%',
+              'text-warning': answer.porcent === '50%',
+              'text-success': answer.porcent === '100%',
             }"
-            :key="management.id"
-            :ref="`construction-porcent-${construction.id}`"
-            v-html="this.printPorcent(construction, key)"
-          ></td>
+            :key="answer.id"
+            :ref="`construction-porcent-${answer.id}`"
+           
+          >{{answer.porcent}}</td>
           <td
             class="fw-bold text-center"
             :class="{
