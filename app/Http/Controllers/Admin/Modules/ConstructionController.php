@@ -16,7 +16,7 @@ class ConstructionController extends BaseController
         $query = Construction::query();
 
 
-        $query->with(['answers', 'managements', 'managements.answers' => function($query){
+        $query->with(['answers.management', 'managements', 'managements.answers' => function($query){
             
         }, 'planification' => function ($builder) use ($request) {
 
@@ -24,7 +24,6 @@ class ConstructionController extends BaseController
             }, 'planification.parish.municipality.state']);
 
         $construction = $query->get();
-
 	$managements =
 	       
 	$this->model('management')->whereConstruction(true)->with(['answers'])->get();

@@ -17,8 +17,8 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('management_id')->references('id')->on('managements')->onDelete('cascade');
             $table->string('title');
-            $table->longText('description');
-            $table->bigInteger('end_days');
+	   $table->integer('porcent')->index()->nullable();
+	    $table->bigInteger('end_days');
             $table->softDeletes();
             $table->timestamps();
         });

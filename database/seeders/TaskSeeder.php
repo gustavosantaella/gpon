@@ -21,31 +21,26 @@ class TaskSeeder extends Seeder
         $oc_task = [
             [
                 'title' => 'solicitud de permiso',
-                'description' => 'solicitud de permiso',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'aprobacion de permisos',
-                'description' => 'aprobacion de permisos',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'procura de materiales',
-                'description' => 'procura de materiales',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'construccion de obra',
-                'description' => 'construccion de obra',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'certificacion oc',
-                'description' => 'certificacion oc',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
@@ -60,43 +55,36 @@ class TaskSeeder extends Seeder
         $rl_task = [
             [
                 'title' => 'replanteo rl',
-                'description' => 'replanteo rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'creacion de reserva rl',
-                'description' => 'creacion de reserva rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'atencion de reserva rl',
-                'description' => 'atencion de reserva rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'obra civil y posteadura rl',
-                'description' => 'obra civil y posteadura rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'tendido rl',
-                'description' => 'tendido rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'empalme y peinado rl',
-                'description' => 'empalme y peinado rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'pruebas y certificacion rl',
-                'description' => 'pruebas y certificacion rl',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
@@ -111,62 +99,52 @@ class TaskSeeder extends Seeder
         $ix_task = [
             [
                 'title' => 'solicitud de ix',
-                'description' => 'solicitud de ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'entrega del proyecto ix',
-                'description' => 'entrega del proyecto ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'contratacion del proyecto',
-                'description' => 'contratacion del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'replanteo ix',
-                'description' => 'replanteo ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'creacion de reserva ix',
-                'description' => 'creacion de reserva ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'atencion de reserva ixx',
-                'description' => 'atencion de reserva ixx',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'obra civil y posteadura ix',
-                'description' => 'obra civil y posteadura ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'tendido ix',
-                'description' => 'tendido ix',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
 
             [
                 'title' => 'empalme y fusion',
-                'description' => 'empalme y fusion',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'pruebas y certifiacion',
-                'description' => 'pruebas y certifiacion',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
@@ -181,49 +159,41 @@ class TaskSeeder extends Seeder
         $ex_task = [
             [
                 'title' => 'solicitud de factibilidad',
-                'description' => 'solicitud de factibilidad',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'aprobacion de factibilidad',
-                'description' => 'aprobacion de factibilidad',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'entrega del proyecto',
-                'description' => 'entrega del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'aprobacion del proyecto',
-                'description' => 'aprobacion del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'construccion de spat',
-                'description' => 'construccion de spat',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'solicitud de corte electrico',
-                'description' => 'solicitud de corte electrico',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'aprobacion de corte electrico',
-                'description' => 'aprobacion de corte electrico',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'construccion de acometida',
-                'description' => 'construccion de acometida',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
@@ -239,19 +209,16 @@ class TaskSeeder extends Seeder
         $con_task = [
             [
                 'title' => 'solicitud de data e abonados',
-                'description' => 'solicitud de data e abonados',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'validacion de data de abonados',
-                'description' => 'validacion de data de abonados',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'matriz de transferencia ia',
-                'description' => 'matriz de transferencia ia',
                 'end_days' => 1,
                 'field_type' => 'number',
             ],

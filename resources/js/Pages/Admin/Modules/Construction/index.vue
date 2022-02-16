@@ -14,10 +14,12 @@
         <th>MUNICIPIO</th>
         <th>PARROQUIA</th>
         <th>NOMBRE</th>
-
-        <th v-for="management in this.managements" :key="management.id">
-          {{ management.name }}
-        </th>
+        <!-- <th>INFRAESTRUCTURA</th>
+        <th>FIBRA OPTICA</th>
+        <th>RED LOCAL</th>
+        <th>ENERGIA</th> -->
+       
+        
         <th>AVANCE</th>
         <th>OPCIONES</th>
       </template>
@@ -29,24 +31,7 @@
           <td>{{ construction.planification.parish.municipality.name }}</td>
           <td>{{ construction.planification.parish.name }}</td>
           <td>{{ construction.planification.name }}</td>
-          <td
-            class="text-center fw-bold"
-            :data-construction="`construction-porcent-${construction.id}`"
-               v-for="(answer, key) in print([{
-                               porcent:10,
-                               id:1
-                              },{
-                               porcent:20,
-                               id:2
-                              }])"
-            :class="{
-              'text-danger': answer.porcent <=20,
-              'text-warning': answer.porcent <= 60,
-              'text-success': answer.porcent === 100,
-            }"
-            :key="answer.id"
-            
-          >{{answer.porcent}}%</td>
+          
           <td
             class="fw-bold text-center"
             :class="{
@@ -175,16 +160,6 @@ export default {
 
   methods: {
 
-    print(answers){
-   
-      return answers;
-    },
-
-      printManagements(){
-   
-      return 2;
-    },
-
     randomColor() {
       const randomBetween = (min, max) =>
         min + Math.floor(Math.random() * (max - min + 1));
@@ -193,9 +168,8 @@ export default {
       const b = randomBetween(0, 255);
     return`rgb(${r},${g},${b})`;
     },
-    edit(construction) {
-      alert(JSON.stringify(construction));
-    },
+ 
+
     show(construction) {
 
         let generalPorcent = this.printGeneralPorcent(construction.answers)
@@ -206,36 +180,6 @@ export default {
         this.$inertia.visit(url)
     },
 
-    printPorcent(construction, key, management, index) {
-    //   let order = construction.answers.sort(function (a, b) {
-    //     return a.id - b.id;
-    //   });
-
-    //   let porcents = order.map((answer) => {
-    //     return answer.porcent;
-    //   })[key];
-
-    const { answers, id } = construction
-   
-    var is = -1;
-    answers.find((item, i) => {
-     
-      if(item.answer_id == id && item.management_id == management.id)
-        {
-          is = i
-          return i
-        }
-        
-    })
-
-   if(this.construction[index].answers[is] == undefined) return 0
-
-    return this.construction[index].answers[is].porcent
-
-    return 0
-
-
-    },
 
     printGeneralPorcent(answers) {
       if (answers !== undefined && answers.length)
