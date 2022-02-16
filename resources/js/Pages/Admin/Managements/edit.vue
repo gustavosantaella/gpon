@@ -171,15 +171,6 @@
                 </div> -->
 
             </div>
-            <div>
-                <h2>Roles</h2>
-                <app-select
-                    :data="this.roles"
-                    :route="route('admin.gerencias.addOrRemoveRole',{
-                        gerencia:this.gerencia.id
-                    })"
-                ></app-select>
-            </div>
 
         </div>
     </Dashboard>

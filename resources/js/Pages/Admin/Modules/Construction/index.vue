@@ -14,12 +14,6 @@
         <th>MUNICIPIO</th>
         <th>PARROQUIA</th>
         <th>NOMBRE</th>
-        <!-- <th>INFRAESTRUCTURA</th>
-        <th>FIBRA OPTICA</th>
-        <th>RED LOCAL</th>
-        <th>ENERGIA</th> -->
-       
-        
         <th>AVANCE</th>
         <th>OPCIONES</th>
       </template>
@@ -36,9 +30,9 @@
             class="fw-bold text-center"
             :class="{
               'text-danger':
-                this.printGeneralPorcent(construction.answers) == '0',
+                this.printGeneralPorcent(construction.answers) <= '10',
               'text-warning':
-                this.printGeneralPorcent(construction.answers) == '50',
+                this.printGeneralPorcent(construction.answers) <= '70',
               'text-success':
                 this.printGeneralPorcent(construction.answers) == '100',
             }"
@@ -159,7 +153,6 @@ export default {
   },
 
   methods: {
-
     randomColor() {
       const randomBetween = (min, max) =>
         min + Math.floor(Math.random() * (max - min + 1));
