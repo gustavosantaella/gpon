@@ -1,35 +1,29 @@
 <template>
     <Dashboard>
         <div class="form-responsive">
-            <app-form
+            <!--<app-form
             :class="'btn btn-sm btn-primary col-md-2 '"
             :data="this.gerencia"
             :url="route('admin.gerencias.update',{gerencia:this.gerencia.id})"
             :method="'put'"
             >
-              <template v-slot:content>
+              <template v-slot:content>-->
                   <div class="row mb-3">
                       <div class=" col-md-4">
                           <label for="name">Nombre:</label>
-                          <input type="text" required name="name" id="name" class="form-control"
+                          <input disabled type="text" required name="name" id="name" class="form-control"
                                  v-model="this.gerencia.name">
-                          <small v-if='this.$page.errors'>{{ this.$page.errors.name }}</small>
-                      </div>
-                      <div class=" col-md-4">
-                          <label for="acronimo">Nombre(Acronimo):</label>
-                          <input type="text" required name="acronimo" id="acronimo" class="form-control"
-                                 v-model="this.gerencia.name">
-                          <small v-if='this.$page.errors'>{{ this.$page.errors.name }}</small>
+                          <small  v-if='this.$page.errors'>{{ this.$page.errors.name }}</small>
                       </div>
                       <div class="col-md-4">
                           <label class="form-check-label mx-1" for="position">Orden</label>
-                          <input type="number" class="form-control" v-model="this.gerencia.position" id="position">
+                          <input disabled type="number" class="form-control" v-model="this.gerencia.position" id="position">
                       </div>
 
                   </div>
 
-              </template>
-            </app-form>
+              <!--</template>
+            </app-form>-->
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="row">
@@ -91,14 +85,11 @@
                                                        class="form-control">
 
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="descriptionofactivity">Descripcion de la
-                                                    actividiad:</label>
-                                                <textarea required v-model="this.task.description"
-                                                          id="descriptionofactivity" cols="30"
-                                                          rows="10"
-                                                          class="form-control">{{this.task.description}}</textarea>
-                                            </div>
+					<div class="mb-3">
+
+					<label for="porcer">Porcentaje</label>
+					<input type="number" min="1" max="100" v-model="task.porcent" class="form-control" id="porcent">
+					 </div>
                                             <div class="mb-3">
                                                 <label for="field_type">Tipo de campo:</label>
                                               <select required='true'  v-model='this.task.field_type'
@@ -216,7 +207,7 @@ export default {
             task: {
                 title: null,
                 field_type:null,
-                description: null,
+                porcent: null,
                 end_days: null,
             },
             form: {

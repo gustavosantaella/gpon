@@ -28,7 +28,6 @@ class ManagementController extends BaseController
         $data = $this->request()->validate([
             'name' => ['required', "unique:managements"],
             'position' => ['required', "unique:managements"],
-            'acronym' => ['required', "unique:managements"],
 
         ]);
 
@@ -71,13 +70,13 @@ class ManagementController extends BaseController
 
         $this->request()->validate([
             'title' => ['required', 'unique:tasks'],
-	    'porcent'=>['required', 'number'],
+	    'porcent'=>['required', 'numeric'],
             'end_days' => 'required',
             'field_type' => 'required'
         ]);
 
 
-        $data = $this->request()->only(['title', 'description', 'end_days', 'field_type']);
+        $data = $this->request()->only(['title', 'porcent', 'end_days', 'field_type']);
         if ($gerencia)
             $gerencia->tasks()->create($data);
 
@@ -89,7 +88,7 @@ class ManagementController extends BaseController
 
         $this->request()->validate([
             'title' => ['required', "unique:tasks,title,{$this->request()->id}"],
-             'porcent'=>['required', 'number'],   
+             'porcent'=>['required', 'numeric'],   
             'end_days' => 'required',
             'field_type' => 'required'
         ]);
