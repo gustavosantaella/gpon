@@ -88,7 +88,7 @@
             }" :ref='"container-"+task.id'>
                   <div v-for="(line, index) in task.lines" :key='line.id'  class='mx-4 mt-2'>
               <div class='d-flex flex-column mb-3'>
-                    <label class='fw-bold' :for="'task'+line.task.id"> {{ `${i+1}.${index+1}) ` }}  {{   line.task.title  }}</label>
+                    <label class='fw-bold' :for="'task'+line.task.id"> {{ `${i+1}.${index+1}) ` }}  {{   line.task.title  }} {{ line.task.porcent }}</label>
               <div class="row">
                     <!-- <input type="text" class='mt-2 col-md-2' :value='line.answer+"%"' disabled :id="'task'+line.task.id">
                   <span class=" mt-2 col-md-1">/</span>
