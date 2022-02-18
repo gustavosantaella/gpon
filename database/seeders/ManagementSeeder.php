@@ -43,21 +43,21 @@ class ManagementSeeder extends Seeder
          Management::create([
             'name'=>'construccion infraestructura',
 	    'position'=>6,
-	    'porcent'=>15,
+	    'porcent'=>20,
             'construction'=>true
         ]);
 
         Management::create([
             'name'=>'construccion fibra optica',
 	    'position'=>7,
-	    'porcent'=>10,
+	    'porcent'=>20,
             'construction'=>true
         ]);
 
          Management::create([
             'name'=>'construccion red local',
 	    'position'=>8,
-	    'porcent'=>10,
+	    'porcent'=>20,
             'construction'=>true
         ]);
 
@@ -71,7 +71,7 @@ class ManagementSeeder extends Seeder
           Management::create([
             'name'=>'conmutacion',
 	    'porcent'=>5,
-            'position'=>10,
+            'position'=>20,
             'construction'=>true
         ]);
 
