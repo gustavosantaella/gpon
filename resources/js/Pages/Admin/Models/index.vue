@@ -1,6 +1,6 @@
 <template>
     <Dashboard>
-    
+
         <Datatable
         :modal="{
             id:'modalProvider',
@@ -29,12 +29,12 @@
          text:'editar',
          method:'edit',
          class:'btn-primary',
-         permission:(is('CONSULTOR'))
+         permission:(hasRolesOrPermissions('editar modelo', 'user', 'permissions'))
      },{
          text:'delete',
          method:'delete',
          class:'btn-danger',
-         permission:(is('CONSULTOR'))
+           permission:(hasRolesOrPermissions('elimnar modelo', 'user', 'permissions'))
      }]"
      >
      <template v-slot:modalProvider>

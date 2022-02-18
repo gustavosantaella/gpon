@@ -24,12 +24,12 @@
          text:'editar',
          method:'edit',
          class:'btn-primary',
-         permission:(is('CONSULTOR'))
+         permission:(hasRolesOrPermissions('editar proveedor', 'user', 'permissions'))
      },{
          text:'delete',
          method:'delete',
          class:'btn-danger',
-         permission:(is('CONSULTOR'))
+         permission:(hasRolesOrPermissions('eliminar proveedor', 'user', 'permissions'))
      }]"
      >
      <template v-slot:modalProvider>
@@ -73,7 +73,7 @@
                 method:null,
                 action:null,
                 form:{
-                    name:null,  
+                    name:null,
                 },
                 modal:null,
             }

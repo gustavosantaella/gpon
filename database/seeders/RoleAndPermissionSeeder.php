@@ -40,38 +40,38 @@ class RoleAndPermissionSeeder extends Seeder
                     'updated_at' => now(),
                 ],
 
-            [
-                'name' => 'Editar unidad',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                [
+                    'name' => 'Editar unidad',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
 
-            [
-                'name' => 'agregar modelos',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'editar modelos',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                [
+                    'name' => 'agregar modelos',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'editar modelos',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
 
-            [
-                'name' => 'eliminar modelos',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'listar modelos',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                [
+                    'name' => 'eliminar modelos',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'listar modelos',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
 
 
                 [
@@ -141,23 +141,59 @@ class RoleAndPermissionSeeder extends Seeder
                     'updated_at' => now(),
                 ],
                 [
+                    'name' => 'agregar modelo',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'eliminar modelo',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'editar modelo',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'agregar proveedor',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'eliminar proveedor',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'editar proveedor',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
                     'name' => 'aprobar requerimiento',
                     'guard_name' => 'web',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-            [
-                'name' => 'solicitar requerimiento',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'completar requerimiento',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                [
+                    'name' => 'solicitar requerimiento',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'completar requerimiento',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
                 [
                     'name' => 'eliminar requerimiento',
                     'guard_name' => 'web',
@@ -196,30 +232,30 @@ class RoleAndPermissionSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-                    [
-                        'name' => 'ver construccion',
-                        'guard_name' => 'web',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ],
-            [
-                'name' => 'agregar actividad',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'editar actividad',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-             [
-                'name' => 'remover actividad',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+                [
+                    'name' => 'ver construccion',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'agregar actividad',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'editar actividad',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'name' => 'remover actividad',
+                    'guard_name' => 'web',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
             ];
         $permissionId = [];
         foreach ($permissionArray as $data) :
@@ -233,8 +269,8 @@ class RoleAndPermissionSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        $role1->permissions()->attach($permissionId);
-        User::whereEmail('gsanta01@cantv.com.ve')->first()->assignRole($role1);
+        $role1->permissions()->sync($permissionId);
+        User::whereEmail('gsanta01@cantv.com.ve')->first()->roles()->sync($role1);
 
         $role2 = Role::create([
             'name' => 'consultor',

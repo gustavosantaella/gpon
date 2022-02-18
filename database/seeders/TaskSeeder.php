@@ -47,8 +47,10 @@ class TaskSeeder extends Seeder
 
         ];
 
+        $percentage = 100 / count($oc_task);
         foreach ($oc_task as $task) {
-            $oc->tasks()->create($task);
+            $array  = ['porcent' => floor($percentage)];
+            $oc->tasks()->create(array_merge($task, $array));
         }
 
         $rl =   Management::whereName('CONSTRUCCION RED LOCAL')->first();
@@ -91,8 +93,10 @@ class TaskSeeder extends Seeder
 
         ];
 
+        $percentage = 100 / count($rl_task);
         foreach ($rl_task as $task) {
-            $rl->tasks()->create($task);
+            $array  = ['porcent' => floor($percentage)];
+            $rl->tasks()->create(array_merge($task, $array));
         }
 
         $ix =   Management::whereName('CONSTRUCCION FIBRA OPTICA')->first();
@@ -150,9 +154,10 @@ class TaskSeeder extends Seeder
             ],
 
         ];
-
+   $percentage = 100 / count($ix_task);
         foreach ($ix_task as $task) {
-            $ix->tasks()->create($task);
+               $array  = ['porcent' => floor($percentage)];
+            $ix->tasks()->create(array_merge($task,$array));
         }
 
         $ex =   Management::whereName('CONSTRUCCION ENERGIA')->first();
@@ -200,9 +205,10 @@ class TaskSeeder extends Seeder
 
 
         ];
-
+        $percentage = 100 / count($ex_task);
         foreach ($ex_task as $task) {
-            $ex->tasks()->create($task);
+            $array  = ['porcent' => floor($percentage)];
+            $ex->tasks()->create(array_merge($task, $array));
         }
 
         $con =   Management::whereName('CONMUTACION')->first();
@@ -210,16 +216,19 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'solicitud de data e abonados',
                 'end_days' => 1,
+                'porcent' => 33,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'validacion de data de abonados',
                 'end_days' => 1,
+                'porcent' => 33,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'matriz de transferencia ia',
                 'end_days' => 1,
+                'porcent'=>33,
                 'field_type' => 'number',
             ],
 

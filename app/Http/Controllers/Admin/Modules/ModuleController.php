@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\BaseController;
 use App\Models\Management;
+use App\Models\Task;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 
@@ -114,8 +115,9 @@ class ModuleController extends BaseController
 
     public function create($answer, $value, $data)
     {
+        $task = Task::find($data['task_id']);
         $answer->lines()->create([
-            'task_id' => $data['task_id'],
+            'task_id' => $task->id,
             'answer' => $value,
             'observation' => $data['observation'] ?? null
         ]);
@@ -162,6 +164,7 @@ class ModuleController extends BaseController
         $request = $this->request();
         $request->validate([
             'data.*.answer' => ['required'],
+            'data.*.task_id' => ['required'],
             'data.*.observation' => ['required'],
         ]);
 
@@ -171,6 +174,8 @@ class ModuleController extends BaseController
         $notPorcents = [];
         $porcent = 0;
         foreach ($request->data as $data) {
+
+            $task = Task::find($data['task_id']);
             $value = $data['answer'];
 
             if (File::exists($value)) {
@@ -178,19 +183,17 @@ class ModuleController extends BaseController
                 $value = $file->store('files', 'public');
                 $porcent += 100;
             } else {
-
-
-
                 if ($value > 100) {
                     $notPorcents[] = $value;
                     $value = 0;
-                } else $porcent += $value;
+                } else $porcent += $value / $task->porcent;
             }
 
 
             if (isset($data['line_id'])) {
 
                $lines = $answer->lines()->find($data['line_id']);
+              // $answer_porcent = ($value / $lines->task->porcent);
                if($value >= $lines->answer){
                    $lines->update([
                     'answer' => $value,
@@ -211,7 +214,7 @@ class ModuleController extends BaseController
             $return =   redirect()->route('admin.modules.construcciones.index');
         }
 
-        $totalPorcent =  floor($porcent / $taskCount);
+        $totalPorcent =  floor($porcent / $management->porcent);
 
 
         if ($totalPorcent < $answer->porcent) {

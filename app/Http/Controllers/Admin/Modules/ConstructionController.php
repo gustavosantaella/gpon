@@ -16,8 +16,8 @@ class ConstructionController extends BaseController
         $query = Construction::query();
 
 
-        $query->with(['answers.management', 'managements', 'managements.answers' => function($query){
-            
+        $query->with(['answers.management', 'answers.lines.task', 'managements', 'managements.answers' => function($query){
+
         }, 'planification' => function ($builder) use ($request) {
 
                 return $builder->where('name', 'like', '%' . Str::upper($request->text) . '%');
@@ -25,7 +25,7 @@ class ConstructionController extends BaseController
 
         $construction = $query->get();
 	$managements =
-	       
+
 	$this->model('management')->whereConstruction(true)->with(['answers'])->get();
 
 
@@ -83,7 +83,7 @@ class ConstructionController extends BaseController
     public function edit(Construction $construccione)
     {
 
-        $array = [6,7,8,9];
+        $array = [6,7,8,9,10];
         $managemet = $this->model('management')->find($array[array_rand($array, 1)]);
         // $managemet = auth()->user()->management;
         if (!$managemet->construction) return back();

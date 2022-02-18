@@ -34,10 +34,10 @@
 	}
 	]"
 	:options="[{
-         text:'editar',
+         icon:'fas fa-edit',
          method:'edit',
          class:'btn-primary',
-         permission:(is('CONSULTOR'))
+        permission:(this.hasRolesOrPermissions('completar requerimiento', 'user', 'permissions'))
      }]"
 	>
 

@@ -19,13 +19,13 @@
       </template>
       <template v-slot:items>
         <tr v-for="(construction, index) in constructionFilter" :key="construction.id">
-         
+
           <td>{{ construction.id }}</td>
           <td>{{ construction.planification.parish.municipality.state.name }}</td>
           <td>{{ construction.planification.parish.municipality.name }}</td>
           <td>{{ construction.planification.parish.name }}</td>
           <td>{{ construction.planification.name }}</td>
-          
+
           <td
             class="fw-bold text-center"
             :class="{
@@ -107,6 +107,11 @@ export default {
       }
     },
   mounted() {
+    this.chart()
+  },
+
+  methods: {
+    chart(){
 
     const _this = this;
     const ctx = document.getElementById("myChart");
@@ -150,9 +155,7 @@ export default {
         },
       },
     });
-  },
-
-  methods: {
+    },
     randomColor() {
       const randomBetween = (min, max) =>
         min + Math.floor(Math.random() * (max - min + 1));
@@ -161,7 +164,7 @@ export default {
       const b = randomBetween(0, 255);
     return`rgb(${r},${g},${b})`;
     },
- 
+
 
     show(construction) {
 
@@ -175,10 +178,18 @@ export default {
 
 
     printGeneralPorcent(answers) {
+
+
       if (answers !== undefined && answers.length)
-        return Math.floor(
-          answers.map((answer) => answer.porcent).reduce((a, b) => parseInt(a) + parseInt(b)) / this.managements.length
-        ).toFixed(0);
+           {
+                var percentage = 0;
+           answers.forEach((answer)=> {
+             percentage += parseInt(answer.porcent)
+
+            });
+
+        return Math.floor((percentage));
+           }
       else return 0;
     },
 
