@@ -8,41 +8,27 @@ use App\Models\Planification;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\BaseController;
+use App\Models\Technology;
 use App\Notifications\StatusPlanificationNotify;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
-
+use PhpParser\Node\Stmt\TryCatch;
 
 class PlanificationModule extends BaseController
 {
     public static function list(int $id = null)
     {
         $query =  $id ? Planification::find($id) : Planification::query();
-
-        $query->select([
-            'planifications.*',
-            'models.name as modelName',
-            'parishes.id as parishId',
-            'parishes.name as parishName',
-            'municipalities.id as munId',
-            'municipalities.name as munName',
-            'states.id as stateid',
-            'states.name as stateName'
-        ]);
-
-
-        $query->join('parishes', 'parishes.id', 'planifications.parish_id')
-            ->join('municipalities', 'municipalities.id', 'parishes.municipality_id')
-            ->join('states', 'states.id', 'municipalities.state_id')
-            ->join('models', 'models.id', 'planifications.model_id')
-            ->orderBy('id', 'desc');
+        $query->with('parish.municipality.state', 'model', "technology", "file");
 
         return $id ? $query : $query->paginate(5);
     }
     public function index()
     {
         $planifications = self::list();
-        return $this->loadView('Admin.Modules.Planifications.index', compact('planifications'));
+        $technologies = Technology::all();
+        return $this->loadView('Admin.Modules.Planifications.index', compact('planifications', 'technologies'));
     }
 
     public function store()
@@ -53,6 +39,7 @@ class PlanificationModule extends BaseController
             'municipality_id' => ['required', 'numeric'],
             'model_id' => ['required', 'numeric'],
             'state_id' => ['required', 'numeric'],
+            'technology_id' => ['required', 'numeric'],
             'name' => [
                 'required', 'string',
                 Rule::unique('planifications')->where(function ($query) use ($request) {
@@ -66,7 +53,9 @@ class PlanificationModule extends BaseController
             'name',
             'model_id'
         ]);
-        $this->model('planification')->create($request);
+       $planification =  $this->model('planification')->create($request);
+
+       $planification->technology()->attach($this->request()->technology_id);
 
         return back()->with('status', 200);
     }
@@ -132,6 +121,26 @@ class PlanificationModule extends BaseController
             }
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function setDocumentation(Planification $planification )
+    {
+
+        try {
+
+            $file  = ($this->request()->all());
+            if ($file[0]->extension() !== 'zip') return back()->with('error', 'El formato  debe de ser .zip obligatoriamente');
+            $url =  $file[0]->store("planifiaciones-$planification->id");
+
+            $planification->file()->create([
+                'file' => "storage/$url"
+            ]);
+            return back()->with('status', 200);
+        } catch (\Throwable $th) {
+
+
+        return back()->with('error',$th->getMessage() );
         }
     }
 }

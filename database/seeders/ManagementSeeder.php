@@ -15,30 +15,30 @@ class ManagementSeeder extends Seeder
     {
         Management::truncate();
         // Management::factory(400)->create();
-        Management::create([
-            'name'=>'planificaciones',
-            'position'=>1,
-        ]);
+        // Management::create([
+        //     'name'=>'planificaciones',
+        //     'position'=>1,
+        // ]);
 
-        Management::create([
-            'name'=>'fibra optica',
-            'position'=>2,
-        ]);
+        // Management::create([
+        //     'name'=>'fibra optica',
+        //     'position'=>2,
+        // ]);
 
-        Management::create([
-            'name'=>'red local',
-            'position'=>3,
-        ]);
+        // Management::create([
+        //     'name'=>'red local',
+        //     'position'=>3,
+        // ]);
 
-        Management::create([
-            'name'=>'energia',
-            'position'=>4,
-        ]);
+        // Management::create([
+        //     'name'=>'energia',
+        //     'position'=>4,
+        // ]);
 
-        Management::create([
-            'name'=>'infraestructura',
-            'position'=>5,
-        ]);
+        // Management::create([
+        //     'name'=>'infraestructura',
+        //     'position'=>5,
+        // ]);
 
          Management::create([
             'name'=>'construccion infraestructura',

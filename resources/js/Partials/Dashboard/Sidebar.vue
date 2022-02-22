@@ -31,7 +31,7 @@
                         Planificaciones
                     </nav-link>
 
-                    <nav-link
+                    <!-- <nav-link
                         v-show="true ||
                             $page.props.flash.userManagement.name ==
                                 'FIBRA OPTICA' ||
@@ -101,7 +101,7 @@
                             <i class="fas fa-chart-area"></i>
                         </div>
                         Infraestructura
-                    </nav-link>
+                    </nav-link> -->
 
                     <nav-link
                         v-show="true ||

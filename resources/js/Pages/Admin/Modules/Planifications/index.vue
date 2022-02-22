@@ -4,7 +4,7 @@
       <template v-slot:title>Crear nuevo requerimiento</template>
       <template v-slot:content>
         <app-form
-          v-on:submitSuccess="this.success"
+          v-on:submitSuccess="this.success('newRequeriment')"
           :data="this.form"
           :url="this.form.action"
           :method="this.form.method"
@@ -84,6 +84,23 @@
                   </option>
                 </select>
               </div>
+                       <div class="mb-3">
+                <label for="technology">Seleccione una tecnologia</label>
+                <select
+                  required
+                  v-model="this.form.technology_id"
+                  id="technology"
+                  class="form-select"
+                >
+                  <option
+                    v-for="technology in technologies"
+                    :key="technology.id"
+                    :value="technology.id"
+                  >
+                    {{ technology.type }}
+                  </option>
+                </select>
+              </div>
               <div class="mb-3">
                 <label for="name">Nombre del proyecto</label>
                 <input
@@ -96,6 +113,34 @@
             </div>
           </template>
         </app-form>
+      </template>
+</dialog-modal>
+       <dialog-modal id="uploadDocumentation">
+      <template v-slot:title>Subir documentacion </template>
+      <template v-slot:content>
+        <app-form
+        v-if="this.planification &&  !this.planification.file"
+             v-on:submitSuccess="this.success('uploadDocumentation')"
+          :data="form.documentation.files"
+          :url="route('admin.modules.planificaciones.setDocumentation',{
+              planification:this.planification.id
+          })"
+          method="post"
+        >
+          <template v-slot:content>
+           <div>
+                 <input type="file" name="" @change="setDocumentation($event)" class='form-control'  id="">
+           </div>
+          </template>
+        </app-form>
+        <div v-else-if="this.planification">
+
+            <span>
+                   <button class="btn btn-info" @click='downloadDocumentation'>Descargar</button>
+               <button class='btn btn-danger mx-3' @click="removeDocumentation"><i class='fas fa-trash'></i></button>
+            </span>
+
+        </div>
       </template>
     </dialog-modal>
     <button
@@ -111,6 +156,7 @@
     </button>
     <datatable
       v-on:show="this.show"
+        v-on:uploadDocumentation="this.uploadDocumentation"
       :items="this.planifications"
       :url="route('admin.modules.planificaciones.index')"
       :showItems="false"
@@ -120,23 +166,27 @@
           text: 'id',
         },
         {
-          original: 'name',
+          original: (item)=> item.name ,
           text: 'nombre',
         },
         {
-          original: 'stateName',
+          original: (item)=> item.parish.municipality.state.name ,
           text: 'estado',
         },
         {
-          original: 'munName',
+         original: (item)=> item.parish.municipality.name ,
           text: 'municipio',
         },
         {
-          original: 'parishName',
+         original: (item)=> item.parish.name ,
           text: 'parroquia',
         },
+         {
+         original: (item)=> item.technology[0] ? item.technology[0].type : null ,
+          text: 'tecnologia',
+        },
         {
-          original: 'modelName',
+          original: (item)=> item.model.name ,
           text: 'equipo',
         },
         {
@@ -146,9 +196,9 @@
       ]"
       :options="[
         {
-          text: 'editar',
+          icon: 'fas fa-edit',
           method: 'edit',
-          class: 'btn-primary',
+          class: 'btn-sm btn-primary',
           permission: this.hasRolesOrPermissions(
             'EDITAR REQUERIMIENTO',
             'user',
@@ -156,9 +206,9 @@
           ),
         },
         {
-          text: 'delete',
+          icon: 'fas fa-trash',
           method: 'delete',
-          class: 'btn-danger',
+          class: 'btn-sm btn-danger',
           permission: this.hasRolesOrPermissions(
             'ELIMINAR REQUERIMIENTO',
             'user',
@@ -166,9 +216,9 @@
           ),
         },
         {
-          text: 'Ver datos',
-          method: 'show',
-          class: 'btn-secondary',
+          icon: 'fas fa-file',
+          method: 'uploadDocumentation',
+          class: ' btn-sm btn-dark',
           permission: this.hasRolesOrPermissions(
             'VER REQUERIMIENTO',
             'user',
@@ -195,7 +245,7 @@ export default {
     DialogModal,
   },
 
-  props: ["planifications"],
+  props: ["planifications", "technologies"],
   data() {
     return {
       states: [],
@@ -205,12 +255,17 @@ export default {
       form: {
         mehtod: null,
         action: null,
+        technology_id:null,
         state_id: null,
         municipality_id: null,
         parish_id: null,
         model_id: null,
         name: null,
+        documentation:{
+            files:[]
+        }
       },
+      planification:null,
       modal: {
         open: false,
         id: "newRequeriment",
@@ -218,6 +273,21 @@ export default {
     };
   },
   methods: {
+      setDocumentation(event){
+          const { files } = event.target
+            this.form.documentation.files = (files)
+      },
+      uploadDocumentation(data){
+    //         this.getStates();
+    //   this.getModels();
+    //   this.form.method = "post";
+    //   this.form.action = route("admin.modules.planificaciones.store");
+    this.planification = data
+      let element = document.getElementById('uploadDocumentation');
+      let modal = new bootstrap.Modal(element);
+      modal.show();
+      },
+
     show(data) {
       this.$inertia.visit(
         route("admin.modules.planificaciones.show", {
@@ -281,8 +351,10 @@ export default {
       }
     },
 
-    success() {
-      alert(123);
+    success(modalid) {
+         let element = document.getElementById(modalid);
+      let modal = bootstrap.Modal.getInstance(element);
+      modal.hide();
     },
   },
 };

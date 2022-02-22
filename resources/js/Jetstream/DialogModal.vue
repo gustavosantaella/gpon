@@ -6,7 +6,8 @@
           <slot name="title">
           </slot>
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" @click="close()" class="btn-close" ></button>
+        <!-- <button type="button" @click="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
         <slot name="content">
@@ -38,6 +39,13 @@
       maxWidth: {
         default: '2xl'
       }
+    },
+    methods:{
+        close(){
+              let element = document.getElementById(this.id);
+            let modal =  bootstrap.Modal.getInstance(element)
+            modal.hide();
+        }
     }
   })
 </script>

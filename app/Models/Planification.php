@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\Model as ModelCantv;
 class Planification extends Model
 {
     use HasFactory, SoftDeletes;
@@ -30,6 +30,22 @@ class Planification extends Model
         return $this->hasOne(Construction::class);
     }
 
+    public function model()
+    {
+        return $this->belongsTo(ModelCantv::class);
+    }
+
+    public function technology()
+    {
+        return $this->belongsToMany(Technology::class, 'planification_technologies');
+    }
+
+    public function file()
+    {
+        return $this->hasOne(PlanificationFiles::class);
+    }
+
+
 
     // Scopes
 
@@ -46,4 +62,8 @@ class Planification extends Model
     {
         $this->attributes['name'] = Str::upper($name);
     }
+
+    // Accessors
+
+
 }

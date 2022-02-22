@@ -47,7 +47,7 @@
             <tbody>
                    <slot name="items"></slot>
                 <tr v-show="this.items && !this.showItems" v-for='(item, key) in (this.items? this.items.data ? this.items.data: this.items :this.items )' :key='key'>
-                    <td  v-show='this.th ' v-for='(th, key) in this.th' :key='key'>{{ item[th.original] }}</td>
+                    <td  v-show='this.th ' v-for='(th, key) in this.th' :key='key'>{{  typeof th.original === 'function' ? th.original(item)  : item[th.original] }}</td>
                     <td v-show="this.options">
                         <button  v-show="option.permission" class='btn fw-bold btn-sm' v-for="(option, key) in this.options" :key="key" :class="[option.class]"
                         @click.prevent="this.$emit(option.method,item)">

@@ -62,17 +62,20 @@ Route::prefix('dashboard')
     Route::prefix('modulos')->namespace('\App\Http\Controllers\Admin\Modules')->as('modules.')->group(function(){
 
 
+        // PL
 	    Route::resource('planificaciones', 'PlanificationModule');
         Route::post('planifiaciones/approved/{planificacione}', 'PlanificationModule@approved')->name('planificaciones.approved');
+        Route::post('planifiaciones/{planification?}', 'PlanificationModule@setDocumentation')->name('planificaciones.setDocumentation');
+            // FO
         Route::resource('fibra-optica', 'FoModule')->except('update');
         Route::post('fibra-optica/update/', 'FoModule@update')->name('fibra-optica.update');
-
+            // RL
         Route::resource('red-local', 'RedLocalModule')->except('update');
         Route::post('red-local/update/', 'RedLocalModule@update')->name('red-local.update');
-
+            // EX
         Route::resource('energia', 'EnergyModule')->except('update');
         Route::post('energia/update/', 'EnergyModule@update')->name('energia.update');
-
+            // OC
         Route::resource('infraestructura', 'InfraestructureModule')->except('update');
         Route::post('infraestructura/update/', 'InfraestructureModule@update')->name('infraestructura.update');
 
