@@ -17,11 +17,7 @@ class ConstructionController extends BaseController
 
 
         $query->with(['answers.management', 'answers.lines.task', 'managements', 'managements.answers' => function($query){
-
-        }, 'planification' => function ($builder) use ($request) {
-
-                return $builder->where('name', 'like', '%' . Str::upper($request->text) . '%');
-            }, 'planification.parish.municipality.state']);
+        }, 'planification.model.provider','planification.technology', 'planification.parish.municipality.state']);
 
         $construction = $query->get();
 	$managements =
