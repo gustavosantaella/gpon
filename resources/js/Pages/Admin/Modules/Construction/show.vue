@@ -197,17 +197,17 @@ export default {
              var percentage = 0;
            lines.forEach((line)=> {
                 if(line.task){
-                    percentage += (line.answer / line.task.porcent)
+                    percentage += Math.ceil(line.answer / line.task.porcent)
                 }
             });
 
 
 
-            return Math.floor((percentage / management.porcent));
+            return Math.ceil((percentage / management.porcent));
         },
 
         setTotalPercentage(){
-            return this.totalPorcent.reduce((previous, current) => parseInt(previous) + parseInt(current));
+            return Math.ceil(this.totalPorcent.reduce((previous, current) => parseInt(previous) + parseInt(current)));
         },
 
         sumIndividualPercentages({lines, management}){
@@ -215,11 +215,11 @@ export default {
             var percentage = 0;
            lines.forEach((line)=> {
                 if(line.task){
-                    percentage += ((line.answer * line.task.porcent)/100)
+                    percentage += Math.round((line.answer * line.task.porcent)/100)
                 }
             });
 
-            this.totalPorcent.push(Math.floor(percentage  * management.porcent) /100);
+            this.totalPorcent.push(Math.ceil((percentage  * management.porcent) /100));
 
             return ((percentage));
 
@@ -238,7 +238,7 @@ export default {
 
         porcent(){
           const params = new URLSearchParams(window.location.search)
-          const porcent = params.get('porcent')
+          const porcent = this.setTotalPercentage()
 
             let obj = {
                 original:0,
