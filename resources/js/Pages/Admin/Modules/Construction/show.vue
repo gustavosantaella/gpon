@@ -100,6 +100,15 @@
                     </div>
 
                 </div>
+                 <div class="col-md-3">
+                    <div id='canvas'>
+
+                        <div>
+                        <button class='btn btn-secondary' @click="download()">Descargar documentacion</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>
@@ -251,6 +260,16 @@ export default {
 
 
             return obj
+
+        },
+
+        download(){
+            const file = this.construction.planification.file
+            if(file){
+              let url  = file.file
+
+              this.$download(this.access(url,true), `documentacion-${this.construction.planification.name}.zip`)
+            }
 
         }
     }
