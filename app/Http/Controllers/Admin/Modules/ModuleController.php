@@ -186,7 +186,7 @@ class ModuleController extends BaseController
                 if ($value > 100) {
                     $notPorcents[] = $value;
                     $value = 0;
-                } else $porcent += $value / $task->porcent;
+                } else $porcent += ($value * $task->porcent) /100;
             }
 
 
@@ -214,7 +214,7 @@ class ModuleController extends BaseController
             $return =   redirect()->route('admin.modules.construcciones.index');
         }
 
-        $totalPorcent =  floor($porcent / $management->porcent);
+        $totalPorcent =  ceil(($porcent *$management->porcent) /100);
 
 
         if ($totalPorcent < $answer->porcent) {

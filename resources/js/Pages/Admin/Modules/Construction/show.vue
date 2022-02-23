@@ -123,7 +123,7 @@
                   <span class=" mt-2 col-md-1">/</span>
                         <input type="text" class='mt-2 col-md-3' :value='line.task.porcent+"%"' disabled >
                         <span class=" mt-2 col-md-1">=</span> -->
-                        <input type="text" class='mt-2 col-md-3' :value='Math.floor(line.answer / line.task.porcent)+"%"' disabled >
+                        <input type="text" class='mt-2 col-md-3' :value='Math.ceil(line.answer / line.task.porcent, 2)+"%"' disabled >
               </div>
               </div>
             </div>
@@ -215,13 +215,13 @@ export default {
             var percentage = 0;
            lines.forEach((line)=> {
                 if(line.task){
-                    percentage += (line.answer / line.task.porcent)
+                    percentage += ((line.answer * line.task.porcent)/100)
                 }
             });
 
-            this.totalPorcent.push(percentage / management.porcent);
+            this.totalPorcent.push(Math.floor(percentage  * management.porcent) /100);
 
-            return Math.floor((percentage));
+            return ((percentage));
 
         },
         setClass () {
@@ -238,7 +238,7 @@ export default {
 
         porcent(){
           const params = new URLSearchParams(window.location.search)
-          const porcent = this.setTotalPercentage()
+          const porcent = params.get('porcent')
 
             let obj = {
                 original:0,
