@@ -16,7 +16,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 
 // Helpers
 import {hasRolesOrPermissions, permission} from '@/Helpers/RoleAndPermissions'
-import { access, action, $destroyNotify } from "@/Helpers/Functions";
+import { access, action, $destroyNotify, $download } from "@/Helpers/Functions";
 
 
 
@@ -42,6 +42,7 @@ const appvue = createInertiaApp({
                     access,
                     action,
                     $destroyNotify,
+                    $download
                 },
             });
 

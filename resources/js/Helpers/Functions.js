@@ -105,4 +105,19 @@ const $destroyNotify = (url) => {
       });
 }
 
-export { access, action, $destroyNotify };
+const  $download = async (url, name) => {
+      try {
+          const response = await fetch(url);
+          const file = await response.blob();
+          let link = document.createElement("a");
+          link.href = URL.createObjectURL(file);
+          link.setAttribute("download", name);
+          link.click();
+          URL.revokeObjectURL(link.href);
+          link.remove();
+      } catch (error) {
+             throw error;
+      }
+}
+
+export { access, action, $destroyNotify, $download };

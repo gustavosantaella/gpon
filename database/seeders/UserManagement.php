@@ -20,10 +20,10 @@ class UserManagement extends Seeder
         $alexis = User::whereEmail("amarca02@cantv.com.ve")->first();
         $andres = User::whereEmail("asobcz01@cantv.com.ve")->first();
 
-        $gustavo->management()->sync(6);
-        $erika->management()->sync(7);
-        $alexis->management()->sync(8);
-        $andres->management()->sync(10);
+        // $gustavo->management()->sync(6);
+        // $erika->management()->sync(7);
+        // $alexis->management()->sync(8);
+        // $andres->management()->sync(10);
 
 
     }

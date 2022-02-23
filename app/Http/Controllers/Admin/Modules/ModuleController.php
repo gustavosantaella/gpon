@@ -72,10 +72,10 @@ class ModuleController extends BaseController
 
         $management = $this->model('management')->find($request->management_id);
         if ($management->construction) {
-            $request->validate([
-                'data.*.observation' => ['required']
+            // $request->validate([
+            //     'data.*.observation' => ['required']
 
-            ]);
+            // ]);
         }
 
         foreach ($request->data as $data) {
@@ -131,10 +131,10 @@ class ModuleController extends BaseController
         ]);
         $management = $this->model('management')->find($request->management_id);
         if ($management->construction) {
-            $request->validate([
-                'data.*.observation' => ['required']
+            // $request->validate([
+            //     'data.*.observation' => ['required']
 
-            ]);
+            // ]);
         }
         if ($management->construction) {
             return $this->test($parent_model, $answer, $management);
@@ -165,7 +165,7 @@ class ModuleController extends BaseController
         $request->validate([
             'data.*.answer' => ['required'],
             'data.*.task_id' => ['required'],
-            'data.*.observation' => ['required'],
+            // 'data.*.observation' => ['required'],
         ]);
 
         $taskCount = $management->tasks()->count();

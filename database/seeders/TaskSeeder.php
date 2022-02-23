@@ -23,34 +23,39 @@ class TaskSeeder extends Seeder
                 'title' => 'solicitud de permiso',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent'=>1
             ],
             [
                 'title' => 'aprobacion de permisos',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' =>9
             ],
             [
                 'title' => 'procura de materiales',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 10
             ],
             [
                 'title' => 'construccion de obra',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 60
             ],
             [
                 'title' => 'certificacion oc',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 20
             ],
 
         ];
 
-        $percentage = 100 / count($oc_task);
+
         foreach ($oc_task as $task) {
-            $array  = ['porcent' => floor($percentage)];
-            $oc->tasks()->create(array_merge($task, $array));
+
+            $oc->tasks()->create($task);
         }
 
         $rl =   Management::whereName('CONSTRUCCION RED LOCAL')->first();
@@ -59,105 +64,128 @@ class TaskSeeder extends Seeder
                 'title' => 'replanteo rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 2
+            ],
+            [
+                'title' => 'contratacion del proyecto rl',
+                'end_days' => 1,
+                'field_type' => 'number',
+                'porcent' =>1
             ],
             [
                 'title' => 'creacion de reserva rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 2
             ],
             [
                 'title' => 'atencion de reserva rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 5
             ],
             [
                 'title' => 'obra civil y posteadura rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 30
             ],
             [
                 'title' => 'tendido rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 25
             ],
             [
                 'title' => 'empalme y peinado rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 10
             ],
             [
                 'title' => 'pruebas y certificacion rl',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 20
             ],
 
         ];
 
-        $percentage = 100 / count($rl_task);
+
         foreach ($rl_task as $task) {
-            $array  = ['porcent' => floor($percentage)];
-            $rl->tasks()->create(array_merge($task, $array));
+
+            $rl->tasks()->create($task);
         }
 
         $ix =   Management::whereName('CONSTRUCCION FIBRA OPTICA')->first();
         $ix_task = [
             [
-                'title' => 'solicitud de ix',
+                'title' => 'solicitud de proyecto ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 1
             ],
             [
                 'title' => 'entrega del proyecto ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 4
             ],
             [
                 'title' => 'contratacion del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 1
             ],
             [
                 'title' => 'replanteo ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 2
             ],
             [
                 'title' => 'creacion de reserva ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 2
             ],
             [
                 'title' => 'atencion de reserva ixx',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 5
             ],
             [
                 'title' => 'obra civil y posteadura ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 30
             ],
             [
                 'title' => 'tendido ix',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 30
             ],
 
             [
                 'title' => 'empalme y fusion',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 5
             ],
             [
                 'title' => 'pruebas y certifiacion',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 20
             ],
 
         ];
-   $percentage = 100 / count($ix_task);
+
         foreach ($ix_task as $task) {
-               $array  = ['porcent' => floor($percentage)];
-            $ix->tasks()->create(array_merge($task,$array));
+
+            $ix->tasks()->create($task);
         }
 
         $ex =   Management::whereName('CONSTRUCCION ENERGIA')->first();
@@ -166,49 +194,63 @@ class TaskSeeder extends Seeder
                 'title' => 'solicitud de factibilidad',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 1
             ],
             [
                 'title' => 'aprobacion de factibilidad',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 4
             ],
             [
                 'title' => 'entrega del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 1
             ],
             [
                 'title' => 'aprobacion del proyecto',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 4
             ],
             [
                 'title' => 'construccion de spat',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 28
             ],
             [
                 'title' => 'solicitud de corte electrico',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 2
             ],
             [
                 'title' => 'aprobacion de corte electrico',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 20
             ],
             [
                 'title' => 'construccion de acometida',
                 'end_days' => 1,
                 'field_type' => 'number',
+                'porcent' => 25
+            ],
+            [
+                'title' => 'certificacion electrica',
+                'end_days' => 1,
+                'field_type' => 'number',
+                'porcent' => 15
             ],
 
 
         ];
-        $percentage = 100 / count($ex_task);
+
         foreach ($ex_task as $task) {
-            $array  = ['porcent' => floor($percentage)];
-            $ex->tasks()->create(array_merge($task, $array));
+
+            $ex->tasks()->create($task);
         }
 
         $con =   Management::whereName('CONMUTACION')->first();
@@ -216,19 +258,19 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'solicitud de data e abonados',
                 'end_days' => 1,
-                'porcent' => 33,
+                'porcent' => 15,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'validacion de data de abonados',
                 'end_days' => 1,
-                'porcent' => 33,
+                'porcent' => 25,
                 'field_type' => 'number',
             ],
             [
                 'title' => 'matriz de transferencia ia',
                 'end_days' => 1,
-                'porcent'=>33,
+                'porcent'=>60,
                 'field_type' => 'number',
             ],
 

@@ -49,7 +49,7 @@ class ConstructionController extends BaseController
 
     public function show(Construction $construccione)
     {
-        $construction = $construccione->load(['managements.tasks','planification.parish.municipality.state', 'answers.lines.task', 'answers.management']);
+        $construction = $construccione->load(['managements.tasks','planification.parish.municipality.state', "planification.technology", "planification.model.provider", 'answers.lines.task', 'answers.management']);
         $managements = $this->model('management')->whereConstruction(true)->with(['answers', 'tasks'])->get();
         $porcent = request()->porcent;
         return $this->loadView('Admin.Modules.Construction.show', compact('construction', 'managements', 'porcent'));
@@ -79,7 +79,7 @@ class ConstructionController extends BaseController
     public function edit(Construction $construccione)
     {
 
-        $array = [6,7,8,9,10];
+        $array = [1,2,3,4,5];
         $managemet = $this->model('management')->find($array[array_rand($array, 1)]);
         // $managemet = auth()->user()->management;
         if (!$managemet->construction) return back();

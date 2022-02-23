@@ -25,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $energia =   Management::whereName('CONSTRUCCION ENERGIA')->with('tasks')->first();
-      $energia_tasks = [
-
-      ];
 
     }
 }

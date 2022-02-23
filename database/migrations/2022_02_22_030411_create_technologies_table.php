@@ -15,7 +15,7 @@ class CreateTechnologiesTable extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('type',['GPON', 'MDU', 'NODO']);
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

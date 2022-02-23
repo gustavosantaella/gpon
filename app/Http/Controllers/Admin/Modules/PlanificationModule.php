@@ -90,11 +90,11 @@ class PlanificationModule extends BaseController
             });
             switch ($request['approved']) {
                 case 'APROBADO':
-                    $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
-                    Notification::send($users, new StatusPlanificationNotify([
-                        'message' => "requerimiento *APROBADO*",
+                    // $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
+                    // Notification::send($users, new StatusPlanificationNotify([
+                    //     'message' => "requerimiento *APROBADO*",
 
-                    ]));
+                    // ]));
                     $construction = $planificacione->construction()->create();
                     $construction->managements()->attach($managements);
                     return back()->with('status', 200);
@@ -102,20 +102,20 @@ class PlanificationModule extends BaseController
                 case 'RECHAZADO':
                     //$planificacione->delete();
                     $users = (User::whereRelation('management', 'name', 'PLANIFICACIONES')->get());
-                    Notification::send($users, new StatusPlanificationNotify([
-                        'message' => "el requerimiento tiene un status de *$request[approved]* por ende sera eliminado.",
+                    // Notification::send($users, new StatusPlanificationNotify([
+                    //     'message' => "el requerimiento tiene un status de *$request[approved]* por ende sera eliminado.",
 
-                    ]));
+                    // ]));
                     return redirect()->route('admin.modules.planificaciones.index')->with('status', 200);
                     break;
                 case 'POR REVISAR':
                     $users = (User::whereRelation('roles', 'name', 'SUPER USUARIO')->get());
-                    Notification::send($users, new StatusPlanificationNotify([
-                        'message' => "Planificaciones ha solicitado una revision status: $request[approved]",
+                    // Notification::send($users, new StatusPlanificationNotify([
+                    //     'message' => "Planificaciones ha solicitado una revision status: $request[approved]",
 
-                        'planification' => $planificacione,
-                        'route' => route('admin.modules.planificaciones.show', [$planificacione])
-                    ]));
+                    //     'planification' => $planificacione,
+                    //     'route' => route('admin.modules.planificaciones.show', [$planificacione])
+                    // ]));
                     return back()->with('info', 'Se ha solicitado la revision con exito');
                     break;
             }
@@ -130,12 +130,29 @@ class PlanificationModule extends BaseController
         try {
 
             $file  = ($this->request()->all());
-            if ($file[0]->extension() !== 'zip') return back()->with('error', 'El formato  debe de ser .zip obligatoriamente');
-            $url =  $file[0]->store("planifiaciones-$planification->id");
+            if ($file[0]->extension() !== 'zip' && $file[0]->extension() !== 'rar') return back()->with('error', 'El formato  debe de ser .zip obligatoriamente');
+            $url =  $file[0]->store("planifiaciones-$planification->id", 'public');
 
             $planification->file()->create([
-                'file' => "storage/$url"
+                'file' => "$url"
             ]);
+            $users = (User::whereRelation('roles', 'name', 'SUPER USUARIO')->get());
+            $message  = "Se ha subido la documentacion de '$planification->name'";
+          if(!$planification->construction->count()){
+
+                $message  = "Se ha subido la documentacion y hecho el pase a construccion de '$planification->name'";
+                $managements = $this->model('management')->whereConstruction(true)->get()->map(function ($value, $key) {
+                    return $value->id;
+                });
+                $construction = $planification->construction()->create();
+                $construction->managements()->attach($managements);
+          }
+            Notification::send($users, new StatusPlanificationNotify([
+                'message' => "$message",
+
+                'planification' => $planification,
+                'route' => route('admin.modules.planificaciones.show', [$planification])
+            ]));
             return back()->with('status', 200);
         } catch (\Throwable $th) {
 

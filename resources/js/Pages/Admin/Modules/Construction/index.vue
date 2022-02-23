@@ -41,7 +41,7 @@
           </td>
           <td>
             <button
-            v-show="this.$page.props.flash.userManagement.construction"
+            v-show="true"
               @click="this.redirectOnEdi(construction)"
               class="btn btn-sm btn-primary"
             >
@@ -194,7 +194,7 @@ export default {
     },
 
     redirectOnEdi(construction) {
-      let management = this.$page.props.flash.userManagement;
+     // let management = this.$page.props.flash.userManagement;
 
       let ruta = route("admin.modules.construcciones.edit", {
         construccione: construction.id,

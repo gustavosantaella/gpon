@@ -129,15 +129,15 @@
         >
           <template v-slot:content>
            <div>
-                 <input type="file" name="" @change="setDocumentation($event)" class='form-control'  id="">
+                 <input type="file" required @change="setDocumentation($event)" class='form-control'  id="">
            </div>
           </template>
         </app-form>
         <div v-else-if="this.planification">
 
             <span>
-                   <button class="btn btn-info" @click='downloadDocumentation'>Descargar</button>
-               <button class='btn btn-danger mx-3' @click="removeDocumentation"><i class='fas fa-trash'></i></button>
+                   <button class="btn btn-info" @click='downloadDocumentation()'>Descargar</button>
+               <button class='btn btn-danger mx-3' @click="removeDocumentation()"><i class='fas fa-trash'></i></button>
             </span>
 
         </div>
@@ -273,6 +273,21 @@ export default {
     };
   },
   methods: {
+      removeDocumentation(){
+          this.$destroyNotify(route('admin.xhr.file.destroy',{
+              fileId:this.planification.file.id
+          }))
+          this.success('uploadDocumentation')
+      },
+       downloadDocumentation(){
+          try {
+
+            this.$download(this.access(this.planification.file.file, true), `documentacion-${this.planification.name}.zip`)
+            this.success('uploadDocumentation')
+          } catch (error) {
+              alert(error.getMessage())
+          }
+      },
       setDocumentation(event){
           const { files } = event.target
             this.form.documentation.files = (files)

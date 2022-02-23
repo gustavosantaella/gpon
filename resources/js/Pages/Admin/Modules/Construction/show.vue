@@ -50,14 +50,43 @@
                         {{
                             construction.planification.name                        }}
                     </p>
-                    <p class='d-flex'>
+                    <!-- <p class='d-flex'>
                         Status:
                             <p :class="[this.setClass(), 'fw-bold']">
                              {{
                              construction.planification.status
                         }}
                       </p>
+                    </p> -->
+                    <p class="">
+                        Construccion numero: #{{ construction.id }}
                     </p>
+                </div>
+                 <div class="col-md-3">
+                    <label class="card-text fw-bold">Equipo:</label>
+                      <p class="">
+                     Modelo:
+                        {{
+                            construction.planification.model.name                        }}
+                    </p>
+                     <p class="">
+                     Serial:
+                        {{
+                            construction.planification.model.code                        }}
+                    </p>
+                        <p class="">
+                     Tecnologia:
+                        {{
+                            construction.planification.technology[0].type                        }}
+                    </p>
+                    <!-- <p class='d-flex'>
+                        Status:
+                            <p :class="[this.setClass(), 'fw-bold']">
+                             {{
+                             construction.planification.status
+                        }}
+                      </p>
+                    </p> -->
                     <p class="">
                         Construccion numero: #{{ construction.id }}
                     </p>
