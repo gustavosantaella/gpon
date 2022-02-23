@@ -27,7 +27,7 @@ class Planification extends Model
 
     public function construction()
     {
-        return $this->hasOne(Construction::class);
+        return $this->hasOne(Construction::class)->withTrashed();
     }
 
     public function model()

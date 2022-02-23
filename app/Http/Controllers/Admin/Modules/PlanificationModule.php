@@ -138,8 +138,8 @@ class PlanificationModule extends BaseController
             ]);
             $users = (User::whereRelation('roles', 'name', 'SUPER USUARIO')->get());
             $message  = "Se ha subido la documentacion de '$planification->name'";
-            dd($planification->construction->withTrashed());
-          if(!$planification->construction->withTrashed()){
+            dd($planification->construction);
+          if(!$planification->construction){
 
                 $message  = "Se ha subido la documentacion y hecho el pase a construccion de '$planification->name'";
                 $managements = $this->model('management')->whereConstruction(true)->get()->map(function ($value, $key) {
