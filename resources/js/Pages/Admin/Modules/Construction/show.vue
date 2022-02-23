@@ -87,9 +87,7 @@
                         }}
                       </p>
                     </p> -->
-                    <p class="">
-                        Construccion numero: #{{ construction.id }}
-                    </p>
+
                 </div>
                   <div class="col-md-3">
                     <div id='canvas'>
@@ -103,7 +101,7 @@
                  <div class="col-md-3">
                     <div id='canvas'>
 
-                        <div>
+                        <div v-show="construction.file">
                         <button class='btn btn-secondary' @click="download()">Descargar documentacion</button>
                         </div>
                     </div>
