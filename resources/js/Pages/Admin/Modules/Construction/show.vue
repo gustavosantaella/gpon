@@ -216,7 +216,8 @@ export default {
         },
 
         setTotalPercentage(){
-            return Math.ceil(this.totalPorcent.reduce((previous, current) => parseInt(previous) + parseInt(current)));
+        
+            return !this.totalPorcent.length  ? 0 : Math.ceil(this.totalPorcent.reduce((previous, current) => parseInt(previous) + parseInt(current)));
         },
 
         sumIndividualPercentages({lines, management}){
