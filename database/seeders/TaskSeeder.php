@@ -106,7 +106,7 @@ class TaskSeeder extends Seeder
                 'title' => 'pruebas y certificacion rl',
                 'end_days' => 1,
                 'field_type' => 'number',
-                'porcent' => 20
+                'porcent' => 25
             ],
 
         ];
